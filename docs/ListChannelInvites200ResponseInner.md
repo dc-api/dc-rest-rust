@@ -1,0 +1,32 @@
+# ListChannelInvites200ResponseInner
+
+## Properties
+
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**r#type** | Option<**i32**> |  | [optional]
+**code** | **String** |  | 
+**inviter** | Option<[**models::UserResponse**](UserResponse.md)> |  | [optional]
+**max_age** | Option<**i32**> |  | [optional]
+**created_at** | Option<**String**> |  | [optional]
+**expires_at** | Option<**String**> |  | [optional]
+**friends_count** | Option<**i32**> |  | [optional]
+**channel** | Option<[**models::InviteChannelResponse**](InviteChannelResponse.md)> |  | [optional]
+**is_contact** | Option<**bool**> |  | [optional]
+**uses** | Option<**i32**> |  | [optional]
+**max_uses** | Option<**i32**> |  | [optional]
+**flags** | Option<**i32**> |  | [optional]
+**approximate_member_count** | Option<**i32**> |  | [optional]
+**guild** | Option<[**models::InviteGuildResponse**](InviteGuildResponse.md)> |  | [optional]
+**guild_id** | Option<**String**> |  | [optional]
+**target_type** | Option<**i32**> |  | [optional]
+**target_user** | Option<[**models::UserResponse**](UserResponse.md)> |  | [optional]
+**target_application** | Option<[**models::InviteApplicationResponse**](InviteApplicationResponse.md)> |  | [optional]
+**guild_scheduled_event** | Option<[**models::ScheduledEventResponse**](ScheduledEventResponse.md)> |  | [optional]
+**temporary** | Option<**bool**> |  | [optional]
+**approximate_presence_count** | Option<**i32**> |  | [optional]
+**is_nickname_changeable** | Option<**bool**> |  | [optional]
+
+[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+
+
