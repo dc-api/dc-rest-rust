@@ -1,19 +1,10 @@
-name: Close Stale Pull Requests
+name: Close Stale Issues and PRs
+
 on:
   schedule:
-    - cron: '0 0 * * *'
+    - cron: "30 1 * * *"
+  workflow_dispatch: 
 
 jobs:
-  stale:
-    runs-on: ubuntu-latest
-    permissions:
-      pull-requests: write
-    steps:
-      - uses: actions/stale@v9
-        with:
-          days-before-pr-stale: 30 # Mark PR as stale after 30 days of inactivity
-          days-before-pr-close: 7  # Close PR 7 days after being marked as stale
-          stale-pr-message: 'This pull request has been marked as stale due to inactivity for 30 days. It will be closed in 7 days if no further activity occurs.'
-          close-pr-message: 'This pull request has been closed due to inactivity for 7 days after being marked as stale.'
-          stale-pr-label: 'stale' # Label to add when marking as stale
-          exempt-pr-labels: 'pinned,security' # PRs with these labels will not be marked as stale
+  close-stale:
+    uses: qntx/workflows/.github/workflows/stale.yml@main
