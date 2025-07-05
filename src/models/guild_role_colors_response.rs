@@ -45,15 +45,21 @@ use crate::models;
 use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
-pub struct PongInteractionCallbackRequest {
-    #[serde(rename = "type", deserialize_with = "Option::deserialize")]
-    pub r#type: Option<i32>,
+pub struct GuildRoleColorsResponse {
+    #[serde(rename = "primary_color", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub primary_color: Option<Option<i32>>,
+    #[serde(rename = "secondary_color", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub secondary_color: Option<Option<i32>>,
+    #[serde(rename = "tertiary_color", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub tertiary_color: Option<Option<i32>>,
 }
 
-impl PongInteractionCallbackRequest {
-    pub fn new(r#type: Option<i32>) -> PongInteractionCallbackRequest {
-        PongInteractionCallbackRequest {
-            r#type,
+impl GuildRoleColorsResponse {
+    pub fn new() -> GuildRoleColorsResponse {
+        GuildRoleColorsResponse {
+            primary_color: None,
+            secondary_color: None,
+            tertiary_color: None,
         }
     }
 }

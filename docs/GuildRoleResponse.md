@@ -10,12 +10,14 @@ Name | Type | Description | Notes
 **permissions** | **String** |  | 
 **position** | **i32** |  | 
 **color** | **i32** |  | 
+**colors** | Option<[**models::GuildRoleColorsResponse**](GuildRoleColorsResponse.md)> |  | [optional]
 **hoist** | **bool** |  | 
 **managed** | **bool** |  | 
 **mentionable** | **bool** |  | 
 **icon** | Option<**String**> |  | [optional]
 **unicode_emoji** | Option<**String**> |  | [optional]
 **tags** | Option<[**models::GuildRoleTagsResponse**](GuildRoleTagsResponse.md)> |  | [optional]
+**flags** | **i32** |  | 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
