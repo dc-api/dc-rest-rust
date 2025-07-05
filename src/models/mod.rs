@@ -412,6 +412,8 @@ pub mod guild_prune_response;
 pub use self::guild_prune_response::GuildPruneResponse;
 pub mod guild_response;
 pub use self::guild_response::GuildResponse;
+pub mod guild_role_colors_response;
+pub use self::guild_role_colors_response::GuildRoleColorsResponse;
 pub mod guild_role_response;
 pub use self::guild_role_response::GuildRoleResponse;
 pub mod guild_role_tags_response;
