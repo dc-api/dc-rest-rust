@@ -7,7 +7,7 @@
 //! - **Copyright**: Copyright (c) 2025 Qntx
 //! - **Author**: ΣX <gitctrlx@gmail.com>
 //! - **Version**: 10
-//! - **Modified**: 2025-07-05T02:42:20.508163788Z[Etc/UTC]
+//! - **Modified**: 2025-07-19T09:30:51.635997860Z[Etc/UTC]
 //! - **Generator Version**: 7.14.0
 //!
 //! <details>
@@ -61,7 +61,7 @@ pub trait DefaultApi: Send + Sync {
     /// PUT /guilds/{guild_id}/members/{user_id}
     ///
     /// 
-    async fn add_guild_member<'guild_id, 'user_id, 'add_guild_member_request>(&self, guild_id: &'guild_id str, user_id: &'user_id str, add_guild_member_request: models::AddGuildMemberRequest) -> Result<ResponseContent<AddGuildMemberSuccess>, Error<AddGuildMemberError>>;
+    async fn add_guild_member<'guild_id, 'user_id, 'bot_add_guild_member_request>(&self, guild_id: &'guild_id str, user_id: &'user_id str, bot_add_guild_member_request: models::BotAddGuildMemberRequest) -> Result<ResponseContent<AddGuildMemberSuccess>, Error<AddGuildMemberError>>;
 
     /// PUT /guilds/{guild_id}/members/{user_id}/roles/{role_id}
     ///
@@ -92,6 +92,11 @@ pub trait DefaultApi: Send + Sync {
     ///
     /// 
     async fn ban_user_from_guild<'guild_id, 'user_id, 'ban_user_from_guild_request>(&self, guild_id: &'guild_id str, user_id: &'user_id str, ban_user_from_guild_request: models::BanUserFromGuildRequest) -> Result<ResponseContent<BanUserFromGuildSuccess>, Error<BanUserFromGuildError>>;
+
+    /// POST /partner-sdk/token/bot
+    ///
+    /// 
+    async fn bot_partner_sdk_token<'bot_partner_sdk_token_request>(&self, bot_partner_sdk_token_request: models::BotPartnerSdkTokenRequest) -> Result<ResponseContent<BotPartnerSdkTokenSuccess>, Error<BotPartnerSdkTokenError>>;
 
     /// POST /guilds/{guild_id}/bulk-ban
     ///
@@ -217,6 +222,16 @@ pub trait DefaultApi: Send + Sync {
     ///
     /// 
     async fn create_interaction_response<'interaction_id, 'interaction_token, 'create_interaction_response_request, 'with_response>(&self, interaction_id: &'interaction_id str, interaction_token: &'interaction_token str, create_interaction_response_request: models::CreateInteractionResponseRequest, with_response: Option<bool>) -> Result<ResponseContent<CreateInteractionResponseSuccess>, Error<CreateInteractionResponseError>>;
+
+    /// POST /lobbies/{lobby_id}/members/@me/invites
+    ///
+    /// 
+    async fn create_linked_lobby_guild_invite_for_self<'lobby_id>(&self, lobby_id: &'lobby_id str) -> Result<ResponseContent<CreateLinkedLobbyGuildInviteForSelfSuccess>, Error<CreateLinkedLobbyGuildInviteForSelfError>>;
+
+    /// POST /lobbies/{lobby_id}/members/{user_id}/invites
+    ///
+    /// 
+    async fn create_linked_lobby_guild_invite_for_user<'lobby_id, 'user_id>(&self, lobby_id: &'lobby_id str, user_id: &'user_id str) -> Result<ResponseContent<CreateLinkedLobbyGuildInviteForUserSuccess>, Error<CreateLinkedLobbyGuildInviteForUserError>>;
 
     /// POST /lobbies
     ///
@@ -1216,7 +1231,7 @@ impl DefaultApi for DefaultApiClient {
         }
     }
 
-    async fn add_guild_member<'guild_id, 'user_id, 'add_guild_member_request>(&self, guild_id: &'guild_id str, user_id: &'user_id str, add_guild_member_request: models::AddGuildMemberRequest) -> Result<ResponseContent<AddGuildMemberSuccess>, Error<AddGuildMemberError>> {
+    async fn add_guild_member<'guild_id, 'user_id, 'bot_add_guild_member_request>(&self, guild_id: &'guild_id str, user_id: &'user_id str, bot_add_guild_member_request: models::BotAddGuildMemberRequest) -> Result<ResponseContent<AddGuildMemberSuccess>, Error<AddGuildMemberError>> {
         let local_var_configuration = &self.configuration;
 
         let local_var_client = &local_var_configuration.client;
@@ -1235,7 +1250,7 @@ impl DefaultApi for DefaultApiClient {
             };
             local_var_req_builder = local_var_req_builder.header("Authorization", local_var_value);
         };
-        local_var_req_builder = local_var_req_builder.json(&add_guild_member_request);
+        local_var_req_builder = local_var_req_builder.json(&bot_add_guild_member_request);
 
         let local_var_req = local_var_req_builder.build()?;
         let local_var_resp = local_var_client.execute(local_var_req).await?;
@@ -1473,6 +1488,44 @@ impl DefaultApi for DefaultApiClient {
             Ok(local_var_result)
         } else {
             let local_var_entity: Option<BanUserFromGuildError> = serde_json::from_str(&local_var_content).ok();
+            let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
+            Err(Error::ResponseError(local_var_error))
+        }
+    }
+
+    async fn bot_partner_sdk_token<'bot_partner_sdk_token_request>(&self, bot_partner_sdk_token_request: models::BotPartnerSdkTokenRequest) -> Result<ResponseContent<BotPartnerSdkTokenSuccess>, Error<BotPartnerSdkTokenError>> {
+        let local_var_configuration = &self.configuration;
+
+        let local_var_client = &local_var_configuration.client;
+
+        let local_var_uri_str = format!("{}/partner-sdk/token/bot", local_var_configuration.base_path);
+        let mut local_var_req_builder = local_var_client.request(reqwest::Method::POST, local_var_uri_str.as_str());
+
+        if let Some(ref local_var_user_agent) = local_var_configuration.user_agent {
+            local_var_req_builder = local_var_req_builder.header(reqwest::header::USER_AGENT, local_var_user_agent.clone());
+        }
+        if let Some(ref local_var_apikey) = local_var_configuration.api_key {
+            let local_var_key = local_var_apikey.key.clone();
+            let local_var_value = match local_var_apikey.prefix {
+                Some(ref local_var_prefix) => format!("{} {}", local_var_prefix, local_var_key),
+                None => local_var_key,
+            };
+            local_var_req_builder = local_var_req_builder.header("Authorization", local_var_value);
+        };
+        local_var_req_builder = local_var_req_builder.json(&bot_partner_sdk_token_request);
+
+        let local_var_req = local_var_req_builder.build()?;
+        let local_var_resp = local_var_client.execute(local_var_req).await?;
+
+        let local_var_status = local_var_resp.status();
+        let local_var_content = local_var_resp.text().await?;
+
+        if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
+            let local_var_entity: Option<BotPartnerSdkTokenSuccess> = serde_json::from_str(&local_var_content).ok();
+            let local_var_result = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
+            Ok(local_var_result)
+        } else {
+            let local_var_entity: Option<BotPartnerSdkTokenError> = serde_json::from_str(&local_var_content).ok();
             let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
             Err(Error::ResponseError(local_var_error))
         }
@@ -2477,6 +2530,89 @@ impl DefaultApi for DefaultApiClient {
             Ok(local_var_result)
         } else {
             let local_var_entity: Option<CreateInteractionResponseError> = serde_json::from_str(&local_var_content).ok();
+            let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
+            Err(Error::ResponseError(local_var_error))
+        }
+    }
+
+    async fn create_linked_lobby_guild_invite_for_self<'lobby_id>(&self, lobby_id: &'lobby_id str) -> Result<ResponseContent<CreateLinkedLobbyGuildInviteForSelfSuccess>, Error<CreateLinkedLobbyGuildInviteForSelfError>> {
+        let local_var_configuration = &self.configuration;
+
+        let local_var_client = &local_var_configuration.client;
+
+        let local_var_uri_str = format!("{}/lobbies/{lobby_id}/members/@me/invites", local_var_configuration.base_path, lobby_id=crate::apis::urlencode(lobby_id));
+        let mut local_var_req_builder = local_var_client.request(reqwest::Method::POST, local_var_uri_str.as_str());
+
+        if let Some(ref local_var_user_agent) = local_var_configuration.user_agent {
+            local_var_req_builder = local_var_req_builder.header(reqwest::header::USER_AGENT, local_var_user_agent.clone());
+        }
+        if let Some(ref local_var_token) = local_var_configuration.oauth_access_token {
+            local_var_req_builder = local_var_req_builder.bearer_auth(local_var_token.to_owned());
+        };
+        if let Some(ref local_var_token) = local_var_configuration.oauth_access_token {
+            local_var_req_builder = local_var_req_builder.bearer_auth(local_var_token.to_owned());
+        };
+        if let Some(ref local_var_token) = local_var_configuration.oauth_access_token {
+            local_var_req_builder = local_var_req_builder.bearer_auth(local_var_token.to_owned());
+        };
+        if let Some(ref local_var_apikey) = local_var_configuration.api_key {
+            let local_var_key = local_var_apikey.key.clone();
+            let local_var_value = match local_var_apikey.prefix {
+                Some(ref local_var_prefix) => format!("{} {}", local_var_prefix, local_var_key),
+                None => local_var_key,
+            };
+            local_var_req_builder = local_var_req_builder.header("Authorization", local_var_value);
+        };
+
+        let local_var_req = local_var_req_builder.build()?;
+        let local_var_resp = local_var_client.execute(local_var_req).await?;
+
+        let local_var_status = local_var_resp.status();
+        let local_var_content = local_var_resp.text().await?;
+
+        if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
+            let local_var_entity: Option<CreateLinkedLobbyGuildInviteForSelfSuccess> = serde_json::from_str(&local_var_content).ok();
+            let local_var_result = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
+            Ok(local_var_result)
+        } else {
+            let local_var_entity: Option<CreateLinkedLobbyGuildInviteForSelfError> = serde_json::from_str(&local_var_content).ok();
+            let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
+            Err(Error::ResponseError(local_var_error))
+        }
+    }
+
+    async fn create_linked_lobby_guild_invite_for_user<'lobby_id, 'user_id>(&self, lobby_id: &'lobby_id str, user_id: &'user_id str) -> Result<ResponseContent<CreateLinkedLobbyGuildInviteForUserSuccess>, Error<CreateLinkedLobbyGuildInviteForUserError>> {
+        let local_var_configuration = &self.configuration;
+
+        let local_var_client = &local_var_configuration.client;
+
+        let local_var_uri_str = format!("{}/lobbies/{lobby_id}/members/{user_id}/invites", local_var_configuration.base_path, lobby_id=crate::apis::urlencode(lobby_id), user_id=crate::apis::urlencode(user_id));
+        let mut local_var_req_builder = local_var_client.request(reqwest::Method::POST, local_var_uri_str.as_str());
+
+        if let Some(ref local_var_user_agent) = local_var_configuration.user_agent {
+            local_var_req_builder = local_var_req_builder.header(reqwest::header::USER_AGENT, local_var_user_agent.clone());
+        }
+        if let Some(ref local_var_apikey) = local_var_configuration.api_key {
+            let local_var_key = local_var_apikey.key.clone();
+            let local_var_value = match local_var_apikey.prefix {
+                Some(ref local_var_prefix) => format!("{} {}", local_var_prefix, local_var_key),
+                None => local_var_key,
+            };
+            local_var_req_builder = local_var_req_builder.header("Authorization", local_var_value);
+        };
+
+        let local_var_req = local_var_req_builder.build()?;
+        let local_var_resp = local_var_client.execute(local_var_req).await?;
+
+        let local_var_status = local_var_resp.status();
+        let local_var_content = local_var_resp.text().await?;
+
+        if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
+            let local_var_entity: Option<CreateLinkedLobbyGuildInviteForUserSuccess> = serde_json::from_str(&local_var_content).ok();
+            let local_var_result = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
+            Ok(local_var_result)
+        } else {
+            let local_var_entity: Option<CreateLinkedLobbyGuildInviteForUserError> = serde_json::from_str(&local_var_content).ok();
             let local_var_error = ResponseContent { status: local_var_status, content: local_var_content, entity: local_var_entity };
             Err(Error::ResponseError(local_var_error))
         }
@@ -10093,6 +10229,14 @@ pub enum BanUserFromGuildSuccess {
     UnknownValue(serde_json::Value),
 }
 
+/// struct for typed successes of method [`bot_partner_sdk_token`]
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum BotPartnerSdkTokenSuccess {
+    Status200(models::ProvisionalTokenResponse),
+    UnknownValue(serde_json::Value),
+}
+
 /// struct for typed successes of method [`bulk_ban_users_from_guild`]
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
@@ -10294,6 +10438,22 @@ pub enum CreateGuildTemplateSuccess {
 pub enum CreateInteractionResponseSuccess {
     Status200(models::InteractionCallbackResponse),
     Status204(),
+    UnknownValue(serde_json::Value),
+}
+
+/// struct for typed successes of method [`create_linked_lobby_guild_invite_for_self`]
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum CreateLinkedLobbyGuildInviteForSelfSuccess {
+    Status200(models::LobbyGuildInviteResponse),
+    UnknownValue(serde_json::Value),
+}
+
+/// struct for typed successes of method [`create_linked_lobby_guild_invite_for_user`]
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum CreateLinkedLobbyGuildInviteForUserSuccess {
+    Status200(models::LobbyGuildInviteResponse),
     UnknownValue(serde_json::Value),
 }
 
@@ -11817,6 +11977,7 @@ pub enum UploadApplicationAttachmentSuccess {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum AddGroupDmUserError {
+    Status429(models::RatelimitedResponse),
     Status4XX(models::ErrorResponse),
     UnknownValue(serde_json::Value),
 }
@@ -11825,6 +11986,7 @@ pub enum AddGroupDmUserError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum AddGuildMemberError {
+    Status429(models::RatelimitedResponse),
     Status4XX(models::ErrorResponse),
     UnknownValue(serde_json::Value),
 }
@@ -11833,6 +11995,7 @@ pub enum AddGuildMemberError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum AddGuildMemberRoleError {
+    Status429(models::RatelimitedResponse),
     Status4XX(models::ErrorResponse),
     UnknownValue(serde_json::Value),
 }
@@ -11841,6 +12004,7 @@ pub enum AddGuildMemberRoleError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum AddLobbyMemberError {
+    Status429(models::RatelimitedResponse),
     Status4XX(models::ErrorResponse),
     UnknownValue(serde_json::Value),
 }
@@ -11849,6 +12013,7 @@ pub enum AddLobbyMemberError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum AddMyMessageReactionError {
+    Status429(models::RatelimitedResponse),
     Status4XX(models::ErrorResponse),
     UnknownValue(serde_json::Value),
 }
@@ -11857,6 +12022,7 @@ pub enum AddMyMessageReactionError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum AddThreadMemberError {
+    Status429(models::RatelimitedResponse),
     Status4XX(models::ErrorResponse),
     UnknownValue(serde_json::Value),
 }
@@ -11865,6 +12031,7 @@ pub enum AddThreadMemberError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum ApplicationsGetActivityInstanceError {
+    Status429(models::RatelimitedResponse),
     Status4XX(models::ErrorResponse),
     UnknownValue(serde_json::Value),
 }
@@ -11873,6 +12040,16 @@ pub enum ApplicationsGetActivityInstanceError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum BanUserFromGuildError {
+    Status429(models::RatelimitedResponse),
+    Status4XX(models::ErrorResponse),
+    UnknownValue(serde_json::Value),
+}
+
+/// struct for typed errors of method [`bot_partner_sdk_token`]
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum BotPartnerSdkTokenError {
+    Status429(models::RatelimitedResponse),
     Status4XX(models::ErrorResponse),
     UnknownValue(serde_json::Value),
 }
@@ -11881,6 +12058,7 @@ pub enum BanUserFromGuildError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum BulkBanUsersFromGuildError {
+    Status429(models::RatelimitedResponse),
     Status4XX(models::ErrorResponse),
     UnknownValue(serde_json::Value),
 }
@@ -11889,6 +12067,7 @@ pub enum BulkBanUsersFromGuildError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum BulkDeleteMessagesError {
+    Status429(models::RatelimitedResponse),
     Status4XX(models::ErrorResponse),
     UnknownValue(serde_json::Value),
 }
@@ -11897,6 +12076,7 @@ pub enum BulkDeleteMessagesError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum BulkSetApplicationCommandsError {
+    Status429(models::RatelimitedResponse),
     Status4XX(models::ErrorResponse),
     UnknownValue(serde_json::Value),
 }
@@ -11905,6 +12085,7 @@ pub enum BulkSetApplicationCommandsError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum BulkSetGuildApplicationCommandsError {
+    Status429(models::RatelimitedResponse),
     Status4XX(models::ErrorResponse),
     UnknownValue(serde_json::Value),
 }
@@ -11913,6 +12094,7 @@ pub enum BulkSetGuildApplicationCommandsError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum BulkUpdateGuildChannelsError {
+    Status429(models::RatelimitedResponse),
     Status4XX(models::ErrorResponse),
     UnknownValue(serde_json::Value),
 }
@@ -11921,6 +12103,7 @@ pub enum BulkUpdateGuildChannelsError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum BulkUpdateGuildRolesError {
+    Status429(models::RatelimitedResponse),
     Status4XX(models::ErrorResponse),
     UnknownValue(serde_json::Value),
 }
@@ -11929,6 +12112,7 @@ pub enum BulkUpdateGuildRolesError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum BulkUpdateLobbyMembersError {
+    Status429(models::RatelimitedResponse),
     Status4XX(models::ErrorResponse),
     UnknownValue(serde_json::Value),
 }
@@ -11937,6 +12121,7 @@ pub enum BulkUpdateLobbyMembersError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum ConsumeEntitlementError {
+    Status429(models::RatelimitedResponse),
     Status4XX(models::ErrorResponse),
     UnknownValue(serde_json::Value),
 }
@@ -11945,6 +12130,7 @@ pub enum ConsumeEntitlementError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum CreateApplicationCommandError {
+    Status429(models::RatelimitedResponse),
     Status4XX(models::ErrorResponse),
     UnknownValue(serde_json::Value),
 }
@@ -11953,6 +12139,7 @@ pub enum CreateApplicationCommandError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum CreateApplicationEmojiError {
+    Status429(models::RatelimitedResponse),
     Status4XX(models::ErrorResponse),
     UnknownValue(serde_json::Value),
 }
@@ -11961,6 +12148,7 @@ pub enum CreateApplicationEmojiError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum CreateAutoModerationRuleError {
+    Status429(models::RatelimitedResponse),
     Status4XX(models::ErrorResponse),
     UnknownValue(serde_json::Value),
 }
@@ -11969,6 +12157,7 @@ pub enum CreateAutoModerationRuleError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum CreateChannelInviteError {
+    Status429(models::RatelimitedResponse),
     Status4XX(models::ErrorResponse),
     UnknownValue(serde_json::Value),
 }
@@ -11977,6 +12166,7 @@ pub enum CreateChannelInviteError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum CreateDmError {
+    Status429(models::RatelimitedResponse),
     Status4XX(models::ErrorResponse),
     UnknownValue(serde_json::Value),
 }
@@ -11985,6 +12175,7 @@ pub enum CreateDmError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum CreateEntitlementError {
+    Status429(models::RatelimitedResponse),
     Status4XX(models::ErrorResponse),
     UnknownValue(serde_json::Value),
 }
@@ -11993,6 +12184,7 @@ pub enum CreateEntitlementError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum CreateGuildError {
+    Status429(models::RatelimitedResponse),
     Status4XX(models::ErrorResponse),
     UnknownValue(serde_json::Value),
 }
@@ -12001,6 +12193,7 @@ pub enum CreateGuildError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum CreateGuildApplicationCommandError {
+    Status429(models::RatelimitedResponse),
     Status4XX(models::ErrorResponse),
     UnknownValue(serde_json::Value),
 }
@@ -12009,6 +12202,7 @@ pub enum CreateGuildApplicationCommandError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum CreateGuildChannelError {
+    Status429(models::RatelimitedResponse),
     Status4XX(models::ErrorResponse),
     UnknownValue(serde_json::Value),
 }
@@ -12017,6 +12211,7 @@ pub enum CreateGuildChannelError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum CreateGuildEmojiError {
+    Status429(models::RatelimitedResponse),
     Status4XX(models::ErrorResponse),
     UnknownValue(serde_json::Value),
 }
@@ -12025,6 +12220,7 @@ pub enum CreateGuildEmojiError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum CreateGuildFromTemplateError {
+    Status429(models::RatelimitedResponse),
     Status4XX(models::ErrorResponse),
     UnknownValue(serde_json::Value),
 }
@@ -12033,6 +12229,7 @@ pub enum CreateGuildFromTemplateError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum CreateGuildRoleError {
+    Status429(models::RatelimitedResponse),
     Status4XX(models::ErrorResponse),
     UnknownValue(serde_json::Value),
 }
@@ -12041,6 +12238,7 @@ pub enum CreateGuildRoleError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum CreateGuildScheduledEventError {
+    Status429(models::RatelimitedResponse),
     Status4XX(models::ErrorResponse),
     UnknownValue(serde_json::Value),
 }
@@ -12049,6 +12247,7 @@ pub enum CreateGuildScheduledEventError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum CreateGuildSoundboardSoundError {
+    Status429(models::RatelimitedResponse),
     Status4XX(models::ErrorResponse),
     UnknownValue(serde_json::Value),
 }
@@ -12057,6 +12256,7 @@ pub enum CreateGuildSoundboardSoundError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum CreateGuildStickerError {
+    Status429(models::RatelimitedResponse),
     Status4XX(models::ErrorResponse),
     UnknownValue(serde_json::Value),
 }
@@ -12065,6 +12265,7 @@ pub enum CreateGuildStickerError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum CreateGuildTemplateError {
+    Status429(models::RatelimitedResponse),
     Status4XX(models::ErrorResponse),
     UnknownValue(serde_json::Value),
 }
@@ -12073,6 +12274,25 @@ pub enum CreateGuildTemplateError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum CreateInteractionResponseError {
+    Status429(models::RatelimitedResponse),
+    Status4XX(models::ErrorResponse),
+    UnknownValue(serde_json::Value),
+}
+
+/// struct for typed errors of method [`create_linked_lobby_guild_invite_for_self`]
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum CreateLinkedLobbyGuildInviteForSelfError {
+    Status429(models::RatelimitedResponse),
+    Status4XX(models::ErrorResponse),
+    UnknownValue(serde_json::Value),
+}
+
+/// struct for typed errors of method [`create_linked_lobby_guild_invite_for_user`]
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum CreateLinkedLobbyGuildInviteForUserError {
+    Status429(models::RatelimitedResponse),
     Status4XX(models::ErrorResponse),
     UnknownValue(serde_json::Value),
 }
@@ -12081,6 +12301,7 @@ pub enum CreateInteractionResponseError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum CreateLobbyError {
+    Status429(models::RatelimitedResponse),
     Status4XX(models::ErrorResponse),
     UnknownValue(serde_json::Value),
 }
@@ -12089,6 +12310,7 @@ pub enum CreateLobbyError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum CreateLobbyMessageError {
+    Status429(models::RatelimitedResponse),
     Status4XX(models::ErrorResponse),
     UnknownValue(serde_json::Value),
 }
@@ -12097,6 +12319,7 @@ pub enum CreateLobbyMessageError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum CreateMessageError {
+    Status429(models::RatelimitedResponse),
     Status4XX(models::ErrorResponse),
     UnknownValue(serde_json::Value),
 }
@@ -12105,6 +12328,7 @@ pub enum CreateMessageError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum CreateOrJoinLobbyError {
+    Status429(models::RatelimitedResponse),
     Status4XX(models::ErrorResponse),
     UnknownValue(serde_json::Value),
 }
@@ -12113,6 +12337,7 @@ pub enum CreateOrJoinLobbyError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum CreatePinError {
+    Status429(models::RatelimitedResponse),
     Status4XX(models::ErrorResponse),
     UnknownValue(serde_json::Value),
 }
@@ -12121,6 +12346,7 @@ pub enum CreatePinError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum CreateStageInstanceError {
+    Status429(models::RatelimitedResponse),
     Status4XX(models::ErrorResponse),
     UnknownValue(serde_json::Value),
 }
@@ -12129,6 +12355,7 @@ pub enum CreateStageInstanceError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum CreateThreadError {
+    Status429(models::RatelimitedResponse),
     Status4XX(models::ErrorResponse),
     UnknownValue(serde_json::Value),
 }
@@ -12137,6 +12364,7 @@ pub enum CreateThreadError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum CreateThreadFromMessageError {
+    Status429(models::RatelimitedResponse),
     Status4XX(models::ErrorResponse),
     UnknownValue(serde_json::Value),
 }
@@ -12145,6 +12373,7 @@ pub enum CreateThreadFromMessageError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum CreateWebhookError {
+    Status429(models::RatelimitedResponse),
     Status4XX(models::ErrorResponse),
     UnknownValue(serde_json::Value),
 }
@@ -12153,6 +12382,7 @@ pub enum CreateWebhookError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum CrosspostMessageError {
+    Status429(models::RatelimitedResponse),
     Status4XX(models::ErrorResponse),
     UnknownValue(serde_json::Value),
 }
@@ -12161,6 +12391,7 @@ pub enum CrosspostMessageError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum DeleteAllMessageReactionsError {
+    Status429(models::RatelimitedResponse),
     Status4XX(models::ErrorResponse),
     UnknownValue(serde_json::Value),
 }
@@ -12169,6 +12400,7 @@ pub enum DeleteAllMessageReactionsError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum DeleteAllMessageReactionsByEmojiError {
+    Status429(models::RatelimitedResponse),
     Status4XX(models::ErrorResponse),
     UnknownValue(serde_json::Value),
 }
@@ -12177,6 +12409,7 @@ pub enum DeleteAllMessageReactionsByEmojiError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum DeleteApplicationCommandError {
+    Status429(models::RatelimitedResponse),
     Status4XX(models::ErrorResponse),
     UnknownValue(serde_json::Value),
 }
@@ -12185,6 +12418,7 @@ pub enum DeleteApplicationCommandError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum DeleteApplicationEmojiError {
+    Status429(models::RatelimitedResponse),
     Status4XX(models::ErrorResponse),
     UnknownValue(serde_json::Value),
 }
@@ -12193,6 +12427,7 @@ pub enum DeleteApplicationEmojiError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum DeleteApplicationUserRoleConnectionError {
+    Status429(models::RatelimitedResponse),
     Status4XX(models::ErrorResponse),
     UnknownValue(serde_json::Value),
 }
@@ -12201,6 +12436,7 @@ pub enum DeleteApplicationUserRoleConnectionError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum DeleteAutoModerationRuleError {
+    Status429(models::RatelimitedResponse),
     Status4XX(models::ErrorResponse),
     UnknownValue(serde_json::Value),
 }
@@ -12209,6 +12445,7 @@ pub enum DeleteAutoModerationRuleError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum DeleteChannelError {
+    Status429(models::RatelimitedResponse),
     Status4XX(models::ErrorResponse),
     UnknownValue(serde_json::Value),
 }
@@ -12217,6 +12454,7 @@ pub enum DeleteChannelError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum DeleteChannelPermissionOverwriteError {
+    Status429(models::RatelimitedResponse),
     Status4XX(models::ErrorResponse),
     UnknownValue(serde_json::Value),
 }
@@ -12225,6 +12463,7 @@ pub enum DeleteChannelPermissionOverwriteError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum DeleteEntitlementError {
+    Status429(models::RatelimitedResponse),
     Status4XX(models::ErrorResponse),
     UnknownValue(serde_json::Value),
 }
@@ -12233,6 +12472,7 @@ pub enum DeleteEntitlementError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum DeleteGroupDmUserError {
+    Status429(models::RatelimitedResponse),
     Status4XX(models::ErrorResponse),
     UnknownValue(serde_json::Value),
 }
@@ -12241,6 +12481,7 @@ pub enum DeleteGroupDmUserError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum DeleteGuildError {
+    Status429(models::RatelimitedResponse),
     Status4XX(models::ErrorResponse),
     UnknownValue(serde_json::Value),
 }
@@ -12249,6 +12490,7 @@ pub enum DeleteGuildError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum DeleteGuildApplicationCommandError {
+    Status429(models::RatelimitedResponse),
     Status4XX(models::ErrorResponse),
     UnknownValue(serde_json::Value),
 }
@@ -12257,6 +12499,7 @@ pub enum DeleteGuildApplicationCommandError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum DeleteGuildEmojiError {
+    Status429(models::RatelimitedResponse),
     Status4XX(models::ErrorResponse),
     UnknownValue(serde_json::Value),
 }
@@ -12265,6 +12508,7 @@ pub enum DeleteGuildEmojiError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum DeleteGuildIntegrationError {
+    Status429(models::RatelimitedResponse),
     Status4XX(models::ErrorResponse),
     UnknownValue(serde_json::Value),
 }
@@ -12273,6 +12517,7 @@ pub enum DeleteGuildIntegrationError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum DeleteGuildMemberError {
+    Status429(models::RatelimitedResponse),
     Status4XX(models::ErrorResponse),
     UnknownValue(serde_json::Value),
 }
@@ -12281,6 +12526,7 @@ pub enum DeleteGuildMemberError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum DeleteGuildMemberRoleError {
+    Status429(models::RatelimitedResponse),
     Status4XX(models::ErrorResponse),
     UnknownValue(serde_json::Value),
 }
@@ -12289,6 +12535,7 @@ pub enum DeleteGuildMemberRoleError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum DeleteGuildRoleError {
+    Status429(models::RatelimitedResponse),
     Status4XX(models::ErrorResponse),
     UnknownValue(serde_json::Value),
 }
@@ -12297,6 +12544,7 @@ pub enum DeleteGuildRoleError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum DeleteGuildScheduledEventError {
+    Status429(models::RatelimitedResponse),
     Status4XX(models::ErrorResponse),
     UnknownValue(serde_json::Value),
 }
@@ -12305,6 +12553,7 @@ pub enum DeleteGuildScheduledEventError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum DeleteGuildSoundboardSoundError {
+    Status429(models::RatelimitedResponse),
     Status4XX(models::ErrorResponse),
     UnknownValue(serde_json::Value),
 }
@@ -12313,6 +12562,7 @@ pub enum DeleteGuildSoundboardSoundError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum DeleteGuildStickerError {
+    Status429(models::RatelimitedResponse),
     Status4XX(models::ErrorResponse),
     UnknownValue(serde_json::Value),
 }
@@ -12321,6 +12571,7 @@ pub enum DeleteGuildStickerError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum DeleteGuildTemplateError {
+    Status429(models::RatelimitedResponse),
     Status4XX(models::ErrorResponse),
     UnknownValue(serde_json::Value),
 }
@@ -12329,6 +12580,7 @@ pub enum DeleteGuildTemplateError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum DeleteLobbyMemberError {
+    Status429(models::RatelimitedResponse),
     Status4XX(models::ErrorResponse),
     UnknownValue(serde_json::Value),
 }
@@ -12337,6 +12589,7 @@ pub enum DeleteLobbyMemberError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum DeleteMessageError {
+    Status429(models::RatelimitedResponse),
     Status4XX(models::ErrorResponse),
     UnknownValue(serde_json::Value),
 }
@@ -12345,6 +12598,7 @@ pub enum DeleteMessageError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum DeleteMyMessageReactionError {
+    Status429(models::RatelimitedResponse),
     Status4XX(models::ErrorResponse),
     UnknownValue(serde_json::Value),
 }
@@ -12353,6 +12607,7 @@ pub enum DeleteMyMessageReactionError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum DeleteOriginalWebhookMessageError {
+    Status429(models::RatelimitedResponse),
     Status4XX(models::ErrorResponse),
     UnknownValue(serde_json::Value),
 }
@@ -12361,6 +12616,7 @@ pub enum DeleteOriginalWebhookMessageError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum DeletePinError {
+    Status429(models::RatelimitedResponse),
     Status4XX(models::ErrorResponse),
     UnknownValue(serde_json::Value),
 }
@@ -12369,6 +12625,7 @@ pub enum DeletePinError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum DeleteStageInstanceError {
+    Status429(models::RatelimitedResponse),
     Status4XX(models::ErrorResponse),
     UnknownValue(serde_json::Value),
 }
@@ -12377,6 +12634,7 @@ pub enum DeleteStageInstanceError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum DeleteThreadMemberError {
+    Status429(models::RatelimitedResponse),
     Status4XX(models::ErrorResponse),
     UnknownValue(serde_json::Value),
 }
@@ -12385,6 +12643,7 @@ pub enum DeleteThreadMemberError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum DeleteUserMessageReactionError {
+    Status429(models::RatelimitedResponse),
     Status4XX(models::ErrorResponse),
     UnknownValue(serde_json::Value),
 }
@@ -12393,6 +12652,7 @@ pub enum DeleteUserMessageReactionError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum DeleteWebhookError {
+    Status429(models::RatelimitedResponse),
     Status4XX(models::ErrorResponse),
     UnknownValue(serde_json::Value),
 }
@@ -12401,6 +12661,7 @@ pub enum DeleteWebhookError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum DeleteWebhookByTokenError {
+    Status429(models::RatelimitedResponse),
     Status4XX(models::ErrorResponse),
     UnknownValue(serde_json::Value),
 }
@@ -12409,6 +12670,7 @@ pub enum DeleteWebhookByTokenError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum DeleteWebhookMessageError {
+    Status429(models::RatelimitedResponse),
     Status4XX(models::ErrorResponse),
     UnknownValue(serde_json::Value),
 }
@@ -12417,6 +12679,7 @@ pub enum DeleteWebhookMessageError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum DeprecatedCreatePinError {
+    Status429(models::RatelimitedResponse),
     Status4XX(models::ErrorResponse),
     UnknownValue(serde_json::Value),
 }
@@ -12425,6 +12688,7 @@ pub enum DeprecatedCreatePinError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum DeprecatedDeletePinError {
+    Status429(models::RatelimitedResponse),
     Status4XX(models::ErrorResponse),
     UnknownValue(serde_json::Value),
 }
@@ -12433,6 +12697,7 @@ pub enum DeprecatedDeletePinError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum DeprecatedListPinsError {
+    Status429(models::RatelimitedResponse),
     Status4XX(models::ErrorResponse),
     UnknownValue(serde_json::Value),
 }
@@ -12441,6 +12706,7 @@ pub enum DeprecatedListPinsError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum EditLobbyError {
+    Status429(models::RatelimitedResponse),
     Status4XX(models::ErrorResponse),
     UnknownValue(serde_json::Value),
 }
@@ -12449,6 +12715,7 @@ pub enum EditLobbyError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum EditLobbyChannelLinkError {
+    Status429(models::RatelimitedResponse),
     Status4XX(models::ErrorResponse),
     UnknownValue(serde_json::Value),
 }
@@ -12457,6 +12724,7 @@ pub enum EditLobbyChannelLinkError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum ExecuteGithubCompatibleWebhookError {
+    Status429(models::RatelimitedResponse),
     Status4XX(models::ErrorResponse),
     UnknownValue(serde_json::Value),
 }
@@ -12465,6 +12733,7 @@ pub enum ExecuteGithubCompatibleWebhookError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum ExecuteSlackCompatibleWebhookError {
+    Status429(models::RatelimitedResponse),
     Status4XX(models::ErrorResponse),
     UnknownValue(serde_json::Value),
 }
@@ -12473,6 +12742,7 @@ pub enum ExecuteSlackCompatibleWebhookError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum ExecuteWebhookError {
+    Status429(models::RatelimitedResponse),
     Status4XX(models::ErrorResponse),
     UnknownValue(serde_json::Value),
 }
@@ -12481,6 +12751,7 @@ pub enum ExecuteWebhookError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum FollowChannelError {
+    Status429(models::RatelimitedResponse),
     Status4XX(models::ErrorResponse),
     UnknownValue(serde_json::Value),
 }
@@ -12489,6 +12760,7 @@ pub enum FollowChannelError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum GetActiveGuildThreadsError {
+    Status429(models::RatelimitedResponse),
     Status4XX(models::ErrorResponse),
     UnknownValue(serde_json::Value),
 }
@@ -12497,6 +12769,7 @@ pub enum GetActiveGuildThreadsError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum GetAnswerVotersError {
+    Status429(models::RatelimitedResponse),
     Status4XX(models::ErrorResponse),
     UnknownValue(serde_json::Value),
 }
@@ -12505,6 +12778,7 @@ pub enum GetAnswerVotersError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum GetApplicationError {
+    Status429(models::RatelimitedResponse),
     Status4XX(models::ErrorResponse),
     UnknownValue(serde_json::Value),
 }
@@ -12513,6 +12787,7 @@ pub enum GetApplicationError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum GetApplicationCommandError {
+    Status429(models::RatelimitedResponse),
     Status4XX(models::ErrorResponse),
     UnknownValue(serde_json::Value),
 }
@@ -12521,6 +12796,7 @@ pub enum GetApplicationCommandError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum GetApplicationEmojiError {
+    Status429(models::RatelimitedResponse),
     Status4XX(models::ErrorResponse),
     UnknownValue(serde_json::Value),
 }
@@ -12529,6 +12805,7 @@ pub enum GetApplicationEmojiError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum GetApplicationRoleConnectionsMetadataError {
+    Status429(models::RatelimitedResponse),
     Status4XX(models::ErrorResponse),
     UnknownValue(serde_json::Value),
 }
@@ -12537,6 +12814,7 @@ pub enum GetApplicationRoleConnectionsMetadataError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum GetApplicationUserRoleConnectionError {
+    Status429(models::RatelimitedResponse),
     Status4XX(models::ErrorResponse),
     UnknownValue(serde_json::Value),
 }
@@ -12545,6 +12823,7 @@ pub enum GetApplicationUserRoleConnectionError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum GetAutoModerationRuleError {
+    Status429(models::RatelimitedResponse),
     Status4XX(models::ErrorResponse),
     UnknownValue(serde_json::Value),
 }
@@ -12553,6 +12832,7 @@ pub enum GetAutoModerationRuleError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum GetBotGatewayError {
+    Status429(models::RatelimitedResponse),
     Status4XX(models::ErrorResponse),
     UnknownValue(serde_json::Value),
 }
@@ -12561,6 +12841,7 @@ pub enum GetBotGatewayError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum GetChannelError {
+    Status429(models::RatelimitedResponse),
     Status4XX(models::ErrorResponse),
     UnknownValue(serde_json::Value),
 }
@@ -12569,6 +12850,7 @@ pub enum GetChannelError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum GetEntitlementError {
+    Status429(models::RatelimitedResponse),
     Status4XX(models::ErrorResponse),
     UnknownValue(serde_json::Value),
 }
@@ -12577,6 +12859,7 @@ pub enum GetEntitlementError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum GetEntitlementsError {
+    Status429(models::RatelimitedResponse),
     Status4XX(models::ErrorResponse),
     UnknownValue(serde_json::Value),
 }
@@ -12585,6 +12868,7 @@ pub enum GetEntitlementsError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum GetGatewayError {
+    Status429(models::RatelimitedResponse),
     Status4XX(models::ErrorResponse),
     UnknownValue(serde_json::Value),
 }
@@ -12593,6 +12877,7 @@ pub enum GetGatewayError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum GetGuildError {
+    Status429(models::RatelimitedResponse),
     Status4XX(models::ErrorResponse),
     UnknownValue(serde_json::Value),
 }
@@ -12601,6 +12886,7 @@ pub enum GetGuildError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum GetGuildApplicationCommandError {
+    Status429(models::RatelimitedResponse),
     Status4XX(models::ErrorResponse),
     UnknownValue(serde_json::Value),
 }
@@ -12609,6 +12895,7 @@ pub enum GetGuildApplicationCommandError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum GetGuildApplicationCommandPermissionsError {
+    Status429(models::RatelimitedResponse),
     Status4XX(models::ErrorResponse),
     UnknownValue(serde_json::Value),
 }
@@ -12617,6 +12904,7 @@ pub enum GetGuildApplicationCommandPermissionsError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum GetGuildBanError {
+    Status429(models::RatelimitedResponse),
     Status4XX(models::ErrorResponse),
     UnknownValue(serde_json::Value),
 }
@@ -12625,6 +12913,7 @@ pub enum GetGuildBanError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum GetGuildEmojiError {
+    Status429(models::RatelimitedResponse),
     Status4XX(models::ErrorResponse),
     UnknownValue(serde_json::Value),
 }
@@ -12633,6 +12922,7 @@ pub enum GetGuildEmojiError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum GetGuildMemberError {
+    Status429(models::RatelimitedResponse),
     Status4XX(models::ErrorResponse),
     UnknownValue(serde_json::Value),
 }
@@ -12641,6 +12931,7 @@ pub enum GetGuildMemberError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum GetGuildNewMemberWelcomeError {
+    Status429(models::RatelimitedResponse),
     Status4XX(models::ErrorResponse),
     UnknownValue(serde_json::Value),
 }
@@ -12649,6 +12940,7 @@ pub enum GetGuildNewMemberWelcomeError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum GetGuildPreviewError {
+    Status429(models::RatelimitedResponse),
     Status4XX(models::ErrorResponse),
     UnknownValue(serde_json::Value),
 }
@@ -12657,6 +12949,7 @@ pub enum GetGuildPreviewError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum GetGuildRoleError {
+    Status429(models::RatelimitedResponse),
     Status4XX(models::ErrorResponse),
     UnknownValue(serde_json::Value),
 }
@@ -12665,6 +12958,7 @@ pub enum GetGuildRoleError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum GetGuildScheduledEventError {
+    Status429(models::RatelimitedResponse),
     Status4XX(models::ErrorResponse),
     UnknownValue(serde_json::Value),
 }
@@ -12673,6 +12967,7 @@ pub enum GetGuildScheduledEventError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum GetGuildSoundboardSoundError {
+    Status429(models::RatelimitedResponse),
     Status4XX(models::ErrorResponse),
     UnknownValue(serde_json::Value),
 }
@@ -12681,6 +12976,7 @@ pub enum GetGuildSoundboardSoundError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum GetGuildStickerError {
+    Status429(models::RatelimitedResponse),
     Status4XX(models::ErrorResponse),
     UnknownValue(serde_json::Value),
 }
@@ -12689,6 +12985,7 @@ pub enum GetGuildStickerError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum GetGuildTemplateError {
+    Status429(models::RatelimitedResponse),
     Status4XX(models::ErrorResponse),
     UnknownValue(serde_json::Value),
 }
@@ -12697,6 +12994,7 @@ pub enum GetGuildTemplateError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum GetGuildVanityUrlError {
+    Status429(models::RatelimitedResponse),
     Status4XX(models::ErrorResponse),
     UnknownValue(serde_json::Value),
 }
@@ -12705,6 +13003,7 @@ pub enum GetGuildVanityUrlError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum GetGuildWebhooksError {
+    Status429(models::RatelimitedResponse),
     Status4XX(models::ErrorResponse),
     UnknownValue(serde_json::Value),
 }
@@ -12713,6 +13012,7 @@ pub enum GetGuildWebhooksError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum GetGuildWelcomeScreenError {
+    Status429(models::RatelimitedResponse),
     Status4XX(models::ErrorResponse),
     UnknownValue(serde_json::Value),
 }
@@ -12721,6 +13021,7 @@ pub enum GetGuildWelcomeScreenError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum GetGuildWidgetError {
+    Status429(models::RatelimitedResponse),
     Status4XX(models::ErrorResponse),
     UnknownValue(serde_json::Value),
 }
@@ -12729,6 +13030,7 @@ pub enum GetGuildWidgetError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum GetGuildWidgetPngError {
+    Status429(models::RatelimitedResponse),
     Status4XX(models::ErrorResponse),
     UnknownValue(serde_json::Value),
 }
@@ -12737,6 +13039,7 @@ pub enum GetGuildWidgetPngError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum GetGuildWidgetSettingsError {
+    Status429(models::RatelimitedResponse),
     Status4XX(models::ErrorResponse),
     UnknownValue(serde_json::Value),
 }
@@ -12745,6 +13048,7 @@ pub enum GetGuildWidgetSettingsError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum GetGuildsOnboardingError {
+    Status429(models::RatelimitedResponse),
     Status4XX(models::ErrorResponse),
     UnknownValue(serde_json::Value),
 }
@@ -12753,6 +13057,7 @@ pub enum GetGuildsOnboardingError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum GetLobbyError {
+    Status429(models::RatelimitedResponse),
     Status4XX(models::ErrorResponse),
     UnknownValue(serde_json::Value),
 }
@@ -12761,6 +13066,7 @@ pub enum GetLobbyError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum GetLobbyMessagesError {
+    Status429(models::RatelimitedResponse),
     Status4XX(models::ErrorResponse),
     UnknownValue(serde_json::Value),
 }
@@ -12769,6 +13075,7 @@ pub enum GetLobbyMessagesError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum GetMessageError {
+    Status429(models::RatelimitedResponse),
     Status4XX(models::ErrorResponse),
     UnknownValue(serde_json::Value),
 }
@@ -12777,6 +13084,7 @@ pub enum GetMessageError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum GetMyApplicationError {
+    Status429(models::RatelimitedResponse),
     Status4XX(models::ErrorResponse),
     UnknownValue(serde_json::Value),
 }
@@ -12785,6 +13093,7 @@ pub enum GetMyApplicationError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum GetMyGuildMemberError {
+    Status429(models::RatelimitedResponse),
     Status4XX(models::ErrorResponse),
     UnknownValue(serde_json::Value),
 }
@@ -12793,6 +13102,7 @@ pub enum GetMyGuildMemberError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum GetMyOauth2ApplicationError {
+    Status429(models::RatelimitedResponse),
     Status4XX(models::ErrorResponse),
     UnknownValue(serde_json::Value),
 }
@@ -12801,6 +13111,7 @@ pub enum GetMyOauth2ApplicationError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum GetMyOauth2AuthorizationError {
+    Status429(models::RatelimitedResponse),
     Status4XX(models::ErrorResponse),
     UnknownValue(serde_json::Value),
 }
@@ -12809,6 +13120,7 @@ pub enum GetMyOauth2AuthorizationError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum GetMyUserError {
+    Status429(models::RatelimitedResponse),
     Status4XX(models::ErrorResponse),
     UnknownValue(serde_json::Value),
 }
@@ -12817,6 +13129,7 @@ pub enum GetMyUserError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum GetOpenidConnectUserinfoError {
+    Status429(models::RatelimitedResponse),
     Status4XX(models::ErrorResponse),
     UnknownValue(serde_json::Value),
 }
@@ -12825,6 +13138,7 @@ pub enum GetOpenidConnectUserinfoError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum GetOriginalWebhookMessageError {
+    Status429(models::RatelimitedResponse),
     Status4XX(models::ErrorResponse),
     UnknownValue(serde_json::Value),
 }
@@ -12833,6 +13147,7 @@ pub enum GetOriginalWebhookMessageError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum GetPublicKeysError {
+    Status429(models::RatelimitedResponse),
     Status4XX(models::ErrorResponse),
     UnknownValue(serde_json::Value),
 }
@@ -12841,6 +13156,7 @@ pub enum GetPublicKeysError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum GetSelfVoiceStateError {
+    Status429(models::RatelimitedResponse),
     Status4XX(models::ErrorResponse),
     UnknownValue(serde_json::Value),
 }
@@ -12849,6 +13165,7 @@ pub enum GetSelfVoiceStateError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum GetSoundboardDefaultSoundsError {
+    Status429(models::RatelimitedResponse),
     Status4XX(models::ErrorResponse),
     UnknownValue(serde_json::Value),
 }
@@ -12857,6 +13174,7 @@ pub enum GetSoundboardDefaultSoundsError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum GetStageInstanceError {
+    Status429(models::RatelimitedResponse),
     Status4XX(models::ErrorResponse),
     UnknownValue(serde_json::Value),
 }
@@ -12865,6 +13183,7 @@ pub enum GetStageInstanceError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum GetStickerError {
+    Status429(models::RatelimitedResponse),
     Status4XX(models::ErrorResponse),
     UnknownValue(serde_json::Value),
 }
@@ -12873,6 +13192,7 @@ pub enum GetStickerError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum GetStickerPackError {
+    Status429(models::RatelimitedResponse),
     Status4XX(models::ErrorResponse),
     UnknownValue(serde_json::Value),
 }
@@ -12881,6 +13201,7 @@ pub enum GetStickerPackError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum GetThreadMemberError {
+    Status429(models::RatelimitedResponse),
     Status4XX(models::ErrorResponse),
     UnknownValue(serde_json::Value),
 }
@@ -12889,6 +13210,7 @@ pub enum GetThreadMemberError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum GetUserError {
+    Status429(models::RatelimitedResponse),
     Status4XX(models::ErrorResponse),
     UnknownValue(serde_json::Value),
 }
@@ -12897,6 +13219,7 @@ pub enum GetUserError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum GetVoiceStateError {
+    Status429(models::RatelimitedResponse),
     Status4XX(models::ErrorResponse),
     UnknownValue(serde_json::Value),
 }
@@ -12905,6 +13228,7 @@ pub enum GetVoiceStateError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum GetWebhookError {
+    Status429(models::RatelimitedResponse),
     Status4XX(models::ErrorResponse),
     UnknownValue(serde_json::Value),
 }
@@ -12913,6 +13237,7 @@ pub enum GetWebhookError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum GetWebhookByTokenError {
+    Status429(models::RatelimitedResponse),
     Status4XX(models::ErrorResponse),
     UnknownValue(serde_json::Value),
 }
@@ -12921,6 +13246,7 @@ pub enum GetWebhookByTokenError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum GetWebhookMessageError {
+    Status429(models::RatelimitedResponse),
     Status4XX(models::ErrorResponse),
     UnknownValue(serde_json::Value),
 }
@@ -12929,6 +13255,7 @@ pub enum GetWebhookMessageError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum InviteResolveError {
+    Status429(models::RatelimitedResponse),
     Status4XX(models::ErrorResponse),
     UnknownValue(serde_json::Value),
 }
@@ -12937,6 +13264,7 @@ pub enum InviteResolveError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum InviteRevokeError {
+    Status429(models::RatelimitedResponse),
     Status4XX(models::ErrorResponse),
     UnknownValue(serde_json::Value),
 }
@@ -12945,6 +13273,7 @@ pub enum InviteRevokeError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum JoinThreadError {
+    Status429(models::RatelimitedResponse),
     Status4XX(models::ErrorResponse),
     UnknownValue(serde_json::Value),
 }
@@ -12953,6 +13282,7 @@ pub enum JoinThreadError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum LeaveGuildError {
+    Status429(models::RatelimitedResponse),
     Status4XX(models::ErrorResponse),
     UnknownValue(serde_json::Value),
 }
@@ -12961,6 +13291,7 @@ pub enum LeaveGuildError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum LeaveLobbyError {
+    Status429(models::RatelimitedResponse),
     Status4XX(models::ErrorResponse),
     UnknownValue(serde_json::Value),
 }
@@ -12969,6 +13300,7 @@ pub enum LeaveLobbyError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum LeaveThreadError {
+    Status429(models::RatelimitedResponse),
     Status4XX(models::ErrorResponse),
     UnknownValue(serde_json::Value),
 }
@@ -12977,6 +13309,7 @@ pub enum LeaveThreadError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum ListApplicationCommandsError {
+    Status429(models::RatelimitedResponse),
     Status4XX(models::ErrorResponse),
     UnknownValue(serde_json::Value),
 }
@@ -12985,6 +13318,7 @@ pub enum ListApplicationCommandsError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum ListApplicationEmojisError {
+    Status429(models::RatelimitedResponse),
     Status4XX(models::ErrorResponse),
     UnknownValue(serde_json::Value),
 }
@@ -12993,6 +13327,7 @@ pub enum ListApplicationEmojisError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum ListAutoModerationRulesError {
+    Status429(models::RatelimitedResponse),
     Status4XX(models::ErrorResponse),
     UnknownValue(serde_json::Value),
 }
@@ -13001,6 +13336,7 @@ pub enum ListAutoModerationRulesError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum ListChannelInvitesError {
+    Status429(models::RatelimitedResponse),
     Status4XX(models::ErrorResponse),
     UnknownValue(serde_json::Value),
 }
@@ -13009,6 +13345,7 @@ pub enum ListChannelInvitesError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum ListChannelWebhooksError {
+    Status429(models::RatelimitedResponse),
     Status4XX(models::ErrorResponse),
     UnknownValue(serde_json::Value),
 }
@@ -13017,6 +13354,7 @@ pub enum ListChannelWebhooksError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum ListGuildApplicationCommandPermissionsError {
+    Status429(models::RatelimitedResponse),
     Status4XX(models::ErrorResponse),
     UnknownValue(serde_json::Value),
 }
@@ -13025,6 +13363,7 @@ pub enum ListGuildApplicationCommandPermissionsError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum ListGuildApplicationCommandsError {
+    Status429(models::RatelimitedResponse),
     Status4XX(models::ErrorResponse),
     UnknownValue(serde_json::Value),
 }
@@ -13033,6 +13372,7 @@ pub enum ListGuildApplicationCommandsError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum ListGuildAuditLogEntriesError {
+    Status429(models::RatelimitedResponse),
     Status4XX(models::ErrorResponse),
     UnknownValue(serde_json::Value),
 }
@@ -13041,6 +13381,7 @@ pub enum ListGuildAuditLogEntriesError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum ListGuildBansError {
+    Status429(models::RatelimitedResponse),
     Status4XX(models::ErrorResponse),
     UnknownValue(serde_json::Value),
 }
@@ -13049,6 +13390,7 @@ pub enum ListGuildBansError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum ListGuildChannelsError {
+    Status429(models::RatelimitedResponse),
     Status4XX(models::ErrorResponse),
     UnknownValue(serde_json::Value),
 }
@@ -13057,6 +13399,7 @@ pub enum ListGuildChannelsError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum ListGuildEmojisError {
+    Status429(models::RatelimitedResponse),
     Status4XX(models::ErrorResponse),
     UnknownValue(serde_json::Value),
 }
@@ -13065,6 +13408,7 @@ pub enum ListGuildEmojisError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum ListGuildIntegrationsError {
+    Status429(models::RatelimitedResponse),
     Status4XX(models::ErrorResponse),
     UnknownValue(serde_json::Value),
 }
@@ -13073,6 +13417,7 @@ pub enum ListGuildIntegrationsError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum ListGuildInvitesError {
+    Status429(models::RatelimitedResponse),
     Status4XX(models::ErrorResponse),
     UnknownValue(serde_json::Value),
 }
@@ -13081,6 +13426,7 @@ pub enum ListGuildInvitesError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum ListGuildMembersError {
+    Status429(models::RatelimitedResponse),
     Status4XX(models::ErrorResponse),
     UnknownValue(serde_json::Value),
 }
@@ -13089,6 +13435,7 @@ pub enum ListGuildMembersError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum ListGuildRolesError {
+    Status429(models::RatelimitedResponse),
     Status4XX(models::ErrorResponse),
     UnknownValue(serde_json::Value),
 }
@@ -13097,6 +13444,7 @@ pub enum ListGuildRolesError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum ListGuildScheduledEventUsersError {
+    Status429(models::RatelimitedResponse),
     Status4XX(models::ErrorResponse),
     UnknownValue(serde_json::Value),
 }
@@ -13105,6 +13453,7 @@ pub enum ListGuildScheduledEventUsersError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum ListGuildScheduledEventsError {
+    Status429(models::RatelimitedResponse),
     Status4XX(models::ErrorResponse),
     UnknownValue(serde_json::Value),
 }
@@ -13113,6 +13462,7 @@ pub enum ListGuildScheduledEventsError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum ListGuildSoundboardSoundsError {
+    Status429(models::RatelimitedResponse),
     Status4XX(models::ErrorResponse),
     UnknownValue(serde_json::Value),
 }
@@ -13121,6 +13471,7 @@ pub enum ListGuildSoundboardSoundsError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum ListGuildStickersError {
+    Status429(models::RatelimitedResponse),
     Status4XX(models::ErrorResponse),
     UnknownValue(serde_json::Value),
 }
@@ -13129,6 +13480,7 @@ pub enum ListGuildStickersError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum ListGuildTemplatesError {
+    Status429(models::RatelimitedResponse),
     Status4XX(models::ErrorResponse),
     UnknownValue(serde_json::Value),
 }
@@ -13137,6 +13489,7 @@ pub enum ListGuildTemplatesError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum ListGuildVoiceRegionsError {
+    Status429(models::RatelimitedResponse),
     Status4XX(models::ErrorResponse),
     UnknownValue(serde_json::Value),
 }
@@ -13145,6 +13498,7 @@ pub enum ListGuildVoiceRegionsError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum ListMessageReactionsByEmojiError {
+    Status429(models::RatelimitedResponse),
     Status4XX(models::ErrorResponse),
     UnknownValue(serde_json::Value),
 }
@@ -13153,6 +13507,7 @@ pub enum ListMessageReactionsByEmojiError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum ListMessagesError {
+    Status429(models::RatelimitedResponse),
     Status4XX(models::ErrorResponse),
     UnknownValue(serde_json::Value),
 }
@@ -13161,6 +13516,7 @@ pub enum ListMessagesError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum ListMyConnectionsError {
+    Status429(models::RatelimitedResponse),
     Status4XX(models::ErrorResponse),
     UnknownValue(serde_json::Value),
 }
@@ -13169,6 +13525,7 @@ pub enum ListMyConnectionsError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum ListMyGuildsError {
+    Status429(models::RatelimitedResponse),
     Status4XX(models::ErrorResponse),
     UnknownValue(serde_json::Value),
 }
@@ -13177,6 +13534,7 @@ pub enum ListMyGuildsError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum ListMyPrivateArchivedThreadsError {
+    Status429(models::RatelimitedResponse),
     Status4XX(models::ErrorResponse),
     UnknownValue(serde_json::Value),
 }
@@ -13185,6 +13543,7 @@ pub enum ListMyPrivateArchivedThreadsError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum ListPinsError {
+    Status429(models::RatelimitedResponse),
     Status4XX(models::ErrorResponse),
     UnknownValue(serde_json::Value),
 }
@@ -13193,6 +13552,7 @@ pub enum ListPinsError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum ListPrivateArchivedThreadsError {
+    Status429(models::RatelimitedResponse),
     Status4XX(models::ErrorResponse),
     UnknownValue(serde_json::Value),
 }
@@ -13201,6 +13561,7 @@ pub enum ListPrivateArchivedThreadsError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum ListPublicArchivedThreadsError {
+    Status429(models::RatelimitedResponse),
     Status4XX(models::ErrorResponse),
     UnknownValue(serde_json::Value),
 }
@@ -13209,6 +13570,7 @@ pub enum ListPublicArchivedThreadsError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum ListStickerPacksError {
+    Status429(models::RatelimitedResponse),
     Status4XX(models::ErrorResponse),
     UnknownValue(serde_json::Value),
 }
@@ -13217,6 +13579,7 @@ pub enum ListStickerPacksError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum ListThreadMembersError {
+    Status429(models::RatelimitedResponse),
     Status4XX(models::ErrorResponse),
     UnknownValue(serde_json::Value),
 }
@@ -13225,6 +13588,7 @@ pub enum ListThreadMembersError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum ListVoiceRegionsError {
+    Status429(models::RatelimitedResponse),
     Status4XX(models::ErrorResponse),
     UnknownValue(serde_json::Value),
 }
@@ -13233,6 +13597,7 @@ pub enum ListVoiceRegionsError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum PartnerSdkTokenError {
+    Status429(models::RatelimitedResponse),
     Status4XX(models::ErrorResponse),
     UnknownValue(serde_json::Value),
 }
@@ -13241,6 +13606,7 @@ pub enum PartnerSdkTokenError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum PartnerSdkUnmergeProvisionalAccountError {
+    Status429(models::RatelimitedResponse),
     Status4XX(models::ErrorResponse),
     UnknownValue(serde_json::Value),
 }
@@ -13249,6 +13615,7 @@ pub enum PartnerSdkUnmergeProvisionalAccountError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum PollExpireError {
+    Status429(models::RatelimitedResponse),
     Status4XX(models::ErrorResponse),
     UnknownValue(serde_json::Value),
 }
@@ -13257,6 +13624,7 @@ pub enum PollExpireError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum PreviewPruneGuildError {
+    Status429(models::RatelimitedResponse),
     Status4XX(models::ErrorResponse),
     UnknownValue(serde_json::Value),
 }
@@ -13265,6 +13633,7 @@ pub enum PreviewPruneGuildError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum PruneGuildError {
+    Status429(models::RatelimitedResponse),
     Status4XX(models::ErrorResponse),
     UnknownValue(serde_json::Value),
 }
@@ -13273,6 +13642,7 @@ pub enum PruneGuildError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum PutGuildsOnboardingError {
+    Status429(models::RatelimitedResponse),
     Status4XX(models::ErrorResponse),
     UnknownValue(serde_json::Value),
 }
@@ -13281,6 +13651,7 @@ pub enum PutGuildsOnboardingError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum SearchGuildMembersError {
+    Status429(models::RatelimitedResponse),
     Status4XX(models::ErrorResponse),
     UnknownValue(serde_json::Value),
 }
@@ -13289,6 +13660,7 @@ pub enum SearchGuildMembersError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum SendSoundboardSoundError {
+    Status429(models::RatelimitedResponse),
     Status4XX(models::ErrorResponse),
     UnknownValue(serde_json::Value),
 }
@@ -13297,6 +13669,7 @@ pub enum SendSoundboardSoundError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum SetChannelPermissionOverwriteError {
+    Status429(models::RatelimitedResponse),
     Status4XX(models::ErrorResponse),
     UnknownValue(serde_json::Value),
 }
@@ -13305,6 +13678,7 @@ pub enum SetChannelPermissionOverwriteError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum SetGuildApplicationCommandPermissionsError {
+    Status429(models::RatelimitedResponse),
     Status4XX(models::ErrorResponse),
     UnknownValue(serde_json::Value),
 }
@@ -13313,6 +13687,7 @@ pub enum SetGuildApplicationCommandPermissionsError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum SetGuildMfaLevelError {
+    Status429(models::RatelimitedResponse),
     Status4XX(models::ErrorResponse),
     UnknownValue(serde_json::Value),
 }
@@ -13321,6 +13696,7 @@ pub enum SetGuildMfaLevelError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum SyncGuildTemplateError {
+    Status429(models::RatelimitedResponse),
     Status4XX(models::ErrorResponse),
     UnknownValue(serde_json::Value),
 }
@@ -13329,6 +13705,7 @@ pub enum SyncGuildTemplateError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum ThreadSearchError {
+    Status429(models::RatelimitedResponse),
     Status4XX(models::ErrorResponse),
     UnknownValue(serde_json::Value),
 }
@@ -13337,6 +13714,7 @@ pub enum ThreadSearchError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum TriggerTypingIndicatorError {
+    Status429(models::RatelimitedResponse),
     Status4XX(models::ErrorResponse),
     UnknownValue(serde_json::Value),
 }
@@ -13345,6 +13723,7 @@ pub enum TriggerTypingIndicatorError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum UnbanUserFromGuildError {
+    Status429(models::RatelimitedResponse),
     Status4XX(models::ErrorResponse),
     UnknownValue(serde_json::Value),
 }
@@ -13353,6 +13732,7 @@ pub enum UnbanUserFromGuildError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum UpdateApplicationError {
+    Status429(models::RatelimitedResponse),
     Status4XX(models::ErrorResponse),
     UnknownValue(serde_json::Value),
 }
@@ -13361,6 +13741,7 @@ pub enum UpdateApplicationError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum UpdateApplicationCommandError {
+    Status429(models::RatelimitedResponse),
     Status4XX(models::ErrorResponse),
     UnknownValue(serde_json::Value),
 }
@@ -13369,6 +13750,7 @@ pub enum UpdateApplicationCommandError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum UpdateApplicationEmojiError {
+    Status429(models::RatelimitedResponse),
     Status4XX(models::ErrorResponse),
     UnknownValue(serde_json::Value),
 }
@@ -13377,6 +13759,7 @@ pub enum UpdateApplicationEmojiError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum UpdateApplicationRoleConnectionsMetadataError {
+    Status429(models::RatelimitedResponse),
     Status4XX(models::ErrorResponse),
     UnknownValue(serde_json::Value),
 }
@@ -13385,6 +13768,7 @@ pub enum UpdateApplicationRoleConnectionsMetadataError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum UpdateApplicationUserRoleConnectionError {
+    Status429(models::RatelimitedResponse),
     Status4XX(models::ErrorResponse),
     UnknownValue(serde_json::Value),
 }
@@ -13393,6 +13777,7 @@ pub enum UpdateApplicationUserRoleConnectionError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum UpdateAutoModerationRuleError {
+    Status429(models::RatelimitedResponse),
     Status4XX(models::ErrorResponse),
     UnknownValue(serde_json::Value),
 }
@@ -13401,6 +13786,7 @@ pub enum UpdateAutoModerationRuleError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum UpdateChannelError {
+    Status429(models::RatelimitedResponse),
     Status4XX(models::ErrorResponse),
     UnknownValue(serde_json::Value),
 }
@@ -13409,6 +13795,7 @@ pub enum UpdateChannelError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum UpdateGuildError {
+    Status429(models::RatelimitedResponse),
     Status4XX(models::ErrorResponse),
     UnknownValue(serde_json::Value),
 }
@@ -13417,6 +13804,7 @@ pub enum UpdateGuildError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum UpdateGuildApplicationCommandError {
+    Status429(models::RatelimitedResponse),
     Status4XX(models::ErrorResponse),
     UnknownValue(serde_json::Value),
 }
@@ -13425,6 +13813,7 @@ pub enum UpdateGuildApplicationCommandError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum UpdateGuildEmojiError {
+    Status429(models::RatelimitedResponse),
     Status4XX(models::ErrorResponse),
     UnknownValue(serde_json::Value),
 }
@@ -13433,6 +13822,7 @@ pub enum UpdateGuildEmojiError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum UpdateGuildMemberError {
+    Status429(models::RatelimitedResponse),
     Status4XX(models::ErrorResponse),
     UnknownValue(serde_json::Value),
 }
@@ -13441,6 +13831,7 @@ pub enum UpdateGuildMemberError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum UpdateGuildRoleError {
+    Status429(models::RatelimitedResponse),
     Status4XX(models::ErrorResponse),
     UnknownValue(serde_json::Value),
 }
@@ -13449,6 +13840,7 @@ pub enum UpdateGuildRoleError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum UpdateGuildScheduledEventError {
+    Status429(models::RatelimitedResponse),
     Status4XX(models::ErrorResponse),
     UnknownValue(serde_json::Value),
 }
@@ -13457,6 +13849,7 @@ pub enum UpdateGuildScheduledEventError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum UpdateGuildSoundboardSoundError {
+    Status429(models::RatelimitedResponse),
     Status4XX(models::ErrorResponse),
     UnknownValue(serde_json::Value),
 }
@@ -13465,6 +13858,7 @@ pub enum UpdateGuildSoundboardSoundError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum UpdateGuildStickerError {
+    Status429(models::RatelimitedResponse),
     Status4XX(models::ErrorResponse),
     UnknownValue(serde_json::Value),
 }
@@ -13473,6 +13867,7 @@ pub enum UpdateGuildStickerError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum UpdateGuildTemplateError {
+    Status429(models::RatelimitedResponse),
     Status4XX(models::ErrorResponse),
     UnknownValue(serde_json::Value),
 }
@@ -13481,6 +13876,7 @@ pub enum UpdateGuildTemplateError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum UpdateGuildWelcomeScreenError {
+    Status429(models::RatelimitedResponse),
     Status4XX(models::ErrorResponse),
     UnknownValue(serde_json::Value),
 }
@@ -13489,6 +13885,7 @@ pub enum UpdateGuildWelcomeScreenError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum UpdateGuildWidgetSettingsError {
+    Status429(models::RatelimitedResponse),
     Status4XX(models::ErrorResponse),
     UnknownValue(serde_json::Value),
 }
@@ -13497,6 +13894,7 @@ pub enum UpdateGuildWidgetSettingsError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum UpdateMessageError {
+    Status429(models::RatelimitedResponse),
     Status4XX(models::ErrorResponse),
     UnknownValue(serde_json::Value),
 }
@@ -13505,6 +13903,7 @@ pub enum UpdateMessageError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum UpdateMyApplicationError {
+    Status429(models::RatelimitedResponse),
     Status4XX(models::ErrorResponse),
     UnknownValue(serde_json::Value),
 }
@@ -13513,6 +13912,7 @@ pub enum UpdateMyApplicationError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum UpdateMyGuildMemberError {
+    Status429(models::RatelimitedResponse),
     Status4XX(models::ErrorResponse),
     UnknownValue(serde_json::Value),
 }
@@ -13521,6 +13921,7 @@ pub enum UpdateMyGuildMemberError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum UpdateMyUserError {
+    Status429(models::RatelimitedResponse),
     Status4XX(models::ErrorResponse),
     UnknownValue(serde_json::Value),
 }
@@ -13529,6 +13930,7 @@ pub enum UpdateMyUserError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum UpdateOriginalWebhookMessageError {
+    Status429(models::RatelimitedResponse),
     Status4XX(models::ErrorResponse),
     UnknownValue(serde_json::Value),
 }
@@ -13537,6 +13939,7 @@ pub enum UpdateOriginalWebhookMessageError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum UpdateSelfVoiceStateError {
+    Status429(models::RatelimitedResponse),
     Status4XX(models::ErrorResponse),
     UnknownValue(serde_json::Value),
 }
@@ -13545,6 +13948,7 @@ pub enum UpdateSelfVoiceStateError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum UpdateStageInstanceError {
+    Status429(models::RatelimitedResponse),
     Status4XX(models::ErrorResponse),
     UnknownValue(serde_json::Value),
 }
@@ -13553,6 +13957,7 @@ pub enum UpdateStageInstanceError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum UpdateVoiceStateError {
+    Status429(models::RatelimitedResponse),
     Status4XX(models::ErrorResponse),
     UnknownValue(serde_json::Value),
 }
@@ -13561,6 +13966,7 @@ pub enum UpdateVoiceStateError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum UpdateWebhookError {
+    Status429(models::RatelimitedResponse),
     Status4XX(models::ErrorResponse),
     UnknownValue(serde_json::Value),
 }
@@ -13569,6 +13975,7 @@ pub enum UpdateWebhookError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum UpdateWebhookByTokenError {
+    Status429(models::RatelimitedResponse),
     Status4XX(models::ErrorResponse),
     UnknownValue(serde_json::Value),
 }
@@ -13577,6 +13984,7 @@ pub enum UpdateWebhookByTokenError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum UpdateWebhookMessageError {
+    Status429(models::RatelimitedResponse),
     Status4XX(models::ErrorResponse),
     UnknownValue(serde_json::Value),
 }
@@ -13585,6 +13993,7 @@ pub enum UpdateWebhookMessageError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum UploadApplicationAttachmentError {
+    Status429(models::RatelimitedResponse),
     Status4XX(models::ErrorResponse),
     UnknownValue(serde_json::Value),
 }

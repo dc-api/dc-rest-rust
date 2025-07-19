@@ -7,7 +7,7 @@
 //! - **Copyright**: Copyright (c) 2025 Qntx
 //! - **Author**: ΣX <gitctrlx@gmail.com>
 //! - **Version**: 10
-//! - **Modified**: 2025-07-05T02:42:20.508163788Z[Etc/UTC]
+//! - **Modified**: 2025-07-19T09:30:51.635997860Z[Etc/UTC]
 //! - **Generator Version**: 7.14.0
 //!
 //! <details>
@@ -45,7 +45,7 @@ use crate::models;
 use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
-pub struct AddGuildMemberRequest {
+pub struct BotAddGuildMemberRequest {
     #[serde(rename = "nick", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
     pub nick: Option<Option<String>>,
     #[serde(rename = "roles", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
@@ -60,9 +60,9 @@ pub struct AddGuildMemberRequest {
     pub flags: Option<Option<i32>>,
 }
 
-impl AddGuildMemberRequest {
-    pub fn new(access_token: String) -> AddGuildMemberRequest {
-        AddGuildMemberRequest {
+impl BotAddGuildMemberRequest {
+    pub fn new(access_token: String) -> BotAddGuildMemberRequest {
+        BotAddGuildMemberRequest {
             nick: None,
             roles: None,
             mute: None,
