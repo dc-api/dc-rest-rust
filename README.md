@@ -7,7 +7,7 @@ Preview of the Discord v10 HTTP API specification. See https://discord.com/devel
 
 - API version: 10
 - Package version: 10
-- Build date: 2025-07-05T02:42:20.508163788Z[Etc/UTC]
+- Build date: 2025-07-25T15:01:23.956698569Z[Etc/UTC]
 
 ## Installation
 
@@ -31,6 +31,7 @@ Class | Method | HTTP request | Description
 *DefaultApi* | [**add_thread_member**](docs/DefaultApi.md#add_thread_member) | **PUT** /channels/{channel_id}/thread-members/{user_id} | 
 *DefaultApi* | [**applications_get_activity_instance**](docs/DefaultApi.md#applications_get_activity_instance) | **GET** /applications/{application_id}/activity-instances/{instance_id} | 
 *DefaultApi* | [**ban_user_from_guild**](docs/DefaultApi.md#ban_user_from_guild) | **PUT** /guilds/{guild_id}/bans/{user_id} | 
+*DefaultApi* | [**bot_partner_sdk_token**](docs/DefaultApi.md#bot_partner_sdk_token) | **POST** /partner-sdk/token/bot | 
 *DefaultApi* | [**bulk_ban_users_from_guild**](docs/DefaultApi.md#bulk_ban_users_from_guild) | **POST** /guilds/{guild_id}/bulk-ban | 
 *DefaultApi* | [**bulk_delete_messages**](docs/DefaultApi.md#bulk_delete_messages) | **POST** /channels/{channel_id}/messages/bulk-delete | 
 *DefaultApi* | [**bulk_set_application_commands**](docs/DefaultApi.md#bulk_set_application_commands) | **PUT** /applications/{application_id}/commands | 
@@ -56,6 +57,8 @@ Class | Method | HTTP request | Description
 *DefaultApi* | [**create_guild_sticker**](docs/DefaultApi.md#create_guild_sticker) | **POST** /guilds/{guild_id}/stickers | 
 *DefaultApi* | [**create_guild_template**](docs/DefaultApi.md#create_guild_template) | **POST** /guilds/{guild_id}/templates | 
 *DefaultApi* | [**create_interaction_response**](docs/DefaultApi.md#create_interaction_response) | **POST** /interactions/{interaction_id}/{interaction_token}/callback | 
+*DefaultApi* | [**create_linked_lobby_guild_invite_for_self**](docs/DefaultApi.md#create_linked_lobby_guild_invite_for_self) | **POST** /lobbies/{lobby_id}/members/@me/invites | 
+*DefaultApi* | [**create_linked_lobby_guild_invite_for_user**](docs/DefaultApi.md#create_linked_lobby_guild_invite_for_user) | **POST** /lobbies/{lobby_id}/members/{user_id}/invites | 
 *DefaultApi* | [**create_lobby**](docs/DefaultApi.md#create_lobby) | **POST** /lobbies | 
 *DefaultApi* | [**create_lobby_message**](docs/DefaultApi.md#create_lobby_message) | **POST** /lobbies/{lobby_id}/messages | 
 *DefaultApi* | [**create_message**](docs/DefaultApi.md#create_message) | **POST** /channels/{channel_id}/messages | 
@@ -258,7 +261,6 @@ Class | Method | HTTP request | Description
  - [ActivitiesAttachmentResponse](docs/ActivitiesAttachmentResponse.md)
  - [AddGroupDmUser201Response](docs/AddGroupDmUser201Response.md)
  - [AddGroupDmUserRequest](docs/AddGroupDmUserRequest.md)
- - [AddGuildMemberRequest](docs/AddGuildMemberRequest.md)
  - [AddLobbyMemberRequest](docs/AddLobbyMemberRequest.md)
  - [ApplicationCommandAttachmentOption](docs/ApplicationCommandAttachmentOption.md)
  - [ApplicationCommandAttachmentOptionResponse](docs/ApplicationCommandAttachmentOptionResponse.md)
@@ -328,6 +330,8 @@ Class | Method | HTTP request | Description
  - [BlockMessageActionMetadataResponse](docs/BlockMessageActionMetadataResponse.md)
  - [BlockMessageActionResponse](docs/BlockMessageActionResponse.md)
  - [BotAccountPatchRequest](docs/BotAccountPatchRequest.md)
+ - [BotAddGuildMemberRequest](docs/BotAddGuildMemberRequest.md)
+ - [BotPartnerSdkTokenRequest](docs/BotPartnerSdkTokenRequest.md)
  - [BulkBanUsersFromGuildRequest](docs/BulkBanUsersFromGuildRequest.md)
  - [BulkBanUsersResponse](docs/BulkBanUsersResponse.md)
  - [BulkDeleteMessagesRequest](docs/BulkDeleteMessagesRequest.md)
@@ -500,6 +504,7 @@ Class | Method | HTTP request | Description
  - [ListGuildIntegrations200ResponseInner](docs/ListGuildIntegrations200ResponseInner.md)
  - [ListGuildScheduledEvents200ResponseInner](docs/ListGuildScheduledEvents200ResponseInner.md)
  - [ListGuildSoundboardSoundsResponse](docs/ListGuildSoundboardSoundsResponse.md)
+ - [LobbyGuildInviteResponse](docs/LobbyGuildInviteResponse.md)
  - [LobbyMemberRequest](docs/LobbyMemberRequest.md)
  - [LobbyMemberResponse](docs/LobbyMemberResponse.md)
  - [LobbyMessageResponse](docs/LobbyMessageResponse.md)
@@ -589,6 +594,7 @@ Class | Method | HTTP request | Description
  - [PurchaseNotificationResponse](docs/PurchaseNotificationResponse.md)
  - [QuarantineUserAction](docs/QuarantineUserAction.md)
  - [QuarantineUserActionResponse](docs/QuarantineUserActionResponse.md)
+ - [RatelimitedResponse](docs/RatelimitedResponse.md)
  - [ResolvedObjectsResponse](docs/ResolvedObjectsResponse.md)
  - [ResourceChannelResponse](docs/ResourceChannelResponse.md)
  - [RichEmbed](docs/RichEmbed.md)
