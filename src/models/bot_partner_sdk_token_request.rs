@@ -7,7 +7,7 @@
 //! - **Copyright**: Copyright (c) 2025 Qntx
 //! - **Author**: ΣX <gitctrlx@gmail.com>
 //! - **Version**: 10
-//! - **Modified**: 2025-07-05T02:42:20.508163788Z[Etc/UTC]
+//! - **Modified**: 2025-07-25T15:01:23.956698569Z[Etc/UTC]
 //! - **Generator Version**: 7.14.0
 //!
 //! <details>
@@ -45,30 +45,18 @@ use crate::models;
 use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
-pub struct AddGuildMemberRequest {
-    #[serde(rename = "nick", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub nick: Option<Option<String>>,
-    #[serde(rename = "roles", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub roles: Option<Option<Vec<String>>>,
-    #[serde(rename = "mute", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub mute: Option<Option<bool>>,
-    #[serde(rename = "deaf", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub deaf: Option<Option<bool>>,
-    #[serde(rename = "access_token")]
-    pub access_token: String,
-    #[serde(rename = "flags", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub flags: Option<Option<i32>>,
+pub struct BotPartnerSdkTokenRequest {
+    #[serde(rename = "external_user_id")]
+    pub external_user_id: String,
+    #[serde(rename = "preferred_global_name", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub preferred_global_name: Option<Option<String>>,
 }
 
-impl AddGuildMemberRequest {
-    pub fn new(access_token: String) -> AddGuildMemberRequest {
-        AddGuildMemberRequest {
-            nick: None,
-            roles: None,
-            mute: None,
-            deaf: None,
-            access_token,
-            flags: None,
+impl BotPartnerSdkTokenRequest {
+    pub fn new(external_user_id: String) -> BotPartnerSdkTokenRequest {
+        BotPartnerSdkTokenRequest {
+            external_user_id,
+            preferred_global_name: None,
         }
     }
 }
