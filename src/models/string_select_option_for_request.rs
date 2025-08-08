@@ -7,7 +7,7 @@
 //! - **Copyright**: Copyright (c) 2025 Qntx
 //! - **Author**: ΣX <gitctrlx@gmail.com>
 //! - **Version**: 10
-//! - **Modified**: 2025-07-05T02:42:20.508163788Z[Etc/UTC]
+//! - **Modified**: 2025-08-08T14:09:28.145966160Z[Etc/UTC]
 //! - **Generator Version**: 7.14.0
 //!
 //! <details>
@@ -45,33 +45,27 @@ use crate::models;
 use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
-pub struct CreateGuildRoleRequest {
-    #[serde(rename = "name", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub name: Option<Option<String>>,
-    #[serde(rename = "permissions", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub permissions: Option<Option<i32>>,
-    #[serde(rename = "color", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub color: Option<Option<i32>>,
-    #[serde(rename = "hoist", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub hoist: Option<Option<bool>>,
-    #[serde(rename = "mentionable", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub mentionable: Option<Option<bool>>,
-    #[serde(rename = "icon", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub icon: Option<Option<String>>,
-    #[serde(rename = "unicode_emoji", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub unicode_emoji: Option<Option<String>>,
+pub struct StringSelectOptionForRequest {
+    #[serde(rename = "label")]
+    pub label: String,
+    #[serde(rename = "value")]
+    pub value: String,
+    #[serde(rename = "description", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub description: Option<Option<String>>,
+    #[serde(rename = "default", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub default: Option<Option<bool>>,
+    #[serde(rename = "emoji", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub emoji: Option<Option<Box<models::ComponentEmojiForRequest>>>,
 }
 
-impl CreateGuildRoleRequest {
-    pub fn new() -> CreateGuildRoleRequest {
-        CreateGuildRoleRequest {
-            name: None,
-            permissions: None,
-            color: None,
-            hoist: None,
-            mentionable: None,
-            icon: None,
-            unicode_emoji: None,
+impl StringSelectOptionForRequest {
+    pub fn new(label: String, value: String) -> StringSelectOptionForRequest {
+        StringSelectOptionForRequest {
+            label,
+            value,
+            description: None,
+            default: None,
+            emoji: None,
         }
     }
 }

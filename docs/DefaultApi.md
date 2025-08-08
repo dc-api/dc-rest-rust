@@ -12,6 +12,7 @@ Method | HTTP request | Description
 [**add_thread_member**](DefaultApi.md#add_thread_member) | **PUT** /channels/{channel_id}/thread-members/{user_id} | 
 [**applications_get_activity_instance**](DefaultApi.md#applications_get_activity_instance) | **GET** /applications/{application_id}/activity-instances/{instance_id} | 
 [**ban_user_from_guild**](DefaultApi.md#ban_user_from_guild) | **PUT** /guilds/{guild_id}/bans/{user_id} | 
+[**bot_partner_sdk_token**](DefaultApi.md#bot_partner_sdk_token) | **POST** /partner-sdk/token/bot | 
 [**bulk_ban_users_from_guild**](DefaultApi.md#bulk_ban_users_from_guild) | **POST** /guilds/{guild_id}/bulk-ban | 
 [**bulk_delete_messages**](DefaultApi.md#bulk_delete_messages) | **POST** /channels/{channel_id}/messages/bulk-delete | 
 [**bulk_set_application_commands**](DefaultApi.md#bulk_set_application_commands) | **PUT** /applications/{application_id}/commands | 
@@ -26,17 +27,17 @@ Method | HTTP request | Description
 [**create_channel_invite**](DefaultApi.md#create_channel_invite) | **POST** /channels/{channel_id}/invites | 
 [**create_dm**](DefaultApi.md#create_dm) | **POST** /users/@me/channels | 
 [**create_entitlement**](DefaultApi.md#create_entitlement) | **POST** /applications/{application_id}/entitlements | 
-[**create_guild**](DefaultApi.md#create_guild) | **POST** /guilds | 
 [**create_guild_application_command**](DefaultApi.md#create_guild_application_command) | **POST** /applications/{application_id}/guilds/{guild_id}/commands | 
 [**create_guild_channel**](DefaultApi.md#create_guild_channel) | **POST** /guilds/{guild_id}/channels | 
 [**create_guild_emoji**](DefaultApi.md#create_guild_emoji) | **POST** /guilds/{guild_id}/emojis | 
-[**create_guild_from_template**](DefaultApi.md#create_guild_from_template) | **POST** /guilds/templates/{code} | 
 [**create_guild_role**](DefaultApi.md#create_guild_role) | **POST** /guilds/{guild_id}/roles | 
 [**create_guild_scheduled_event**](DefaultApi.md#create_guild_scheduled_event) | **POST** /guilds/{guild_id}/scheduled-events | 
 [**create_guild_soundboard_sound**](DefaultApi.md#create_guild_soundboard_sound) | **POST** /guilds/{guild_id}/soundboard-sounds | 
 [**create_guild_sticker**](DefaultApi.md#create_guild_sticker) | **POST** /guilds/{guild_id}/stickers | 
 [**create_guild_template**](DefaultApi.md#create_guild_template) | **POST** /guilds/{guild_id}/templates | 
 [**create_interaction_response**](DefaultApi.md#create_interaction_response) | **POST** /interactions/{interaction_id}/{interaction_token}/callback | 
+[**create_linked_lobby_guild_invite_for_self**](DefaultApi.md#create_linked_lobby_guild_invite_for_self) | **POST** /lobbies/{lobby_id}/members/@me/invites | 
+[**create_linked_lobby_guild_invite_for_user**](DefaultApi.md#create_linked_lobby_guild_invite_for_user) | **POST** /lobbies/{lobby_id}/members/{user_id}/invites | 
 [**create_lobby**](DefaultApi.md#create_lobby) | **POST** /lobbies | 
 [**create_lobby_message**](DefaultApi.md#create_lobby_message) | **POST** /lobbies/{lobby_id}/messages | 
 [**create_message**](DefaultApi.md#create_message) | **POST** /channels/{channel_id}/messages | 
@@ -261,7 +262,7 @@ Name | Type | Description  | Required | Notes
 
 ## add_guild_member
 
-> models::GuildMemberResponse add_guild_member(guild_id, user_id, add_guild_member_request)
+> models::GuildMemberResponse add_guild_member(guild_id, user_id, bot_add_guild_member_request)
 
 
 ### Parameters
@@ -271,7 +272,7 @@ Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
 **guild_id** | **String** |  | [required] |
 **user_id** | **String** |  | [required] |
-**add_guild_member_request** | [**AddGuildMemberRequest**](AddGuildMemberRequest.md) |  | [required] |
+**bot_add_guild_member_request** | [**BotAddGuildMemberRequest**](BotAddGuildMemberRequest.md) |  | [required] |
 
 ### Return type
 
@@ -467,6 +468,34 @@ Name | Type | Description  | Required | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 
+## bot_partner_sdk_token
+
+> models::ProvisionalTokenResponse bot_partner_sdk_token(bot_partner_sdk_token_request)
+
+
+### Parameters
+
+
+Name | Type | Description  | Required | Notes
+------------- | ------------- | ------------- | ------------- | -------------
+**bot_partner_sdk_token_request** | [**BotPartnerSdkTokenRequest**](BotPartnerSdkTokenRequest.md) |  | [required] |
+
+### Return type
+
+[**models::ProvisionalTokenResponse**](ProvisionalTokenResponse.md)
+
+### Authorization
+
+[BotToken](../README.md#BotToken)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+
 ## bulk_ban_users_from_guild
 
 > models::BulkBanUsersResponse bulk_ban_users_from_guild(guild_id, bulk_ban_users_from_guild_request)
@@ -615,7 +644,7 @@ Name | Type | Description  | Required | Notes
 
 ## bulk_update_guild_roles
 
-> Vec<models::GuildRoleResponse> bulk_update_guild_roles(guild_id, bulk_update_guild_roles_request_inner)
+> Vec<models::GuildRoleResponse> bulk_update_guild_roles(guild_id, update_role_positions_request)
 
 
 ### Parameters
@@ -624,7 +653,7 @@ Name | Type | Description  | Required | Notes
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
 **guild_id** | **String** |  | [required] |
-**bulk_update_guild_roles_request_inner** | [**Vec<models::BulkUpdateGuildRolesRequestInner>**](bulk_update_guild_roles_request_inner.md) |  | [required] |
+**update_role_positions_request** | [**Vec<models::UpdateRolePositionsRequest>**](UpdateRolePositionsRequest.md) |  | [required] |
 
 ### Return type
 
@@ -873,34 +902,6 @@ Name | Type | Description  | Required | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 
-## create_guild
-
-> models::GuildResponse create_guild(guild_create_request)
-
-
-### Parameters
-
-
-Name | Type | Description  | Required | Notes
-------------- | ------------- | ------------- | ------------- | -------------
-**guild_create_request** | [**GuildCreateRequest**](GuildCreateRequest.md) |  | [required] |
-
-### Return type
-
-[**models::GuildResponse**](GuildResponse.md)
-
-### Authorization
-
-[BotToken](../README.md#BotToken)
-
-### HTTP request headers
-
-- **Content-Type**: application/json
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-
 ## create_guild_application_command
 
 > models::ApplicationCommandResponse create_guild_application_command(application_id, guild_id, application_command_create_request)
@@ -989,38 +990,9 @@ Name | Type | Description  | Required | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 
-## create_guild_from_template
-
-> models::GuildResponse create_guild_from_template(code, create_guild_from_template_request)
-
-
-### Parameters
-
-
-Name | Type | Description  | Required | Notes
-------------- | ------------- | ------------- | ------------- | -------------
-**code** | **String** |  | [required] |
-**create_guild_from_template_request** | [**CreateGuildFromTemplateRequest**](CreateGuildFromTemplateRequest.md) |  | [required] |
-
-### Return type
-
-[**models::GuildResponse**](GuildResponse.md)
-
-### Authorization
-
-[BotToken](../README.md#BotToken)
-
-### HTTP request headers
-
-- **Content-Type**: application/json
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-
 ## create_guild_role
 
-> models::GuildRoleResponse create_guild_role(guild_id, create_guild_role_request)
+> models::GuildRoleResponse create_guild_role(guild_id, create_role_request)
 
 
 ### Parameters
@@ -1029,7 +1001,7 @@ Name | Type | Description  | Required | Notes
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
 **guild_id** | **String** |  | [required] |
-**create_guild_role_request** | [**CreateGuildRoleRequest**](CreateGuildRoleRequest.md) |  | [required] |
+**create_role_request** | [**CreateRoleRequest**](CreateRoleRequest.md) |  | [required] |
 
 ### Return type
 
@@ -1192,6 +1164,63 @@ Name | Type | Description  | Required | Notes
 ### HTTP request headers
 
 - **Content-Type**: application/json, application/x-www-form-urlencoded, multipart/form-data
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+
+## create_linked_lobby_guild_invite_for_self
+
+> models::LobbyGuildInviteResponse create_linked_lobby_guild_invite_for_self(lobby_id)
+
+
+### Parameters
+
+
+Name | Type | Description  | Required | Notes
+------------- | ------------- | ------------- | ------------- | -------------
+**lobby_id** | **String** |  | [required] |
+
+### Return type
+
+[**models::LobbyGuildInviteResponse**](LobbyGuildInviteResponse.md)
+
+### Authorization
+
+[OAuth2](../README.md#OAuth2), [OAuth2](../README.md#OAuth2), [OAuth2](../README.md#OAuth2), [BotToken](../README.md#BotToken)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+
+## create_linked_lobby_guild_invite_for_user
+
+> models::LobbyGuildInviteResponse create_linked_lobby_guild_invite_for_user(lobby_id, user_id)
+
+
+### Parameters
+
+
+Name | Type | Description  | Required | Notes
+------------- | ------------- | ------------- | ------------- | -------------
+**lobby_id** | **String** |  | [required] |
+**user_id** | **String** |  | [required] |
+
+### Return type
+
+[**models::LobbyGuildInviteResponse**](LobbyGuildInviteResponse.md)
+
+### Authorization
+
+[BotToken](../README.md#BotToken)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -6118,7 +6147,7 @@ Name | Type | Description  | Required | Notes
 
 ## update_guild_role
 
-> models::GuildRoleResponse update_guild_role(guild_id, role_id, create_guild_role_request)
+> models::GuildRoleResponse update_guild_role(guild_id, role_id, update_role_request_partial)
 
 
 ### Parameters
@@ -6128,7 +6157,7 @@ Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
 **guild_id** | **String** |  | [required] |
 **role_id** | **String** |  | [required] |
-**create_guild_role_request** | [**CreateGuildRoleRequest**](CreateGuildRoleRequest.md) |  | [required] |
+**update_role_request_partial** | [**UpdateRoleRequestPartial**](UpdateRoleRequestPartial.md) |  | [required] |
 
 ### Return type
 

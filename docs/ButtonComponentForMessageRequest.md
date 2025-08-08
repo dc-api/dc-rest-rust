@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 **disabled** | Option<**bool**> |  | [optional]
 **url** | Option<**String**> |  | [optional]
 **sku_id** | Option<**String**> |  | [optional]
-**emoji** | Option<[**models::ComponentEmojiForMessageRequest**](ComponentEmojiForMessageRequest.md)> |  | [optional]
+**emoji** | Option<[**models::ComponentEmojiForRequest**](ComponentEmojiForRequest.md)> |  | [optional]
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
