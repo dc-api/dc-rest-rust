@@ -7,7 +7,7 @@
 //! - **Copyright**: Copyright (c) 2025 Qntx
 //! - **Author**: ΣX <gitctrlx@gmail.com>
 //! - **Version**: 10
-//! - **Modified**: 2025-07-05T02:42:20.508163788Z[Etc/UTC]
+//! - **Modified**: 2025-08-08T14:09:28.145966160Z[Etc/UTC]
 //! - **Generator Version**: 7.14.0
 //!
 //! <details>
@@ -45,54 +45,18 @@ use crate::models;
 use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
-pub struct GuildCreateRequest {
-    #[serde(rename = "description", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub description: Option<Option<String>>,
-    #[serde(rename = "name")]
-    pub name: String,
-    #[serde(rename = "region", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub region: Option<Option<String>>,
-    #[serde(rename = "icon", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub icon: Option<Option<String>>,
-    #[serde(rename = "verification_level", skip_serializing_if = "Option::is_none")]
-    pub verification_level: Option<i32>,
-    #[serde(rename = "default_message_notifications", skip_serializing_if = "Option::is_none")]
-    pub default_message_notifications: Option<i32>,
-    #[serde(rename = "explicit_content_filter", skip_serializing_if = "Option::is_none")]
-    pub explicit_content_filter: Option<i32>,
-    #[serde(rename = "preferred_locale", skip_serializing_if = "Option::is_none")]
-    pub preferred_locale: Option<String>,
-    #[serde(rename = "afk_timeout", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub afk_timeout: Option<Option<i32>>,
-    #[serde(rename = "roles", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub roles: Option<Option<Vec<models::CreateGuildRequestRoleItem>>>,
-    #[serde(rename = "channels", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub channels: Option<Option<Vec<models::CreateGuildRequestChannelItem>>>,
-    #[serde(rename = "afk_channel_id", skip_serializing_if = "Option::is_none")]
-    pub afk_channel_id: Option<String>,
-    #[serde(rename = "system_channel_id", skip_serializing_if = "Option::is_none")]
-    pub system_channel_id: Option<String>,
-    #[serde(rename = "system_channel_flags", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub system_channel_flags: Option<Option<i32>>,
+pub struct UpdateRolePositionsRequest {
+    #[serde(rename = "id", skip_serializing_if = "Option::is_none")]
+    pub id: Option<String>,
+    #[serde(rename = "position", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub position: Option<Option<i32>>,
 }
 
-impl GuildCreateRequest {
-    pub fn new(name: String) -> GuildCreateRequest {
-        GuildCreateRequest {
-            description: None,
-            name,
-            region: None,
-            icon: None,
-            verification_level: None,
-            default_message_notifications: None,
-            explicit_content_filter: None,
-            preferred_locale: None,
-            afk_timeout: None,
-            roles: None,
-            channels: None,
-            afk_channel_id: None,
-            system_channel_id: None,
-            system_channel_flags: None,
+impl UpdateRolePositionsRequest {
+    pub fn new() -> UpdateRolePositionsRequest {
+        UpdateRolePositionsRequest {
+            id: None,
+            position: None,
         }
     }
 }

@@ -1,4 +1,4 @@
-# AddGuildMemberRequest
+# BotAddGuildMemberRequest
 
 ## Properties
 
