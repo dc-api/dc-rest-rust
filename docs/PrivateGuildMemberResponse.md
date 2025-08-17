@@ -14,6 +14,7 @@ Name | Type | Description | Notes
 **pending** | **bool** |  | 
 **premium_since** | Option<**String**> |  | [optional]
 **roles** | **Vec<String>** |  | 
+**collectibles** | Option<[**models::UserCollectiblesResponse**](UserCollectiblesResponse.md)> |  | [optional]
 **user** | [**models::UserResponse**](UserResponse.md) |  | 
 **mute** | **bool** |  | 
 **deaf** | **bool** |  | 

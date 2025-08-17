@@ -7,7 +7,7 @@
 //! - **Copyright**: Copyright (c) 2025 Qntx
 //! - **Author**: ΣX <gitctrlx@gmail.com>
 //! - **Version**: 10
-//! - **Modified**: 2025-07-05T02:42:20.508163788Z[Etc/UTC]
+//! - **Modified**: 2025-08-17T02:10:54.763559608Z[Etc/UTC]
 //! - **Generator Version**: 7.14.0
 //!
 //! <details>
@@ -45,27 +45,18 @@ use crate::models;
 use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
-pub struct StringSelectOptionForMessageRequest {
-    #[serde(rename = "label")]
-    pub label: String,
-    #[serde(rename = "value")]
-    pub value: String,
-    #[serde(rename = "description", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub description: Option<Option<String>>,
-    #[serde(rename = "default", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub default: Option<Option<bool>>,
-    #[serde(rename = "emoji", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub emoji: Option<Option<Box<models::ComponentEmojiForMessageRequest>>>,
+pub struct BotPartnerSdkTokenRequest {
+    #[serde(rename = "external_user_id")]
+    pub external_user_id: String,
+    #[serde(rename = "preferred_global_name", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub preferred_global_name: Option<Option<String>>,
 }
 
-impl StringSelectOptionForMessageRequest {
-    pub fn new(label: String, value: String) -> StringSelectOptionForMessageRequest {
-        StringSelectOptionForMessageRequest {
-            label,
-            value,
-            description: None,
-            default: None,
-            emoji: None,
+impl BotPartnerSdkTokenRequest {
+    pub fn new(external_user_id: String) -> BotPartnerSdkTokenRequest {
+        BotPartnerSdkTokenRequest {
+            external_user_id,
+            preferred_global_name: None,
         }
     }
 }
