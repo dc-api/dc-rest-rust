@@ -1,4 +1,4 @@
-# CreateGuildRoleRequest
+# UpdateRoleRequestPartial
 
 ## Properties
 

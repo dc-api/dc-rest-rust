@@ -7,7 +7,7 @@
 //! - **Copyright**: Copyright (c) 2025 Qntx
 //! - **Author**: ΣX <gitctrlx@gmail.com>
 //! - **Version**: 10
-//! - **Modified**: 2025-07-05T02:42:20.508163788Z[Etc/UTC]
+//! - **Modified**: 2025-08-17T02:10:54.763559608Z[Etc/UTC]
 //! - **Generator Version**: 7.14.0
 //!
 //! <details>
@@ -44,16 +44,31 @@
 use crate::models;
 use serde::{Deserialize, Serialize};
 
+/// RatelimitedResponse : Ratelimit error object returned by the Discord API
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
-pub struct SetGuildMfaLevelRequest {
-    #[serde(rename = "level")]
-    pub level: i32,
+pub struct RatelimitedResponse {
+    /// Discord internal error code. See error code reference
+    #[serde(rename = "code")]
+    pub code: i32,
+    /// Human-readable error message
+    #[serde(rename = "message")]
+    pub message: String,
+    /// The number of seconds to wait before retrying your request
+    #[serde(rename = "retry_after")]
+    pub retry_after: f64,
+    /// Whether you are being ratelimited by the global ratelimit or a per-endpoint ratelimit
+    #[serde(rename = "global")]
+    pub global: bool,
 }
 
-impl SetGuildMfaLevelRequest {
-    pub fn new(level: i32) -> SetGuildMfaLevelRequest {
-        SetGuildMfaLevelRequest {
-            level,
+impl RatelimitedResponse {
+    /// Ratelimit error object returned by the Discord API
+    pub fn new(code: i32, message: String, retry_after: f64, global: bool) -> RatelimitedResponse {
+        RatelimitedResponse {
+            code,
+            message,
+            retry_after,
+            global,
         }
     }
 }

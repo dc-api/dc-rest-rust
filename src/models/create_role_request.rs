@@ -7,7 +7,7 @@
 //! - **Copyright**: Copyright (c) 2025 Qntx
 //! - **Author**: ΣX <gitctrlx@gmail.com>
 //! - **Version**: 10
-//! - **Modified**: 2025-07-05T02:42:20.508163788Z[Etc/UTC]
+//! - **Modified**: 2025-08-17T02:10:54.763559608Z[Etc/UTC]
 //! - **Generator Version**: 7.14.0
 //!
 //! <details>
@@ -45,7 +45,7 @@ use crate::models;
 use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
-pub struct CreateGuildRoleRequest {
+pub struct CreateRoleRequest {
     #[serde(rename = "name", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
     pub name: Option<Option<String>>,
     #[serde(rename = "permissions", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
@@ -62,9 +62,9 @@ pub struct CreateGuildRoleRequest {
     pub unicode_emoji: Option<Option<String>>,
 }
 
-impl CreateGuildRoleRequest {
-    pub fn new() -> CreateGuildRoleRequest {
-        CreateGuildRoleRequest {
+impl CreateRoleRequest {
+    pub fn new() -> CreateRoleRequest {
+        CreateRoleRequest {
             name: None,
             permissions: None,
             color: None,

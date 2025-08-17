@@ -7,7 +7,7 @@
 //! - **Copyright**: Copyright (c) 2025 Qntx
 //! - **Author**: ΣX <gitctrlx@gmail.com>
 //! - **Version**: 10
-//! - **Modified**: 2025-07-05T02:42:20.508163788Z[Etc/UTC]
+//! - **Modified**: 2025-08-17T02:10:54.763559608Z[Etc/UTC]
 //! - **Generator Version**: 7.14.0
 //!
 //! <details>
@@ -45,18 +45,18 @@ use crate::models;
 use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
-pub struct BulkBanUsersFromGuildRequest {
-    #[serde(rename = "user_ids")]
-    pub user_ids: Vec<String>,
-    #[serde(rename = "delete_message_seconds", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub delete_message_seconds: Option<Option<i32>>,
+pub struct UpdateRolePositionsRequest {
+    #[serde(rename = "id", skip_serializing_if = "Option::is_none")]
+    pub id: Option<String>,
+    #[serde(rename = "position", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub position: Option<Option<i32>>,
 }
 
-impl BulkBanUsersFromGuildRequest {
-    pub fn new(user_ids: Vec<String>) -> BulkBanUsersFromGuildRequest {
-        BulkBanUsersFromGuildRequest {
-            user_ids,
-            delete_message_seconds: None,
+impl UpdateRolePositionsRequest {
+    pub fn new() -> UpdateRolePositionsRequest {
+        UpdateRolePositionsRequest {
+            id: None,
+            position: None,
         }
     }
 }

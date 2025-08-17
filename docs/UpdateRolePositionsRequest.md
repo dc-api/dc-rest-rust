@@ -1,4 +1,4 @@
-# BulkUpdateGuildRolesRequestInner
+# UpdateRolePositionsRequest
 
 ## Properties
 

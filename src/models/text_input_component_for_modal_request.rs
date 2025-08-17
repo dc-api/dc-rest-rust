@@ -7,7 +7,7 @@
 //! - **Copyright**: Copyright (c) 2025 Qntx
 //! - **Author**: ΣX <gitctrlx@gmail.com>
 //! - **Version**: 10
-//! - **Modified**: 2025-07-05T02:42:20.508163788Z[Etc/UTC]
+//! - **Modified**: 2025-08-17T02:10:54.763559608Z[Etc/UTC]
 //! - **Generator Version**: 7.14.0
 //!
 //! <details>
@@ -52,8 +52,8 @@ pub struct TextInputComponentForModalRequest {
     pub custom_id: String,
     #[serde(rename = "style")]
     pub style: i32,
-    #[serde(rename = "label")]
-    pub label: String,
+    #[serde(rename = "label", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub label: Option<Option<String>>,
     #[serde(rename = "value", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
     pub value: Option<Option<String>>,
     #[serde(rename = "placeholder", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
@@ -67,12 +67,12 @@ pub struct TextInputComponentForModalRequest {
 }
 
 impl TextInputComponentForModalRequest {
-    pub fn new(r#type: i32, custom_id: String, style: i32, label: String) -> TextInputComponentForModalRequest {
+    pub fn new(r#type: i32, custom_id: String, style: i32) -> TextInputComponentForModalRequest {
         TextInputComponentForModalRequest {
             r#type,
             custom_id,
             style,
-            label,
+            label: None,
             value: None,
             placeholder: None,
             required: None,

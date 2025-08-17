@@ -7,7 +7,7 @@
 //! - **Copyright**: Copyright (c) 2025 Qntx
 //! - **Author**: ΣX <gitctrlx@gmail.com>
 //! - **Version**: 10
-//! - **Modified**: 2025-07-05T02:42:20.508163788Z[Etc/UTC]
+//! - **Modified**: 2025-08-17T02:10:54.763559608Z[Etc/UTC]
 //! - **Generator Version**: 7.14.0
 //!
 //! <details>
@@ -56,16 +56,19 @@ pub struct LobbyResponse {
     pub members: Option<Option<Vec<models::LobbyMemberResponse>>>,
     #[serde(rename = "linked_channel", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
     pub linked_channel: Option<Option<Box<models::GuildChannelResponse>>>,
+    #[serde(rename = "flags")]
+    pub flags: i64,
 }
 
 impl LobbyResponse {
-    pub fn new(id: String, application_id: String) -> LobbyResponse {
+    pub fn new(id: String, application_id: String, flags: i64) -> LobbyResponse {
         LobbyResponse {
             id,
             application_id,
             metadata: None,
             members: None,
             linked_channel: None,
+            flags,
         }
     }
 }

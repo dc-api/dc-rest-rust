@@ -7,7 +7,7 @@
 //! - **Copyright**: Copyright (c) 2025 Qntx
 //! - **Author**: ΣX <gitctrlx@gmail.com>
 //! - **Version**: 10
-//! - **Modified**: 2025-07-05T02:42:20.508163788Z[Etc/UTC]
+//! - **Modified**: 2025-08-17T02:10:54.763559608Z[Etc/UTC]
 //! - **Generator Version**: 7.14.0
 //!
 //! <details>
@@ -45,30 +45,15 @@ use crate::models;
 use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
-pub struct AddGuildMemberRequest {
-    #[serde(rename = "nick", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub nick: Option<Option<String>>,
-    #[serde(rename = "roles", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub roles: Option<Option<Vec<String>>>,
-    #[serde(rename = "mute", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub mute: Option<Option<bool>>,
-    #[serde(rename = "deaf", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub deaf: Option<Option<bool>>,
-    #[serde(rename = "access_token")]
-    pub access_token: String,
-    #[serde(rename = "flags", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub flags: Option<Option<i32>>,
+pub struct GuildMfaRequest {
+    #[serde(rename = "level")]
+    pub level: i32,
 }
 
-impl AddGuildMemberRequest {
-    pub fn new(access_token: String) -> AddGuildMemberRequest {
-        AddGuildMemberRequest {
-            nick: None,
-            roles: None,
-            mute: None,
-            deaf: None,
-            access_token,
-            flags: None,
+impl GuildMfaRequest {
+    pub fn new(level: i32) -> GuildMfaRequest {
+        GuildMfaRequest {
+            level,
         }
     }
 }
