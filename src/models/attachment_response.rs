@@ -7,7 +7,7 @@
 //! - **Copyright**: Copyright (c) 2025 Qntx
 //! - **Author**: ΣX <gitctrlx@gmail.com>
 //! - **Version**: 10
-//! - **Modified**: 2025-07-05T02:42:20.508163788Z[Etc/UTC]
+//! - **Modified**: 2025-09-06T05:32:19.066280170Z[Etc/UTC]
 //! - **Generator Version**: 7.14.0
 //!
 //! <details>
@@ -56,28 +56,28 @@ pub struct AttachmentResponse {
     pub url: String,
     #[serde(rename = "proxy_url")]
     pub proxy_url: String,
-    #[serde(rename = "width", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub width: Option<Option<i32>>,
-    #[serde(rename = "height", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub height: Option<Option<i32>>,
-    #[serde(rename = "duration_secs", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub duration_secs: Option<Option<f64>>,
-    #[serde(rename = "waveform", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub waveform: Option<Option<String>>,
-    #[serde(rename = "description", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub description: Option<Option<String>>,
-    #[serde(rename = "content_type", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub content_type: Option<Option<String>>,
-    #[serde(rename = "ephemeral", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub ephemeral: Option<Option<bool>>,
+    #[serde(rename = "width", skip_serializing_if = "Option::is_none")]
+    pub width: Option<i32>,
+    #[serde(rename = "height", skip_serializing_if = "Option::is_none")]
+    pub height: Option<i32>,
+    #[serde(rename = "duration_secs", skip_serializing_if = "Option::is_none")]
+    pub duration_secs: Option<f64>,
+    #[serde(rename = "waveform", skip_serializing_if = "Option::is_none")]
+    pub waveform: Option<String>,
+    #[serde(rename = "description", skip_serializing_if = "Option::is_none")]
+    pub description: Option<String>,
+    #[serde(rename = "content_type", skip_serializing_if = "Option::is_none")]
+    pub content_type: Option<String>,
+    #[serde(rename = "ephemeral", skip_serializing_if = "Option::is_none")]
+    pub ephemeral: Option<bool>,
     #[serde(rename = "title", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
     pub title: Option<Option<String>>,
-    #[serde(rename = "application", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub application: Option<Option<Box<models::ApplicationResponse>>>,
-    #[serde(rename = "clip_created_at", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub clip_created_at: Option<Option<String>>,
-    #[serde(rename = "clip_participants", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub clip_participants: Option<Option<Vec<models::UserResponse>>>,
+    #[serde(rename = "application", skip_serializing_if = "Option::is_none")]
+    pub application: Option<Box<models::ApplicationResponse>>,
+    #[serde(rename = "clip_created_at", skip_serializing_if = "Option::is_none")]
+    pub clip_created_at: Option<String>,
+    #[serde(rename = "clip_participants", skip_serializing_if = "Option::is_none")]
+    pub clip_participants: Option<Vec<models::UserResponse>>,
 }
 
 impl AttachmentResponse {
