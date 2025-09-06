@@ -7,7 +7,7 @@
 //! - **Copyright**: Copyright (c) 2025 Qntx
 //! - **Author**: ΣX <gitctrlx@gmail.com>
 //! - **Version**: 10
-//! - **Modified**: 2025-07-05T02:42:20.508163788Z[Etc/UTC]
+//! - **Modified**: 2025-09-06T05:32:19.066280170Z[Etc/UTC]
 //! - **Generator Version**: 7.14.0
 //!
 //! <details>
@@ -68,12 +68,12 @@ pub struct InviteGuildResponse {
     pub nsfw_level: Option<Option<i32>>,
     #[serde(rename = "nsfw", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
     pub nsfw: Option<Option<bool>>,
-    #[serde(rename = "premium_subscription_count", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub premium_subscription_count: Option<Option<i32>>,
+    #[serde(rename = "premium_subscription_count")]
+    pub premium_subscription_count: i32,
 }
 
 impl InviteGuildResponse {
-    pub fn new(id: String, name: String, features: Vec<String>) -> InviteGuildResponse {
+    pub fn new(id: String, name: String, features: Vec<String>, premium_subscription_count: i32) -> InviteGuildResponse {
         InviteGuildResponse {
             id,
             name,
@@ -86,7 +86,7 @@ impl InviteGuildResponse {
             vanity_url_code: None,
             nsfw_level: None,
             nsfw: None,
-            premium_subscription_count: None,
+            premium_subscription_count,
         }
     }
 }

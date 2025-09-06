@@ -7,7 +7,7 @@
 //! - **Copyright**: Copyright (c) 2025 Qntx
 //! - **Author**: ΣX <gitctrlx@gmail.com>
 //! - **Version**: 10
-//! - **Modified**: 2025-07-05T02:42:20.508163788Z[Etc/UTC]
+//! - **Modified**: 2025-09-06T05:32:19.066280170Z[Etc/UTC]
 //! - **Generator Version**: 7.14.0
 //!
 //! <details>
@@ -50,16 +50,16 @@ pub struct ActionRowComponentResponse {
     pub r#type: i32,
     #[serde(rename = "id")]
     pub id: i32,
-    #[serde(rename = "components", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub components: Option<Option<Vec<models::ActionRowComponentResponseComponentsInner>>>,
+    #[serde(rename = "components")]
+    pub components: Vec<models::ActionRowComponentResponseComponentsInner>,
 }
 
 impl ActionRowComponentResponse {
-    pub fn new(r#type: i32, id: i32) -> ActionRowComponentResponse {
+    pub fn new(r#type: i32, id: i32, components: Vec<models::ActionRowComponentResponseComponentsInner>) -> ActionRowComponentResponse {
         ActionRowComponentResponse {
             r#type,
             id,
-            components: None,
+            components,
         }
     }
 }

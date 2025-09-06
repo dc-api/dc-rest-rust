@@ -5,6 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **r#type** | **i32** |  | 
+**id** | Option<**i32**> |  | [optional]
 **spoiler** | Option<**bool**> |  | [optional]
 **file** | [**models::UnfurledMediaRequestWithAttachmentReferenceRequired**](UnfurledMediaRequestWithAttachmentReferenceRequired.md) |  | 
 

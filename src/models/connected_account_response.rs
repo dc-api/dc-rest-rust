@@ -7,7 +7,7 @@
 //! - **Copyright**: Copyright (c) 2025 Qntx
 //! - **Author**: ΣX <gitctrlx@gmail.com>
 //! - **Version**: 10
-//! - **Modified**: 2025-07-05T02:42:20.508163788Z[Etc/UTC]
+//! - **Modified**: 2025-09-06T05:32:19.066280170Z[Etc/UTC]
 //! - **Generator Version**: 7.14.0
 //!
 //! <details>
@@ -54,8 +54,8 @@ pub struct ConnectedAccountResponse {
     pub r#type: Option<String>,
     #[serde(rename = "friend_sync")]
     pub friend_sync: bool,
-    #[serde(rename = "integrations", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub integrations: Option<Option<Vec<models::ConnectedAccountIntegrationResponse>>>,
+    #[serde(rename = "integrations", skip_serializing_if = "Option::is_none")]
+    pub integrations: Option<Vec<models::ConnectedAccountIntegrationResponse>>,
     #[serde(rename = "show_activity")]
     pub show_activity: bool,
     #[serde(rename = "two_way_link")]
@@ -64,8 +64,8 @@ pub struct ConnectedAccountResponse {
     pub verified: bool,
     #[serde(rename = "visibility", deserialize_with = "Option::deserialize")]
     pub visibility: Option<i32>,
-    #[serde(rename = "revoked", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub revoked: Option<Option<bool>>,
+    #[serde(rename = "revoked", skip_serializing_if = "Option::is_none")]
+    pub revoked: Option<bool>,
 }
 
 impl ConnectedAccountResponse {

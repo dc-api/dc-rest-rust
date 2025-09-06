@@ -7,7 +7,7 @@
 //! - **Copyright**: Copyright (c) 2025 Qntx
 //! - **Author**: ΣX <gitctrlx@gmail.com>
 //! - **Version**: 10
-//! - **Modified**: 2025-07-05T02:42:20.508163788Z[Etc/UTC]
+//! - **Modified**: 2025-09-06T05:32:19.066280170Z[Etc/UTC]
 //! - **Generator Version**: 7.14.0
 //!
 //! <details>
@@ -52,19 +52,19 @@ pub struct PartialDiscordIntegrationResponse {
     pub r#type: Option<String>,
     #[serde(rename = "name", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
     pub name: Option<Option<String>>,
-    #[serde(rename = "account", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub account: Option<Option<Box<models::AccountResponse>>>,
+    #[serde(rename = "account")]
+    pub account: Box<models::AccountResponse>,
     #[serde(rename = "application_id")]
     pub application_id: String,
 }
 
 impl PartialDiscordIntegrationResponse {
-    pub fn new(id: String, r#type: Option<String>, application_id: String) -> PartialDiscordIntegrationResponse {
+    pub fn new(id: String, r#type: Option<String>, account: models::AccountResponse, application_id: String) -> PartialDiscordIntegrationResponse {
         PartialDiscordIntegrationResponse {
             id,
             r#type,
             name: None,
-            account: None,
+            account: Box::new(account),
             application_id,
         }
     }

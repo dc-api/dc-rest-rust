@@ -7,7 +7,7 @@
 //! - **Copyright**: Copyright (c) 2025 Qntx
 //! - **Author**: ΣX <gitctrlx@gmail.com>
 //! - **Version**: 10
-//! - **Modified**: 2025-07-05T02:42:20.508163788Z[Etc/UTC]
+//! - **Modified**: 2025-09-06T05:32:19.066280170Z[Etc/UTC]
 //! - **Generator Version**: 7.14.0
 //!
 //! <details>
@@ -48,30 +48,30 @@ use serde::{Deserialize, Serialize};
 pub struct MessageEmbedResponse {
     #[serde(rename = "type")]
     pub r#type: String,
-    #[serde(rename = "url", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub url: Option<Option<String>>,
-    #[serde(rename = "title", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub title: Option<Option<String>>,
-    #[serde(rename = "description", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub description: Option<Option<String>>,
-    #[serde(rename = "color", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub color: Option<Option<i32>>,
-    #[serde(rename = "timestamp", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub timestamp: Option<Option<String>>,
-    #[serde(rename = "fields", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub fields: Option<Option<Vec<models::MessageEmbedFieldResponse>>>,
-    #[serde(rename = "author", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub author: Option<Option<Box<models::MessageEmbedAuthorResponse>>>,
-    #[serde(rename = "provider", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub provider: Option<Option<Box<models::MessageEmbedProviderResponse>>>,
-    #[serde(rename = "image", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub image: Option<Option<Box<models::MessageEmbedImageResponse>>>,
-    #[serde(rename = "thumbnail", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub thumbnail: Option<Option<Box<models::MessageEmbedImageResponse>>>,
-    #[serde(rename = "video", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub video: Option<Option<Box<models::MessageEmbedVideoResponse>>>,
-    #[serde(rename = "footer", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub footer: Option<Option<Box<models::MessageEmbedFooterResponse>>>,
+    #[serde(rename = "url", skip_serializing_if = "Option::is_none")]
+    pub url: Option<String>,
+    #[serde(rename = "title", skip_serializing_if = "Option::is_none")]
+    pub title: Option<String>,
+    #[serde(rename = "description", skip_serializing_if = "Option::is_none")]
+    pub description: Option<String>,
+    #[serde(rename = "color", skip_serializing_if = "Option::is_none")]
+    pub color: Option<i32>,
+    #[serde(rename = "timestamp", skip_serializing_if = "Option::is_none")]
+    pub timestamp: Option<String>,
+    #[serde(rename = "fields", skip_serializing_if = "Option::is_none")]
+    pub fields: Option<Vec<models::MessageEmbedFieldResponse>>,
+    #[serde(rename = "author", skip_serializing_if = "Option::is_none")]
+    pub author: Option<Box<models::MessageEmbedAuthorResponse>>,
+    #[serde(rename = "provider", skip_serializing_if = "Option::is_none")]
+    pub provider: Option<Box<models::MessageEmbedProviderResponse>>,
+    #[serde(rename = "image", skip_serializing_if = "Option::is_none")]
+    pub image: Option<Box<models::MessageEmbedImageResponse>>,
+    #[serde(rename = "thumbnail", skip_serializing_if = "Option::is_none")]
+    pub thumbnail: Option<Box<models::MessageEmbedImageResponse>>,
+    #[serde(rename = "video", skip_serializing_if = "Option::is_none")]
+    pub video: Option<Box<models::MessageEmbedVideoResponse>>,
+    #[serde(rename = "footer", skip_serializing_if = "Option::is_none")]
+    pub footer: Option<Box<models::MessageEmbedFooterResponse>>,
 }
 
 impl MessageEmbedResponse {

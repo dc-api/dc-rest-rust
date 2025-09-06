@@ -11,9 +11,9 @@ Name | Type | Description | Notes
 **event_type** | **i32** |  | 
 **actions** | [**Vec<models::DefaultKeywordRuleResponseActionsInner>**](DefaultKeywordRuleResponse_actions_inner.md) |  | 
 **trigger_type** | **i32** |  | 
-**enabled** | Option<**bool**> |  | [optional]
-**exempt_roles** | Option<**Vec<String>**> |  | [optional]
-**exempt_channels** | Option<**Vec<String>**> |  | [optional]
+**enabled** | **bool** |  | 
+**exempt_roles** | **Vec<String>** |  | 
+**exempt_channels** | **Vec<String>** |  | 
 **trigger_metadata** | [**models::MentionSpamTriggerMetadataResponse**](MentionSpamTriggerMetadataResponse.md) |  | 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

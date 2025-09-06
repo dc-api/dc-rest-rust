@@ -7,7 +7,7 @@
 //! - **Copyright**: Copyright (c) 2025 Qntx
 //! - **Author**: ΣX <gitctrlx@gmail.com>
 //! - **Version**: 10
-//! - **Modified**: 2025-07-05T02:42:20.508163788Z[Etc/UTC]
+//! - **Modified**: 2025-09-06T05:32:19.066280170Z[Etc/UTC]
 //! - **Generator Version**: 7.14.0
 //!
 //! <details>
@@ -48,6 +48,8 @@ use serde::{Deserialize, Serialize};
 pub struct TextDisplayComponentForMessageRequest {
     #[serde(rename = "type")]
     pub r#type: i32,
+    #[serde(rename = "id", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub id: Option<Option<i32>>,
     #[serde(rename = "content")]
     pub content: String,
 }
@@ -56,6 +58,7 @@ impl TextDisplayComponentForMessageRequest {
     pub fn new(r#type: i32, content: String) -> TextDisplayComponentForMessageRequest {
         TextDisplayComponentForMessageRequest {
             r#type,
+            id: None,
             content,
         }
     }
