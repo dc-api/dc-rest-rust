@@ -7,7 +7,7 @@
 //! - **Copyright**: Copyright (c) 2025 Qntx
 //! - **Author**: ΣX <gitctrlx@gmail.com>
 //! - **Version**: 10
-//! - **Modified**: 2025-07-05T02:42:20.508163788Z[Etc/UTC]
+//! - **Modified**: 2025-09-30T01:39:42.599752795Z[Etc/UTC]
 //! - **Generator Version**: 7.14.0
 //!
 //! <details>
@@ -50,22 +50,22 @@ pub struct ThreadSearchResponse {
     pub threads: Vec<models::ThreadResponse>,
     #[serde(rename = "members")]
     pub members: Vec<models::ThreadMemberResponse>,
-    #[serde(rename = "has_more", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub has_more: Option<Option<bool>>,
-    #[serde(rename = "first_messages", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub first_messages: Option<Option<Vec<models::MessageResponse>>>,
-    #[serde(rename = "total_results", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub total_results: Option<Option<i32>>,
+    #[serde(rename = "has_more")]
+    pub has_more: bool,
+    #[serde(rename = "first_messages", skip_serializing_if = "Option::is_none")]
+    pub first_messages: Option<Vec<models::MessageResponse>>,
+    #[serde(rename = "total_results")]
+    pub total_results: i32,
 }
 
 impl ThreadSearchResponse {
-    pub fn new(threads: Vec<models::ThreadResponse>, members: Vec<models::ThreadMemberResponse>) -> ThreadSearchResponse {
+    pub fn new(threads: Vec<models::ThreadResponse>, members: Vec<models::ThreadMemberResponse>, has_more: bool, total_results: i32) -> ThreadSearchResponse {
         ThreadSearchResponse {
             threads,
             members,
-            has_more: None,
+            has_more,
             first_messages: None,
-            total_results: None,
+            total_results,
         }
     }
 }

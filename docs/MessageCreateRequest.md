@@ -12,6 +12,7 @@ Name | Type | Description | Notes
 **flags** | Option<**i32**> |  | [optional]
 **attachments** | Option<[**Vec<models::MessageAttachmentRequest>**](MessageAttachmentRequest.md)> |  | [optional]
 **poll** | Option<[**models::PollCreateRequest**](PollCreateRequest.md)> |  | [optional]
+**shared_client_theme** | Option<[**models::CustomClientThemeShareRequest**](CustomClientThemeShareRequest.md)> |  | [optional]
 **confetti_potion** | Option<[**serde_json::Value**](.md)> |  | [optional]
 **message_reference** | Option<[**models::MessageReferenceRequest**](MessageReferenceRequest.md)> |  | [optional]
 **nonce** | Option<[**models::BasicMessageResponseNonce**](BasicMessageResponse_nonce.md)> |  | [optional]

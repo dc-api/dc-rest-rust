@@ -35,6 +35,7 @@ Name | Type | Description | Notes
 **approximate_user_authorization_count** | **i32** |  | 
 **explicit_content_filter** | **i32** |  | 
 **team** | Option<[**models::TeamResponse**](TeamResponse.md)> |  | [optional]
+**linked_games** | Option<[**Vec<serde_json::Value>**](serde_json::Value.md)> |  | [optional]
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

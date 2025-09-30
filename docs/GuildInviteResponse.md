@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**r#type** | Option<**i32**> |  | [optional]
+**r#type** | Option<**i32**> |  | 
 **code** | **String** |  | 
 **inviter** | Option<[**models::UserResponse**](UserResponse.md)> |  | [optional]
 **max_age** | Option<**i32**> |  | [optional]
@@ -12,9 +12,9 @@ Name | Type | Description | Notes
 **expires_at** | Option<**String**> |  | [optional]
 **is_contact** | Option<**bool**> |  | [optional]
 **flags** | Option<**i32**> |  | [optional]
-**guild** | Option<[**models::InviteGuildResponse**](InviteGuildResponse.md)> |  | [optional]
-**guild_id** | Option<**String**> |  | [optional]
-**channel** | Option<[**models::InviteChannelResponse**](InviteChannelResponse.md)> |  | [optional]
+**guild** | [**models::InviteGuildResponse**](InviteGuildResponse.md) |  | 
+**guild_id** | **String** |  | 
+**channel** | [**models::InviteChannelResponse**](InviteChannelResponse.md) |  | 
 **target_type** | Option<**i32**> |  | [optional]
 **target_user** | Option<[**models::UserResponse**](UserResponse.md)> |  | [optional]
 **target_application** | Option<[**models::InviteApplicationResponse**](InviteApplicationResponse.md)> |  | [optional]

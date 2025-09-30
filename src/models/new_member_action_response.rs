@@ -7,7 +7,7 @@
 //! - **Copyright**: Copyright (c) 2025 Qntx
 //! - **Author**: ΣX <gitctrlx@gmail.com>
 //! - **Version**: 10
-//! - **Modified**: 2025-07-05T02:42:20.508163788Z[Etc/UTC]
+//! - **Modified**: 2025-09-30T01:39:42.599752795Z[Etc/UTC]
 //! - **Generator Version**: 7.14.0
 //!
 //! <details>
@@ -54,10 +54,10 @@ pub struct NewMemberActionResponse {
     pub title: String,
     #[serde(rename = "description")]
     pub description: String,
-    #[serde(rename = "emoji", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub emoji: Option<Option<Box<models::SettingsEmojiResponse>>>,
-    #[serde(rename = "icon", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub icon: Option<Option<String>>,
+    #[serde(rename = "emoji", skip_serializing_if = "Option::is_none")]
+    pub emoji: Option<Box<models::SettingsEmojiResponse>>,
+    #[serde(rename = "icon", skip_serializing_if = "Option::is_none")]
+    pub icon: Option<String>,
 }
 
 impl NewMemberActionResponse {

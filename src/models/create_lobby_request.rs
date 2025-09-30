@@ -7,7 +7,7 @@
 //! - **Copyright**: Copyright (c) 2025 Qntx
 //! - **Author**: ΣX <gitctrlx@gmail.com>
 //! - **Version**: 10
-//! - **Modified**: 2025-07-05T02:42:20.508163788Z[Etc/UTC]
+//! - **Modified**: 2025-09-30T01:39:42.599752795Z[Etc/UTC]
 //! - **Generator Version**: 7.14.0
 //!
 //! <details>
@@ -52,6 +52,10 @@ pub struct CreateLobbyRequest {
     pub members: Option<Option<Vec<models::LobbyMemberRequest>>>,
     #[serde(rename = "metadata", skip_serializing_if = "Option::is_none")]
     pub metadata: Option<std::collections::HashMap<String, String>>,
+    #[serde(rename = "flags", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub flags: Option<Option<FlagsEnum>>,
+    #[serde(rename = "override_event_webhooks_url", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub override_event_webhooks_url: Option<Option<String>>,
 }
 
 impl CreateLobbyRequest {
@@ -60,7 +64,21 @@ impl CreateLobbyRequest {
             idle_timeout_seconds: None,
             members: None,
             metadata: None,
+            flags: None,
+            override_event_webhooks_url: None,
         }
+    }
+}
+/// 
+#[derive(Clone, Copy, Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Serialize, Deserialize)]
+pub enum FlagsEnum {
+    #[serde(rename = "1")]
+    Variant1,
+}
+
+impl Default for FlagsEnum {
+    fn default() -> FlagsEnum {
+        Self::Variant1
     }
 }
 

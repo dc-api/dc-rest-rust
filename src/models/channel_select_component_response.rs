@@ -7,7 +7,7 @@
 //! - **Copyright**: Copyright (c) 2025 Qntx
 //! - **Author**: ΣX <gitctrlx@gmail.com>
 //! - **Version**: 10
-//! - **Modified**: 2025-07-05T02:42:20.508163788Z[Etc/UTC]
+//! - **Modified**: 2025-09-30T01:39:42.599752795Z[Etc/UTC]
 //! - **Generator Version**: 7.14.0
 //!
 //! <details>
@@ -52,18 +52,18 @@ pub struct ChannelSelectComponentResponse {
     pub id: i32,
     #[serde(rename = "custom_id")]
     pub custom_id: String,
-    #[serde(rename = "placeholder", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub placeholder: Option<Option<String>>,
+    #[serde(rename = "placeholder", skip_serializing_if = "Option::is_none")]
+    pub placeholder: Option<String>,
     #[serde(rename = "min_values", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
     pub min_values: Option<Option<i32>>,
     #[serde(rename = "max_values", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
     pub max_values: Option<Option<i32>>,
-    #[serde(rename = "disabled", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub disabled: Option<Option<bool>>,
-    #[serde(rename = "channel_types", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub channel_types: Option<Option<Vec<i32>>>,
-    #[serde(rename = "default_values", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub default_values: Option<Option<Vec<models::ChannelSelectDefaultValueResponse>>>,
+    #[serde(rename = "disabled", skip_serializing_if = "Option::is_none")]
+    pub disabled: Option<bool>,
+    #[serde(rename = "channel_types", skip_serializing_if = "Option::is_none")]
+    pub channel_types: Option<Vec<i32>>,
+    #[serde(rename = "default_values", skip_serializing_if = "Option::is_none")]
+    pub default_values: Option<Vec<models::ChannelSelectDefaultValueResponse>>,
 }
 
 impl ChannelSelectComponentResponse {
