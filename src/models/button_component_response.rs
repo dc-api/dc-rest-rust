@@ -7,7 +7,7 @@
 //! - **Copyright**: Copyright (c) 2025 Qntx
 //! - **Author**: ΣX <gitctrlx@gmail.com>
 //! - **Version**: 10
-//! - **Modified**: 2025-07-05T02:42:20.508163788Z[Etc/UTC]
+//! - **Modified**: 2025-09-30T01:39:42.599752795Z[Etc/UTC]
 //! - **Generator Version**: 7.14.0
 //!
 //! <details>
@@ -50,16 +50,16 @@ pub struct ButtonComponentResponse {
     pub r#type: i32,
     #[serde(rename = "id")]
     pub id: i32,
-    #[serde(rename = "custom_id", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub custom_id: Option<Option<String>>,
+    #[serde(rename = "custom_id", skip_serializing_if = "Option::is_none")]
+    pub custom_id: Option<String>,
     #[serde(rename = "style", deserialize_with = "Option::deserialize")]
     pub style: Option<i32>,
-    #[serde(rename = "label", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub label: Option<Option<String>>,
-    #[serde(rename = "disabled", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub disabled: Option<Option<bool>>,
-    #[serde(rename = "emoji", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub emoji: Option<Option<Box<models::ComponentEmojiResponse>>>,
+    #[serde(rename = "label", skip_serializing_if = "Option::is_none")]
+    pub label: Option<String>,
+    #[serde(rename = "disabled", skip_serializing_if = "Option::is_none")]
+    pub disabled: Option<bool>,
+    #[serde(rename = "emoji", skip_serializing_if = "Option::is_none")]
+    pub emoji: Option<Box<models::ComponentEmojiResponse>>,
     #[serde(rename = "url", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
     pub url: Option<Option<String>>,
     #[serde(rename = "sku_id", skip_serializing_if = "Option::is_none")]

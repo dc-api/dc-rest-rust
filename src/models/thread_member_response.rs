@@ -7,7 +7,7 @@
 //! - **Copyright**: Copyright (c) 2025 Qntx
 //! - **Author**: ΣX <gitctrlx@gmail.com>
 //! - **Version**: 10
-//! - **Modified**: 2025-07-05T02:42:20.508163788Z[Etc/UTC]
+//! - **Modified**: 2025-09-30T01:39:42.599752795Z[Etc/UTC]
 //! - **Generator Version**: 7.14.0
 //!
 //! <details>
@@ -54,8 +54,8 @@ pub struct ThreadMemberResponse {
     pub join_timestamp: String,
     #[serde(rename = "flags")]
     pub flags: i32,
-    #[serde(rename = "member", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub member: Option<Option<Box<models::GuildMemberResponse>>>,
+    #[serde(rename = "member", skip_serializing_if = "Option::is_none")]
+    pub member: Option<Box<models::GuildMemberResponse>>,
 }
 
 impl ThreadMemberResponse {

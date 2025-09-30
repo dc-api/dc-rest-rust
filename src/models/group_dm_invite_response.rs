@@ -7,7 +7,7 @@
 //! - **Copyright**: Copyright (c) 2025 Qntx
 //! - **Author**: ΣX <gitctrlx@gmail.com>
 //! - **Version**: 10
-//! - **Modified**: 2025-07-05T02:42:20.508163788Z[Etc/UTC]
+//! - **Modified**: 2025-09-30T01:39:42.599752795Z[Etc/UTC]
 //! - **Generator Version**: 7.14.0
 //!
 //! <details>
@@ -46,34 +46,34 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct GroupDmInviteResponse {
-    #[serde(rename = "type", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub r#type: Option<Option<i32>>,
+    #[serde(rename = "type", deserialize_with = "Option::deserialize")]
+    pub r#type: Option<i32>,
     #[serde(rename = "code")]
     pub code: String,
-    #[serde(rename = "inviter", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub inviter: Option<Option<Box<models::UserResponse>>>,
-    #[serde(rename = "max_age", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub max_age: Option<Option<i32>>,
-    #[serde(rename = "created_at", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub created_at: Option<Option<String>>,
+    #[serde(rename = "inviter", skip_serializing_if = "Option::is_none")]
+    pub inviter: Option<Box<models::UserResponse>>,
+    #[serde(rename = "max_age", skip_serializing_if = "Option::is_none")]
+    pub max_age: Option<i32>,
+    #[serde(rename = "created_at", skip_serializing_if = "Option::is_none")]
+    pub created_at: Option<String>,
     #[serde(rename = "expires_at", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
     pub expires_at: Option<Option<String>>,
-    #[serde(rename = "channel", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub channel: Option<Option<Box<models::InviteChannelResponse>>>,
+    #[serde(rename = "channel")]
+    pub channel: Box<models::InviteChannelResponse>,
     #[serde(rename = "approximate_member_count", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
     pub approximate_member_count: Option<Option<i32>>,
 }
 
 impl GroupDmInviteResponse {
-    pub fn new(code: String) -> GroupDmInviteResponse {
+    pub fn new(r#type: Option<i32>, code: String, channel: models::InviteChannelResponse) -> GroupDmInviteResponse {
         GroupDmInviteResponse {
-            r#type: None,
+            r#type,
             code,
             inviter: None,
             max_age: None,
             created_at: None,
             expires_at: None,
-            channel: None,
+            channel: Box::new(channel),
             approximate_member_count: None,
         }
     }

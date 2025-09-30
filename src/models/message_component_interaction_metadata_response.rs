@@ -7,7 +7,7 @@
 //! - **Copyright**: Copyright (c) 2025 Qntx
 //! - **Author**: ΣX <gitctrlx@gmail.com>
 //! - **Version**: 10
-//! - **Modified**: 2025-07-05T02:42:20.508163788Z[Etc/UTC]
+//! - **Modified**: 2025-09-30T01:39:42.599752795Z[Etc/UTC]
 //! - **Generator Version**: 7.14.0
 //!
 //! <details>
@@ -50,8 +50,8 @@ pub struct MessageComponentInteractionMetadataResponse {
     pub id: String,
     #[serde(rename = "type")]
     pub r#type: i32,
-    #[serde(rename = "user", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub user: Option<Option<Box<models::UserResponse>>>,
+    #[serde(rename = "user", skip_serializing_if = "Option::is_none")]
+    pub user: Option<Box<models::UserResponse>>,
     #[serde(rename = "authorizing_integration_owners")]
     pub authorizing_integration_owners: std::collections::HashMap<String, String>,
     #[serde(rename = "original_response_message_id", skip_serializing_if = "Option::is_none")]

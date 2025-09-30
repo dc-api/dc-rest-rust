@@ -7,7 +7,7 @@
 //! - **Copyright**: Copyright (c) 2025 Qntx
 //! - **Author**: ΣX <gitctrlx@gmail.com>
 //! - **Version**: 10
-//! - **Modified**: 2025-07-05T02:42:20.508163788Z[Etc/UTC]
+//! - **Modified**: 2025-09-30T01:39:42.599752795Z[Etc/UTC]
 //! - **Generator Version**: 7.14.0
 //!
 //! <details>
@@ -50,16 +50,16 @@ pub struct OAuth2GetOpenIdConnectUserInfoResponse {
     pub sub: String,
     #[serde(rename = "email", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
     pub email: Option<Option<String>>,
-    #[serde(rename = "email_verified", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub email_verified: Option<Option<bool>>,
-    #[serde(rename = "preferred_username", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub preferred_username: Option<Option<String>>,
+    #[serde(rename = "email_verified", skip_serializing_if = "Option::is_none")]
+    pub email_verified: Option<bool>,
+    #[serde(rename = "preferred_username", skip_serializing_if = "Option::is_none")]
+    pub preferred_username: Option<String>,
     #[serde(rename = "nickname", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
     pub nickname: Option<Option<String>>,
-    #[serde(rename = "picture", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub picture: Option<Option<String>>,
-    #[serde(rename = "locale", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub locale: Option<Option<String>>,
+    #[serde(rename = "picture", skip_serializing_if = "Option::is_none")]
+    pub picture: Option<String>,
+    #[serde(rename = "locale", skip_serializing_if = "Option::is_none")]
+    pub locale: Option<String>,
 }
 
 impl OAuth2GetOpenIdConnectUserInfoResponse {
