@@ -7,8 +7,8 @@
 //! - **Copyright**: Copyright (c) 2025 Qntx
 //! - **Author**: ΣX <gitctrlx@gmail.com>
 //! - **Version**: 10
-//! - **Modified**: 2025-07-05T02:42:20.508163788Z[Etc/UTC]
-//! - **Generator Version**: 7.14.0
+//! - **Modified**: 2025-10-14T14:27:02.971131606Z[Etc/UTC]
+//! - **Generator Version**: 7.16.0
 //!
 //! <details>
 //! <summary><strong>⚠️ Important Disclaimer & Limitation of Liability</strong></summary>
@@ -50,27 +50,27 @@ pub struct DiscordIntegrationResponse {
     pub r#type: Option<String>,
     #[serde(rename = "name", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
     pub name: Option<Option<String>>,
-    #[serde(rename = "account", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub account: Option<Option<Box<models::AccountResponse>>>,
-    #[serde(rename = "enabled", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub enabled: Option<Option<bool>>,
+    #[serde(rename = "account")]
+    pub account: Box<models::AccountResponse>,
+    #[serde(rename = "enabled")]
+    pub enabled: bool,
     #[serde(rename = "id")]
     pub id: String,
     #[serde(rename = "application")]
     pub application: Box<models::IntegrationApplicationResponse>,
     #[serde(rename = "scopes")]
     pub scopes: Vec<String>,
-    #[serde(rename = "user", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub user: Option<Option<Box<models::UserResponse>>>,
+    #[serde(rename = "user", skip_serializing_if = "Option::is_none")]
+    pub user: Option<Box<models::UserResponse>>,
 }
 
 impl DiscordIntegrationResponse {
-    pub fn new(r#type: Option<String>, id: String, application: models::IntegrationApplicationResponse, scopes: Vec<String>) -> DiscordIntegrationResponse {
+    pub fn new(r#type: Option<String>, account: models::AccountResponse, enabled: bool, id: String, application: models::IntegrationApplicationResponse, scopes: Vec<String>) -> DiscordIntegrationResponse {
         DiscordIntegrationResponse {
             r#type,
             name: None,
-            account: None,
-            enabled: None,
+            account: Box::new(account),
+            enabled,
             id,
             application: Box::new(application),
             scopes,

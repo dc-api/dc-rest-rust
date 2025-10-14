@@ -28,9 +28,9 @@ Name | Type | Description | Notes
 **mfa_level** | **i32** |  | 
 **explicit_content_filter** | **i32** |  | 
 **max_presences** | Option<**i32**> |  | [optional]
-**max_members** | Option<**i32**> |  | [optional]
-**max_stage_video_channel_users** | Option<**i32**> |  | [optional]
-**max_video_channel_users** | Option<**i32**> |  | [optional]
+**max_members** | **i32** |  | 
+**max_stage_video_channel_users** | **i32** |  | 
+**max_video_channel_users** | **i32** |  | 
 **vanity_url_code** | Option<**String**> |  | [optional]
 **premium_tier** | **i32** |  | 
 **premium_subscription_count** | **i32** |  | 

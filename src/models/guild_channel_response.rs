@@ -7,8 +7,8 @@
 //! - **Copyright**: Copyright (c) 2025 Qntx
 //! - **Author**: ΣX <gitctrlx@gmail.com>
 //! - **Version**: 10
-//! - **Modified**: 2025-07-05T02:42:20.508163788Z[Etc/UTC]
-//! - **Generator Version**: 7.14.0
+//! - **Modified**: 2025-10-14T14:27:02.971131606Z[Etc/UTC]
+//! - **Generator Version**: 7.16.0
 //!
 //! <details>
 //! <summary><strong>⚠️ Important Disclaimer & Limitation of Liability</strong></summary>
@@ -62,12 +62,12 @@ pub struct GuildChannelResponse {
     pub name: String,
     #[serde(rename = "parent_id", skip_serializing_if = "Option::is_none")]
     pub parent_id: Option<String>,
-    #[serde(rename = "rate_limit_per_user", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub rate_limit_per_user: Option<Option<i32>>,
-    #[serde(rename = "bitrate", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub bitrate: Option<Option<i32>>,
-    #[serde(rename = "user_limit", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub user_limit: Option<Option<i32>>,
+    #[serde(rename = "rate_limit_per_user", skip_serializing_if = "Option::is_none")]
+    pub rate_limit_per_user: Option<i32>,
+    #[serde(rename = "bitrate", skip_serializing_if = "Option::is_none")]
+    pub bitrate: Option<i32>,
+    #[serde(rename = "user_limit", skip_serializing_if = "Option::is_none")]
+    pub user_limit: Option<i32>,
     #[serde(rename = "rtc_region", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
     pub rtc_region: Option<Option<String>>,
     #[serde(rename = "video_quality_mode", skip_serializing_if = "Option::is_none")]
@@ -78,16 +78,16 @@ pub struct GuildChannelResponse {
     pub topic: Option<Option<String>>,
     #[serde(rename = "default_auto_archive_duration", skip_serializing_if = "Option::is_none")]
     pub default_auto_archive_duration: Option<i32>,
-    #[serde(rename = "default_thread_rate_limit_per_user", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub default_thread_rate_limit_per_user: Option<Option<i32>>,
+    #[serde(rename = "default_thread_rate_limit_per_user", skip_serializing_if = "Option::is_none")]
+    pub default_thread_rate_limit_per_user: Option<i32>,
     #[serde(rename = "position")]
     pub position: i32,
-    #[serde(rename = "permission_overwrites", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub permission_overwrites: Option<Option<Vec<models::ChannelPermissionOverwriteResponse>>>,
-    #[serde(rename = "nsfw", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub nsfw: Option<Option<bool>>,
-    #[serde(rename = "available_tags", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub available_tags: Option<Option<Vec<models::ForumTagResponse>>>,
+    #[serde(rename = "permission_overwrites", skip_serializing_if = "Option::is_none")]
+    pub permission_overwrites: Option<Vec<models::ChannelPermissionOverwriteResponse>>,
+    #[serde(rename = "nsfw", skip_serializing_if = "Option::is_none")]
+    pub nsfw: Option<bool>,
+    #[serde(rename = "available_tags", skip_serializing_if = "Option::is_none")]
+    pub available_tags: Option<Vec<models::ForumTagResponse>>,
     #[serde(rename = "default_reaction_emoji", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
     pub default_reaction_emoji: Option<Option<Box<models::DefaultReactionEmojiResponse>>>,
     #[serde(rename = "default_sort_order", skip_serializing_if = "Option::is_none")]
@@ -96,8 +96,8 @@ pub struct GuildChannelResponse {
     pub default_forum_layout: Option<i32>,
     #[serde(rename = "default_tag_setting", skip_serializing_if = "Option::is_none")]
     pub default_tag_setting: Option<String>,
-    #[serde(rename = "hd_streaming_until", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub hd_streaming_until: Option<Option<String>>,
+    #[serde(rename = "hd_streaming_until", skip_serializing_if = "Option::is_none")]
+    pub hd_streaming_until: Option<String>,
     #[serde(rename = "hd_streaming_buyer_id", skip_serializing_if = "Option::is_none")]
     pub hd_streaming_buyer_id: Option<String>,
 }

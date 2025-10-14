@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 **permissions** | **String** |  | 
 **position** | **i32** |  | 
 **color** | **i32** |  | 
-**colors** | Option<[**models::GuildRoleColorsResponse**](GuildRoleColorsResponse.md)> |  | [optional]
+**colors** | [**models::GuildRoleColorsResponse**](GuildRoleColorsResponse.md) |  | 
 **hoist** | **bool** |  | 
 **managed** | **bool** |  | 
 **mentionable** | **bool** |  | 

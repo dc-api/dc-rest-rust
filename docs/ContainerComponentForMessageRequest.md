@@ -5,6 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **r#type** | **i32** |  | 
+**id** | Option<**i32**> |  | [optional]
 **accent_color** | Option<**i32**> |  | [optional]
 **components** | [**Vec<models::ContainerComponentForMessageRequestComponentsInner>**](ContainerComponentForMessageRequest_components_inner.md) |  | 
 **spoiler** | Option<**bool**> |  | [optional]

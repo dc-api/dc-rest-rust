@@ -15,7 +15,6 @@ Name | Type | Description | Notes
 **afk_timeout** | Option<**i32**> |  | [optional]
 **afk_channel_id** | Option<**String**> |  | [optional]
 **system_channel_id** | Option<**String**> |  | [optional]
-**owner_id** | Option<**String**> |  | [optional]
 **splash** | Option<**String**> |  | [optional]
 **banner** | Option<**String**> |  | [optional]
 **system_channel_flags** | Option<**i32**> |  | [optional]
