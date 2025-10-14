@@ -7,8 +7,8 @@
 //! - **Copyright**: Copyright (c) 2025 Qntx
 //! - **Author**: ΣX <gitctrlx@gmail.com>
 //! - **Version**: 10
-//! - **Modified**: 2025-07-05T02:42:20.508163788Z[Etc/UTC]
-//! - **Generator Version**: 7.14.0
+//! - **Modified**: 2025-10-14T14:27:02.971131606Z[Etc/UTC]
+//! - **Generator Version**: 7.16.0
 //!
 //! <details>
 //! <summary><strong>⚠️ Important Disclaimer & Limitation of Liability</strong></summary>
@@ -66,12 +66,10 @@ pub struct MinimalContentMessageResponse {
     pub flags: i32,
     #[serde(rename = "components")]
     pub components: Vec<models::BasicMessageResponseComponentsInner>,
-    #[serde(rename = "resolved", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub resolved: Option<Option<Box<models::ResolvedObjectsResponse>>>,
-    #[serde(rename = "stickers", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub stickers: Option<Option<Vec<models::GetSticker200Response>>>,
-    #[serde(rename = "sticker_items", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub sticker_items: Option<Option<Vec<models::MessageStickerItemResponse>>>,
+    #[serde(rename = "stickers", skip_serializing_if = "Option::is_none")]
+    pub stickers: Option<Vec<models::GetSticker200Response>>,
+    #[serde(rename = "sticker_items", skip_serializing_if = "Option::is_none")]
+    pub sticker_items: Option<Vec<models::MessageStickerItemResponse>>,
 }
 
 impl MinimalContentMessageResponse {
@@ -87,7 +85,6 @@ impl MinimalContentMessageResponse {
             edited_timestamp: None,
             flags,
             components,
-            resolved: None,
             stickers: None,
             sticker_items: None,
         }

@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**r#type** | Option<[**serde_json::Value**](.md)> |  | [optional]
+**r#type** | Option<[**serde_json::Value**](.md)> |  | 
 **channel_id** | **String** |  | 
 **message_id** | Option<**String**> |  | [optional]
 **guild_id** | Option<**String**> |  | [optional]
