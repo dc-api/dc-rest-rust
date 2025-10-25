@@ -7,8 +7,8 @@
 //! - **Copyright**: Copyright (c) 2025 Qntx
 //! - **Author**: ΣX <gitctrlx@gmail.com>
 //! - **Version**: 10
-//! - **Modified**: 2025-07-05T02:42:20.508163788Z[Etc/UTC]
-//! - **Generator Version**: 7.14.0
+//! - **Modified**: 2025-10-25T01:29:55.330183933Z[Etc/UTC]
+//! - **Generator Version**: 7.16.0
 //!
 //! <details>
 //! <summary><strong>⚠️ Important Disclaimer & Limitation of Liability</strong></summary>
@@ -58,28 +58,28 @@ pub struct ApplicationCommandResponse {
     pub r#type: i32,
     #[serde(rename = "name")]
     pub name: String,
-    #[serde(rename = "name_localized", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub name_localized: Option<Option<String>>,
+    #[serde(rename = "name_localized", skip_serializing_if = "Option::is_none")]
+    pub name_localized: Option<String>,
     #[serde(rename = "name_localizations", skip_serializing_if = "Option::is_none")]
     pub name_localizations: Option<std::collections::HashMap<String, String>>,
     #[serde(rename = "description")]
     pub description: String,
-    #[serde(rename = "description_localized", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub description_localized: Option<Option<String>>,
+    #[serde(rename = "description_localized", skip_serializing_if = "Option::is_none")]
+    pub description_localized: Option<String>,
     #[serde(rename = "description_localizations", skip_serializing_if = "Option::is_none")]
     pub description_localizations: Option<std::collections::HashMap<String, String>>,
     #[serde(rename = "guild_id", skip_serializing_if = "Option::is_none")]
     pub guild_id: Option<String>,
-    #[serde(rename = "dm_permission", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub dm_permission: Option<Option<bool>>,
+    #[serde(rename = "dm_permission", skip_serializing_if = "Option::is_none")]
+    pub dm_permission: Option<bool>,
     #[serde(rename = "contexts", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
     pub contexts: Option<Option<Vec<i32>>>,
-    #[serde(rename = "integration_types", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub integration_types: Option<Option<Vec<i32>>>,
-    #[serde(rename = "options", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub options: Option<Option<Vec<models::ApplicationCommandResponseOptionsInner>>>,
-    #[serde(rename = "nsfw", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub nsfw: Option<Option<bool>>,
+    #[serde(rename = "integration_types", skip_serializing_if = "Option::is_none")]
+    pub integration_types: Option<Vec<i32>>,
+    #[serde(rename = "options", skip_serializing_if = "Option::is_none")]
+    pub options: Option<Vec<models::ApplicationCommandResponseOptionsInner>>,
+    #[serde(rename = "nsfw", skip_serializing_if = "Option::is_none")]
+    pub nsfw: Option<bool>,
 }
 
 impl ApplicationCommandResponse {

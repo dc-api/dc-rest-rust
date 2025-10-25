@@ -7,8 +7,8 @@
 //! - **Copyright**: Copyright (c) 2025 Qntx
 //! - **Author**: ΣX <gitctrlx@gmail.com>
 //! - **Version**: 10
-//! - **Modified**: 2025-07-05T02:42:20.508163788Z[Etc/UTC]
-//! - **Generator Version**: 7.14.0
+//! - **Modified**: 2025-10-25T01:29:55.330183933Z[Etc/UTC]
+//! - **Generator Version**: 7.16.0
 //!
 //! <details>
 //! <summary><strong>⚠️ Important Disclaimer & Limitation of Liability</strong></summary>
@@ -54,6 +54,8 @@ pub struct CreateOrJoinLobbyRequest {
     pub member_metadata: Option<std::collections::HashMap<String, String>>,
     #[serde(rename = "secret")]
     pub secret: String,
+    #[serde(rename = "flags", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub flags: Option<Option<FlagsEnum>>,
 }
 
 impl CreateOrJoinLobbyRequest {
@@ -63,7 +65,20 @@ impl CreateOrJoinLobbyRequest {
             lobby_metadata: None,
             member_metadata: None,
             secret,
+            flags: None,
         }
+    }
+}
+/// 
+#[derive(Clone, Copy, Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Serialize, Deserialize)]
+pub enum FlagsEnum {
+    #[serde(rename = "1")]
+    Variant1,
+}
+
+impl Default for FlagsEnum {
+    fn default() -> FlagsEnum {
+        Self::Variant1
     }
 }
 

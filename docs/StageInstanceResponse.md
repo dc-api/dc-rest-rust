@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **topic** | **String** |  | 
 **privacy_level** | **i32** |  | 
 **id** | **String** |  | 
-**discoverable_disabled** | Option<**bool**> |  | [optional]
+**discoverable_disabled** | **bool** |  | 
 **guild_scheduled_event_id** | Option<**String**> |  | [optional]
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

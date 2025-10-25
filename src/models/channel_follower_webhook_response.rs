@@ -7,8 +7,8 @@
 //! - **Copyright**: Copyright (c) 2025 Qntx
 //! - **Author**: ΣX <gitctrlx@gmail.com>
 //! - **Version**: 10
-//! - **Modified**: 2025-07-05T02:42:20.508163788Z[Etc/UTC]
-//! - **Generator Version**: 7.14.0
+//! - **Modified**: 2025-10-25T01:29:55.330183933Z[Etc/UTC]
+//! - **Generator Version**: 7.16.0
 //!
 //! <details>
 //! <summary><strong>⚠️ Important Disclaimer & Limitation of Liability</strong></summary>
@@ -60,12 +60,12 @@ pub struct ChannelFollowerWebhookResponse {
     pub name: String,
     #[serde(rename = "type")]
     pub r#type: i32,
-    #[serde(rename = "user", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub user: Option<Option<Box<models::UserResponse>>>,
-    #[serde(rename = "source_guild", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub source_guild: Option<Option<Box<models::WebhookSourceGuildResponse>>>,
-    #[serde(rename = "source_channel", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub source_channel: Option<Option<Box<models::WebhookSourceChannelResponse>>>,
+    #[serde(rename = "user", skip_serializing_if = "Option::is_none")]
+    pub user: Option<Box<models::UserResponse>>,
+    #[serde(rename = "source_guild", skip_serializing_if = "Option::is_none")]
+    pub source_guild: Option<Box<models::WebhookSourceGuildResponse>>,
+    #[serde(rename = "source_channel", skip_serializing_if = "Option::is_none")]
+    pub source_channel: Option<Box<models::WebhookSourceChannelResponse>>,
 }
 
 impl ChannelFollowerWebhookResponse {

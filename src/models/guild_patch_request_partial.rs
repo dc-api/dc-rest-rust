@@ -7,8 +7,8 @@
 //! - **Copyright**: Copyright (c) 2025 Qntx
 //! - **Author**: ΣX <gitctrlx@gmail.com>
 //! - **Version**: 10
-//! - **Modified**: 2025-07-05T02:42:20.508163788Z[Etc/UTC]
-//! - **Generator Version**: 7.14.0
+//! - **Modified**: 2025-10-25T01:29:55.330183933Z[Etc/UTC]
+//! - **Generator Version**: 7.16.0
 //!
 //! <details>
 //! <summary><strong>⚠️ Important Disclaimer & Limitation of Liability</strong></summary>
@@ -68,8 +68,6 @@ pub struct GuildPatchRequestPartial {
     pub afk_channel_id: Option<String>,
     #[serde(rename = "system_channel_id", skip_serializing_if = "Option::is_none")]
     pub system_channel_id: Option<String>,
-    #[serde(rename = "owner_id", skip_serializing_if = "Option::is_none")]
-    pub owner_id: Option<String>,
     #[serde(rename = "splash", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
     pub splash: Option<Option<String>>,
     #[serde(rename = "banner", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
@@ -106,7 +104,6 @@ impl GuildPatchRequestPartial {
             afk_timeout: None,
             afk_channel_id: None,
             system_channel_id: None,
-            owner_id: None,
             splash: None,
             banner: None,
             system_channel_flags: None,

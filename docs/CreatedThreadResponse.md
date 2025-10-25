@@ -19,7 +19,7 @@ Name | Type | Description | Notes
 **video_quality_mode** | Option<**i32**> |  | [optional]
 **permissions** | Option<**String**> |  | [optional]
 **owner_id** | **String** |  | 
-**thread_metadata** | Option<[**models::ThreadMetadataResponse**](ThreadMetadataResponse.md)> |  | [optional]
+**thread_metadata** | [**models::ThreadMetadataResponse**](ThreadMetadataResponse.md) |  | 
 **message_count** | **i32** |  | 
 **member_count** | **i32** |  | 
 **total_message_sent** | **i32** |  | 

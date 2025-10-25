@@ -6,8 +6,8 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **r#type** | Option<**String**> |  | 
 **name** | Option<**String**> |  | [optional]
-**account** | Option<[**models::AccountResponse**](AccountResponse.md)> |  | [optional]
-**enabled** | Option<**bool**> |  | [optional]
+**account** | [**models::AccountResponse**](AccountResponse.md) |  | 
+**enabled** | **bool** |  | 
 **id** | **String** |  | 
 **application** | [**models::IntegrationApplicationResponse**](IntegrationApplicationResponse.md) |  | 
 **scopes** | **Vec<String>** |  | 

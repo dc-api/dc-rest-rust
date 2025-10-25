@@ -7,8 +7,8 @@
 //! - **Copyright**: Copyright (c) 2025 Qntx
 //! - **Author**: ΣX <gitctrlx@gmail.com>
 //! - **Version**: 10
-//! - **Modified**: 2025-07-05T02:42:20.508163788Z[Etc/UTC]
-//! - **Generator Version**: 7.14.0
+//! - **Modified**: 2025-10-25T01:29:55.330183933Z[Etc/UTC]
+//! - **Generator Version**: 7.16.0
 //!
 //! <details>
 //! <summary><strong>⚠️ Important Disclaimer & Limitation of Liability</strong></summary>
@@ -58,8 +58,8 @@ pub struct ExternalScheduledEventResponse {
     pub channel_id: Option<String>,
     #[serde(rename = "creator_id", skip_serializing_if = "Option::is_none")]
     pub creator_id: Option<String>,
-    #[serde(rename = "creator", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub creator: Option<Option<Box<models::UserResponse>>>,
+    #[serde(rename = "creator", skip_serializing_if = "Option::is_none")]
+    pub creator: Option<Box<models::UserResponse>>,
     #[serde(rename = "image", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
     pub image: Option<Option<String>>,
     #[serde(rename = "scheduled_start_time")]
@@ -72,8 +72,8 @@ pub struct ExternalScheduledEventResponse {
     pub entity_type: Option<i32>,
     #[serde(rename = "entity_id", skip_serializing_if = "Option::is_none")]
     pub entity_id: Option<String>,
-    #[serde(rename = "user_count", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub user_count: Option<Option<i32>>,
+    #[serde(rename = "user_count", skip_serializing_if = "Option::is_none")]
+    pub user_count: Option<i32>,
     #[serde(rename = "privacy_level", deserialize_with = "Option::deserialize")]
     pub privacy_level: Option<serde_json::Value>,
     #[serde(rename = "user_rsvp", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]

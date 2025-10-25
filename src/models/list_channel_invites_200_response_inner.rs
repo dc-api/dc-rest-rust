@@ -7,8 +7,8 @@
 //! - **Copyright**: Copyright (c) 2025 Qntx
 //! - **Author**: ΣX <gitctrlx@gmail.com>
 //! - **Version**: 10
-//! - **Modified**: 2025-07-05T02:42:20.508163788Z[Etc/UTC]
-//! - **Generator Version**: 7.14.0
+//! - **Modified**: 2025-10-25T01:29:55.330183933Z[Etc/UTC]
+//! - **Generator Version**: 7.16.0
 //!
 //! <details>
 //! <summary><strong>⚠️ Important Disclaimer & Limitation of Liability</strong></summary>
@@ -44,80 +44,17 @@
 use crate::models;
 use serde::{Deserialize, Serialize};
 
-#[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
-pub struct ListChannelInvites200ResponseInner {
-    #[serde(rename = "type", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub r#type: Option<Option<i32>>,
-    #[serde(rename = "code")]
-    pub code: String,
-    #[serde(rename = "inviter", skip_serializing_if = "Option::is_none")]
-    pub inviter: Option<Box<models::UserResponse>>,
-    #[serde(rename = "max_age", skip_serializing_if = "Option::is_none")]
-    pub max_age: Option<i32>,
-    #[serde(rename = "created_at", skip_serializing_if = "Option::is_none")]
-    pub created_at: Option<String>,
-    #[serde(rename = "expires_at", skip_serializing_if = "Option::is_none")]
-    pub expires_at: Option<String>,
-    #[serde(rename = "friends_count", skip_serializing_if = "Option::is_none")]
-    pub friends_count: Option<i32>,
-    #[serde(rename = "channel", skip_serializing_if = "Option::is_none")]
-    pub channel: Option<Box<models::InviteChannelResponse>>,
-    #[serde(rename = "is_contact", skip_serializing_if = "Option::is_none")]
-    pub is_contact: Option<bool>,
-    #[serde(rename = "uses", skip_serializing_if = "Option::is_none")]
-    pub uses: Option<i32>,
-    #[serde(rename = "max_uses", skip_serializing_if = "Option::is_none")]
-    pub max_uses: Option<i32>,
-    #[serde(rename = "flags", skip_serializing_if = "Option::is_none")]
-    pub flags: Option<i32>,
-    #[serde(rename = "approximate_member_count", skip_serializing_if = "Option::is_none")]
-    pub approximate_member_count: Option<i32>,
-    #[serde(rename = "guild", skip_serializing_if = "Option::is_none")]
-    pub guild: Option<Box<models::InviteGuildResponse>>,
-    #[serde(rename = "guild_id", skip_serializing_if = "Option::is_none")]
-    pub guild_id: Option<String>,
-    #[serde(rename = "target_type", skip_serializing_if = "Option::is_none")]
-    pub target_type: Option<i32>,
-    #[serde(rename = "target_user", skip_serializing_if = "Option::is_none")]
-    pub target_user: Option<Box<models::UserResponse>>,
-    #[serde(rename = "target_application", skip_serializing_if = "Option::is_none")]
-    pub target_application: Option<Box<models::InviteApplicationResponse>>,
-    #[serde(rename = "guild_scheduled_event", skip_serializing_if = "Option::is_none")]
-    pub guild_scheduled_event: Option<Box<models::ScheduledEventResponse>>,
-    #[serde(rename = "temporary", skip_serializing_if = "Option::is_none")]
-    pub temporary: Option<bool>,
-    #[serde(rename = "approximate_presence_count", skip_serializing_if = "Option::is_none")]
-    pub approximate_presence_count: Option<i32>,
-    #[serde(rename = "is_nickname_changeable", skip_serializing_if = "Option::is_none")]
-    pub is_nickname_changeable: Option<bool>,
+#[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum ListChannelInvites200ResponseInner {
+    FriendInviteResponse(Box<models::FriendInviteResponse>),
+    GroupDmInviteResponse(Box<models::GroupDmInviteResponse>),
+    GuildInviteResponse(Box<models::GuildInviteResponse>),
 }
 
-impl ListChannelInvites200ResponseInner {
-    pub fn new(code: String) -> ListChannelInvites200ResponseInner {
-        ListChannelInvites200ResponseInner {
-            r#type: None,
-            code,
-            inviter: None,
-            max_age: None,
-            created_at: None,
-            expires_at: None,
-            friends_count: None,
-            channel: None,
-            is_contact: None,
-            uses: None,
-            max_uses: None,
-            flags: None,
-            approximate_member_count: None,
-            guild: None,
-            guild_id: None,
-            target_type: None,
-            target_user: None,
-            target_application: None,
-            guild_scheduled_event: None,
-            temporary: None,
-            approximate_presence_count: None,
-            is_nickname_changeable: None,
-        }
+impl Default for ListChannelInvites200ResponseInner {
+    fn default() -> Self {
+        Self::FriendInviteResponse(Default::default())
     }
 }
 
