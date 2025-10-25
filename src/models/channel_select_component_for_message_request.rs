@@ -7,8 +7,8 @@
 //! - **Copyright**: Copyright (c) 2025 Qntx
 //! - **Author**: ΣX <gitctrlx@gmail.com>
 //! - **Version**: 10
-//! - **Modified**: 2025-07-05T02:42:20.508163788Z[Etc/UTC]
-//! - **Generator Version**: 7.14.0
+//! - **Modified**: 2025-10-25T01:29:55.330183933Z[Etc/UTC]
+//! - **Generator Version**: 7.16.0
 //!
 //! <details>
 //! <summary><strong>⚠️ Important Disclaimer & Limitation of Liability</strong></summary>
@@ -48,6 +48,8 @@ use serde::{Deserialize, Serialize};
 pub struct ChannelSelectComponentForMessageRequest {
     #[serde(rename = "type")]
     pub r#type: i32,
+    #[serde(rename = "id", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub id: Option<Option<i32>>,
     #[serde(rename = "custom_id")]
     pub custom_id: String,
     #[serde(rename = "placeholder", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
@@ -58,6 +60,8 @@ pub struct ChannelSelectComponentForMessageRequest {
     pub max_values: Option<Option<i32>>,
     #[serde(rename = "disabled", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
     pub disabled: Option<Option<bool>>,
+    #[serde(rename = "required", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub required: Option<Option<bool>>,
     #[serde(rename = "default_values", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
     pub default_values: Option<Option<Vec<models::ChannelSelectDefaultValue>>>,
     #[serde(rename = "channel_types", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
@@ -68,11 +72,13 @@ impl ChannelSelectComponentForMessageRequest {
     pub fn new(r#type: i32, custom_id: String) -> ChannelSelectComponentForMessageRequest {
         ChannelSelectComponentForMessageRequest {
             r#type,
+            id: None,
             custom_id,
             placeholder: None,
             min_values: None,
             max_values: None,
             disabled: None,
+            required: None,
             default_values: None,
             channel_types: None,
         }

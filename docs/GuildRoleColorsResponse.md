@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**primary_color** | Option<**i32**> |  | [optional]
+**primary_color** | **i32** |  | 
 **secondary_color** | Option<**i32**> |  | [optional]
 **tertiary_color** | Option<**i32**> |  | [optional]
 

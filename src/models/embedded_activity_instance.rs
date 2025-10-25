@@ -7,8 +7,8 @@
 //! - **Copyright**: Copyright (c) 2025 Qntx
 //! - **Author**: ΣX <gitctrlx@gmail.com>
 //! - **Version**: 10
-//! - **Modified**: 2025-07-05T02:42:20.508163788Z[Etc/UTC]
-//! - **Generator Version**: 7.14.0
+//! - **Modified**: 2025-10-25T01:29:55.330183933Z[Etc/UTC]
+//! - **Generator Version**: 7.16.0
 //!
 //! <details>
 //! <summary><strong>⚠️ Important Disclaimer & Limitation of Liability</strong></summary>
@@ -52,19 +52,19 @@ pub struct EmbeddedActivityInstance {
     pub instance_id: String,
     #[serde(rename = "launch_id")]
     pub launch_id: String,
-    #[serde(rename = "location", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub location: Option<Option<Box<models::EmbeddedActivityInstanceLocation>>>,
+    #[serde(rename = "location")]
+    pub location: Box<models::EmbeddedActivityInstanceLocation>,
     #[serde(rename = "users")]
     pub users: Vec<String>,
 }
 
 impl EmbeddedActivityInstance {
-    pub fn new(application_id: String, instance_id: String, launch_id: String, users: Vec<String>) -> EmbeddedActivityInstance {
+    pub fn new(application_id: String, instance_id: String, launch_id: String, location: models::EmbeddedActivityInstanceLocation, users: Vec<String>) -> EmbeddedActivityInstance {
         EmbeddedActivityInstance {
             application_id,
             instance_id,
             launch_id,
-            location: None,
+            location: Box::new(location),
             users,
         }
     }

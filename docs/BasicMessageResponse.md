@@ -14,7 +14,6 @@ Name | Type | Description | Notes
 **edited_timestamp** | Option<**String**> |  | [optional]
 **flags** | **i32** |  | 
 **components** | [**Vec<models::BasicMessageResponseComponentsInner>**](BasicMessageResponse_components_inner.md) |  | 
-**resolved** | Option<[**models::ResolvedObjectsResponse**](ResolvedObjectsResponse.md)> |  | [optional]
 **stickers** | Option<[**Vec<models::GetSticker200Response>**](get_sticker_200_response.md)> |  | [optional]
 **sticker_items** | Option<[**Vec<models::MessageStickerItemResponse>**](MessageStickerItemResponse.md)> |  | [optional]
 **id** | **String** |  | 
@@ -36,7 +35,9 @@ Name | Type | Description | Notes
 **role_subscription_data** | Option<[**models::MessageRoleSubscriptionDataResponse**](MessageRoleSubscriptionDataResponse.md)> |  | [optional]
 **purchase_notification** | Option<[**models::PurchaseNotificationResponse**](PurchaseNotificationResponse.md)> |  | [optional]
 **position** | Option<**i32**> |  | [optional]
+**resolved** | Option<[**models::ResolvedObjectsResponse**](ResolvedObjectsResponse.md)> |  | [optional]
 **poll** | Option<[**models::PollResponse**](PollResponse.md)> |  | [optional]
+**shared_client_theme** | Option<[**models::CustomClientThemeResponse**](CustomClientThemeResponse.md)> |  | [optional]
 **interaction_metadata** | Option<[**models::BasicMessageResponseInteractionMetadata**](BasicMessageResponse_interaction_metadata.md)> |  | [optional]
 **message_snapshots** | Option<[**Vec<models::MessageSnapshotResponse>**](MessageSnapshotResponse.md)> |  | [optional]
 

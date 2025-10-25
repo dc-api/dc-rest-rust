@@ -7,8 +7,8 @@
 //! - **Copyright**: Copyright (c) 2025 Qntx
 //! - **Author**: ΣX <gitctrlx@gmail.com>
 //! - **Version**: 10
-//! - **Modified**: 2025-07-05T02:42:20.508163788Z[Etc/UTC]
-//! - **Generator Version**: 7.14.0
+//! - **Modified**: 2025-10-25T01:29:55.330183933Z[Etc/UTC]
+//! - **Generator Version**: 7.16.0
 //!
 //! <details>
 //! <summary><strong>⚠️ Important Disclaimer & Limitation of Liability</strong></summary>
@@ -48,8 +48,8 @@ use serde::{Deserialize, Serialize};
 pub struct PurchaseNotificationResponse {
     #[serde(rename = "type", deserialize_with = "Option::deserialize")]
     pub r#type: Option<i32>,
-    #[serde(rename = "guild_product_purchase", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub guild_product_purchase: Option<Option<Box<models::GuildProductPurchaseResponse>>>,
+    #[serde(rename = "guild_product_purchase", skip_serializing_if = "Option::is_none")]
+    pub guild_product_purchase: Option<Box<models::GuildProductPurchaseResponse>>,
 }
 
 impl PurchaseNotificationResponse {

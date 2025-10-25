@@ -7,8 +7,8 @@
 //! - **Copyright**: Copyright (c) 2025 Qntx
 //! - **Author**: ΣX <gitctrlx@gmail.com>
 //! - **Version**: 10
-//! - **Modified**: 2025-07-05T02:42:20.508163788Z[Etc/UTC]
-//! - **Generator Version**: 7.14.0
+//! - **Modified**: 2025-10-25T01:29:55.330183933Z[Etc/UTC]
+//! - **Generator Version**: 7.16.0
 //!
 //! <details>
 //! <summary><strong>⚠️ Important Disclaimer & Limitation of Liability</strong></summary>
@@ -66,12 +66,10 @@ pub struct BasicMessageResponse {
     pub flags: i32,
     #[serde(rename = "components")]
     pub components: Vec<models::BasicMessageResponseComponentsInner>,
-    #[serde(rename = "resolved", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub resolved: Option<Option<Box<models::ResolvedObjectsResponse>>>,
-    #[serde(rename = "stickers", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub stickers: Option<Option<Vec<models::GetSticker200Response>>>,
-    #[serde(rename = "sticker_items", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub sticker_items: Option<Option<Vec<models::MessageStickerItemResponse>>>,
+    #[serde(rename = "stickers", skip_serializing_if = "Option::is_none")]
+    pub stickers: Option<Vec<models::GetSticker200Response>>,
+    #[serde(rename = "sticker_items", skip_serializing_if = "Option::is_none")]
+    pub sticker_items: Option<Vec<models::MessageStickerItemResponse>>,
     #[serde(rename = "id")]
     pub id: String,
     #[serde(rename = "channel_id")]
@@ -84,38 +82,42 @@ pub struct BasicMessageResponse {
     pub mention_everyone: bool,
     #[serde(rename = "tts")]
     pub tts: bool,
-    #[serde(rename = "call", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub call: Option<Option<Box<models::MessageCallResponse>>>,
+    #[serde(rename = "call", skip_serializing_if = "Option::is_none")]
+    pub call: Option<Box<models::MessageCallResponse>>,
     #[serde(rename = "activity", skip_serializing_if = "Option::is_none")]
     pub activity: Option<serde_json::Value>,
-    #[serde(rename = "application", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub application: Option<Option<Box<models::BasicApplicationResponse>>>,
+    #[serde(rename = "application", skip_serializing_if = "Option::is_none")]
+    pub application: Option<Box<models::BasicApplicationResponse>>,
     #[serde(rename = "application_id", skip_serializing_if = "Option::is_none")]
     pub application_id: Option<String>,
-    #[serde(rename = "interaction", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub interaction: Option<Option<Box<models::MessageInteractionResponse>>>,
+    #[serde(rename = "interaction", skip_serializing_if = "Option::is_none")]
+    pub interaction: Option<Box<models::MessageInteractionResponse>>,
     #[serde(rename = "nonce", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
     pub nonce: Option<Option<Box<models::BasicMessageResponseNonce>>>,
     #[serde(rename = "webhook_id", skip_serializing_if = "Option::is_none")]
     pub webhook_id: Option<String>,
-    #[serde(rename = "message_reference", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub message_reference: Option<Option<Box<models::MessageReferenceResponse>>>,
-    #[serde(rename = "thread", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub thread: Option<Option<Box<models::ThreadResponse>>>,
-    #[serde(rename = "mention_channels", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub mention_channels: Option<Option<Vec<models::MessageMentionChannelResponse>>>,
-    #[serde(rename = "role_subscription_data", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub role_subscription_data: Option<Option<Box<models::MessageRoleSubscriptionDataResponse>>>,
-    #[serde(rename = "purchase_notification", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub purchase_notification: Option<Option<Box<models::PurchaseNotificationResponse>>>,
-    #[serde(rename = "position", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub position: Option<Option<i32>>,
-    #[serde(rename = "poll", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub poll: Option<Option<Box<models::PollResponse>>>,
-    #[serde(rename = "interaction_metadata", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub interaction_metadata: Option<Option<Box<models::BasicMessageResponseInteractionMetadata>>>,
-    #[serde(rename = "message_snapshots", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub message_snapshots: Option<Option<Vec<models::MessageSnapshotResponse>>>,
+    #[serde(rename = "message_reference", skip_serializing_if = "Option::is_none")]
+    pub message_reference: Option<Box<models::MessageReferenceResponse>>,
+    #[serde(rename = "thread", skip_serializing_if = "Option::is_none")]
+    pub thread: Option<Box<models::ThreadResponse>>,
+    #[serde(rename = "mention_channels", skip_serializing_if = "Option::is_none")]
+    pub mention_channels: Option<Vec<models::MessageMentionChannelResponse>>,
+    #[serde(rename = "role_subscription_data", skip_serializing_if = "Option::is_none")]
+    pub role_subscription_data: Option<Box<models::MessageRoleSubscriptionDataResponse>>,
+    #[serde(rename = "purchase_notification", skip_serializing_if = "Option::is_none")]
+    pub purchase_notification: Option<Box<models::PurchaseNotificationResponse>>,
+    #[serde(rename = "position", skip_serializing_if = "Option::is_none")]
+    pub position: Option<i32>,
+    #[serde(rename = "resolved", skip_serializing_if = "Option::is_none")]
+    pub resolved: Option<Box<models::ResolvedObjectsResponse>>,
+    #[serde(rename = "poll", skip_serializing_if = "Option::is_none")]
+    pub poll: Option<Box<models::PollResponse>>,
+    #[serde(rename = "shared_client_theme", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub shared_client_theme: Option<Option<Box<models::CustomClientThemeResponse>>>,
+    #[serde(rename = "interaction_metadata", skip_serializing_if = "Option::is_none")]
+    pub interaction_metadata: Option<Box<models::BasicMessageResponseInteractionMetadata>>,
+    #[serde(rename = "message_snapshots", skip_serializing_if = "Option::is_none")]
+    pub message_snapshots: Option<Vec<models::MessageSnapshotResponse>>,
 }
 
 impl BasicMessageResponse {
@@ -131,7 +133,6 @@ impl BasicMessageResponse {
             edited_timestamp: None,
             flags,
             components,
-            resolved: None,
             stickers: None,
             sticker_items: None,
             id,
@@ -153,7 +154,9 @@ impl BasicMessageResponse {
             role_subscription_data: None,
             purchase_notification: None,
             position: None,
+            resolved: None,
             poll: None,
+            shared_client_theme: None,
             interaction_metadata: None,
             message_snapshots: None,
         }
