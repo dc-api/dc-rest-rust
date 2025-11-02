@@ -5,9 +5,10 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **r#type** | **i32** |  | 
+**id** | Option<**i32**> |  | [optional]
 **custom_id** | **String** |  | 
 **style** | **i32** |  | 
-**label** | **String** |  | 
+**label** | Option<**String**> |  | [optional]
 **value** | Option<**String**> |  | [optional]
 **placeholder** | Option<**String**> |  | [optional]
 **required** | Option<**bool**> |  | [optional]

@@ -7,8 +7,8 @@
 //! - **Copyright**: Copyright (c) 2025 Qntx
 //! - **Author**: ΣX <gitctrlx@gmail.com>
 //! - **Version**: 10
-//! - **Modified**: 2025-07-05T02:42:20.508163788Z[Etc/UTC]
-//! - **Generator Version**: 7.14.0
+//! - **Modified**: 2025-11-02T04:40:22.540540420Z[Etc/UTC]
+//! - **Generator Version**: 7.17.0
 //!
 //! <details>
 //! <summary><strong>⚠️ Important Disclaimer & Limitation of Liability</strong></summary>
@@ -58,10 +58,10 @@ pub struct UserResponse {
     pub public_flags: i32,
     #[serde(rename = "flags")]
     pub flags: i64,
-    #[serde(rename = "bot", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub bot: Option<Option<bool>>,
-    #[serde(rename = "system", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub system: Option<Option<bool>>,
+    #[serde(rename = "bot", skip_serializing_if = "Option::is_none")]
+    pub bot: Option<bool>,
+    #[serde(rename = "system", skip_serializing_if = "Option::is_none")]
+    pub system: Option<bool>,
     #[serde(rename = "banner", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
     pub banner: Option<Option<String>>,
     #[serde(rename = "accent_color", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]

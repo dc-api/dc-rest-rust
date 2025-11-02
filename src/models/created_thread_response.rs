@@ -7,8 +7,8 @@
 //! - **Copyright**: Copyright (c) 2025 Qntx
 //! - **Author**: ΣX <gitctrlx@gmail.com>
 //! - **Version**: 10
-//! - **Modified**: 2025-07-05T02:42:20.508163788Z[Etc/UTC]
-//! - **Generator Version**: 7.14.0
+//! - **Modified**: 2025-11-02T04:40:22.540540420Z[Etc/UTC]
+//! - **Generator Version**: 7.17.0
 //!
 //! <details>
 //! <summary><strong>⚠️ Important Disclaimer & Limitation of Liability</strong></summary>
@@ -62,12 +62,12 @@ pub struct CreatedThreadResponse {
     pub name: String,
     #[serde(rename = "parent_id", skip_serializing_if = "Option::is_none")]
     pub parent_id: Option<String>,
-    #[serde(rename = "rate_limit_per_user", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub rate_limit_per_user: Option<Option<i32>>,
-    #[serde(rename = "bitrate", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub bitrate: Option<Option<i32>>,
-    #[serde(rename = "user_limit", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub user_limit: Option<Option<i32>>,
+    #[serde(rename = "rate_limit_per_user", skip_serializing_if = "Option::is_none")]
+    pub rate_limit_per_user: Option<i32>,
+    #[serde(rename = "bitrate", skip_serializing_if = "Option::is_none")]
+    pub bitrate: Option<i32>,
+    #[serde(rename = "user_limit", skip_serializing_if = "Option::is_none")]
+    pub user_limit: Option<i32>,
     #[serde(rename = "rtc_region", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
     pub rtc_region: Option<Option<String>>,
     #[serde(rename = "video_quality_mode", skip_serializing_if = "Option::is_none")]
@@ -76,22 +76,22 @@ pub struct CreatedThreadResponse {
     pub permissions: Option<Option<String>>,
     #[serde(rename = "owner_id")]
     pub owner_id: String,
-    #[serde(rename = "thread_metadata", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub thread_metadata: Option<Option<Box<models::ThreadMetadataResponse>>>,
+    #[serde(rename = "thread_metadata")]
+    pub thread_metadata: Box<models::ThreadMetadataResponse>,
     #[serde(rename = "message_count")]
     pub message_count: i32,
     #[serde(rename = "member_count")]
     pub member_count: i32,
     #[serde(rename = "total_message_sent")]
     pub total_message_sent: i32,
-    #[serde(rename = "applied_tags", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub applied_tags: Option<Option<Vec<String>>>,
-    #[serde(rename = "member", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub member: Option<Option<Box<models::ThreadMemberResponse>>>,
+    #[serde(rename = "applied_tags", skip_serializing_if = "Option::is_none")]
+    pub applied_tags: Option<Vec<String>>,
+    #[serde(rename = "member", skip_serializing_if = "Option::is_none")]
+    pub member: Option<Box<models::ThreadMemberResponse>>,
 }
 
 impl CreatedThreadResponse {
-    pub fn new(id: String, r#type: i32, flags: i32, guild_id: String, name: String, owner_id: String, message_count: i32, member_count: i32, total_message_sent: i32) -> CreatedThreadResponse {
+    pub fn new(id: String, r#type: i32, flags: i32, guild_id: String, name: String, owner_id: String, thread_metadata: models::ThreadMetadataResponse, message_count: i32, member_count: i32, total_message_sent: i32) -> CreatedThreadResponse {
         CreatedThreadResponse {
             id,
             r#type,
@@ -108,7 +108,7 @@ impl CreatedThreadResponse {
             video_quality_mode: None,
             permissions: None,
             owner_id,
-            thread_metadata: None,
+            thread_metadata: Box::new(thread_metadata),
             message_count,
             member_count,
             total_message_sent,

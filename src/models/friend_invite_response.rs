@@ -7,8 +7,8 @@
 //! - **Copyright**: Copyright (c) 2025 Qntx
 //! - **Author**: ΣX <gitctrlx@gmail.com>
 //! - **Version**: 10
-//! - **Modified**: 2025-07-05T02:42:20.508163788Z[Etc/UTC]
-//! - **Generator Version**: 7.14.0
+//! - **Modified**: 2025-11-02T04:40:22.540540420Z[Etc/UTC]
+//! - **Generator Version**: 7.17.0
 //!
 //! <details>
 //! <summary><strong>⚠️ Important Disclaimer & Limitation of Liability</strong></summary>
@@ -46,36 +46,36 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct FriendInviteResponse {
-    #[serde(rename = "type", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub r#type: Option<Option<i32>>,
+    #[serde(rename = "type", deserialize_with = "Option::deserialize")]
+    pub r#type: Option<i32>,
     #[serde(rename = "code")]
     pub code: String,
-    #[serde(rename = "inviter", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub inviter: Option<Option<Box<models::UserResponse>>>,
-    #[serde(rename = "max_age", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub max_age: Option<Option<i32>>,
-    #[serde(rename = "created_at", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub created_at: Option<Option<String>>,
+    #[serde(rename = "inviter", skip_serializing_if = "Option::is_none")]
+    pub inviter: Option<Box<models::UserResponse>>,
+    #[serde(rename = "max_age", skip_serializing_if = "Option::is_none")]
+    pub max_age: Option<i32>,
+    #[serde(rename = "created_at", skip_serializing_if = "Option::is_none")]
+    pub created_at: Option<String>,
     #[serde(rename = "expires_at", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
     pub expires_at: Option<Option<String>>,
-    #[serde(rename = "friends_count", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub friends_count: Option<Option<i32>>,
+    #[serde(rename = "friends_count", skip_serializing_if = "Option::is_none")]
+    pub friends_count: Option<i32>,
     #[serde(rename = "channel", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
     pub channel: Option<Option<Box<models::InviteChannelResponse>>>,
-    #[serde(rename = "is_contact", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub is_contact: Option<Option<bool>>,
-    #[serde(rename = "uses", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub uses: Option<Option<i32>>,
-    #[serde(rename = "max_uses", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub max_uses: Option<Option<i32>>,
-    #[serde(rename = "flags", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub flags: Option<Option<i32>>,
+    #[serde(rename = "is_contact", skip_serializing_if = "Option::is_none")]
+    pub is_contact: Option<bool>,
+    #[serde(rename = "uses", skip_serializing_if = "Option::is_none")]
+    pub uses: Option<i32>,
+    #[serde(rename = "max_uses", skip_serializing_if = "Option::is_none")]
+    pub max_uses: Option<i32>,
+    #[serde(rename = "flags", skip_serializing_if = "Option::is_none")]
+    pub flags: Option<i32>,
 }
 
 impl FriendInviteResponse {
-    pub fn new(code: String) -> FriendInviteResponse {
+    pub fn new(r#type: Option<i32>, code: String) -> FriendInviteResponse {
         FriendInviteResponse {
-            r#type: None,
+            r#type,
             code,
             inviter: None,
             max_age: None,

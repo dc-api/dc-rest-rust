@@ -7,8 +7,8 @@
 //! - **Copyright**: Copyright (c) 2025 Qntx
 //! - **Author**: ΣX <gitctrlx@gmail.com>
 //! - **Version**: 10
-//! - **Modified**: 2025-07-05T02:42:20.508163788Z[Etc/UTC]
-//! - **Generator Version**: 7.14.0
+//! - **Modified**: 2025-11-02T04:40:22.540540420Z[Etc/UTC]
+//! - **Generator Version**: 7.17.0
 //!
 //! <details>
 //! <summary><strong>⚠️ Important Disclaimer & Limitation of Liability</strong></summary>
@@ -56,12 +56,12 @@ pub struct TextInputComponentResponse {
     pub style: i32,
     #[serde(rename = "label", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
     pub label: Option<Option<String>>,
-    #[serde(rename = "value", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub value: Option<Option<String>>,
-    #[serde(rename = "placeholder", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub placeholder: Option<Option<String>>,
-    #[serde(rename = "required", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub required: Option<Option<bool>>,
+    #[serde(rename = "value", skip_serializing_if = "Option::is_none")]
+    pub value: Option<String>,
+    #[serde(rename = "placeholder", skip_serializing_if = "Option::is_none")]
+    pub placeholder: Option<String>,
+    #[serde(rename = "required", skip_serializing_if = "Option::is_none")]
+    pub required: Option<bool>,
     #[serde(rename = "min_length", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
     pub min_length: Option<Option<i32>>,
     #[serde(rename = "max_length", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]

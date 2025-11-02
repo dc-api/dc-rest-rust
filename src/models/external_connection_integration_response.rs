@@ -7,8 +7,8 @@
 //! - **Copyright**: Copyright (c) 2025 Qntx
 //! - **Author**: ΣX <gitctrlx@gmail.com>
 //! - **Version**: 10
-//! - **Modified**: 2025-07-05T02:42:20.508163788Z[Etc/UTC]
-//! - **Generator Version**: 7.14.0
+//! - **Modified**: 2025-11-02T04:40:22.540540420Z[Etc/UTC]
+//! - **Generator Version**: 7.17.0
 //!
 //! <details>
 //! <summary><strong>⚠️ Important Disclaimer & Limitation of Liability</strong></summary>
@@ -50,39 +50,39 @@ pub struct ExternalConnectionIntegrationResponse {
     pub r#type: Option<String>,
     #[serde(rename = "name", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
     pub name: Option<Option<String>>,
-    #[serde(rename = "account", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub account: Option<Option<Box<models::AccountResponse>>>,
-    #[serde(rename = "enabled", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub enabled: Option<Option<bool>>,
+    #[serde(rename = "account")]
+    pub account: Box<models::AccountResponse>,
+    #[serde(rename = "enabled")]
+    pub enabled: bool,
     #[serde(rename = "id")]
     pub id: String,
     #[serde(rename = "user")]
     pub user: Box<models::UserResponse>,
-    #[serde(rename = "revoked", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub revoked: Option<Option<bool>>,
+    #[serde(rename = "revoked", skip_serializing_if = "Option::is_none")]
+    pub revoked: Option<bool>,
     #[serde(rename = "expire_behavior", skip_serializing_if = "Option::is_none")]
     pub expire_behavior: Option<i32>,
     #[serde(rename = "expire_grace_period", skip_serializing_if = "Option::is_none")]
     pub expire_grace_period: Option<i32>,
-    #[serde(rename = "subscriber_count", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub subscriber_count: Option<Option<i32>>,
-    #[serde(rename = "synced_at", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub synced_at: Option<Option<String>>,
+    #[serde(rename = "subscriber_count", skip_serializing_if = "Option::is_none")]
+    pub subscriber_count: Option<i32>,
+    #[serde(rename = "synced_at", skip_serializing_if = "Option::is_none")]
+    pub synced_at: Option<String>,
     #[serde(rename = "role_id", skip_serializing_if = "Option::is_none")]
     pub role_id: Option<String>,
-    #[serde(rename = "syncing", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub syncing: Option<Option<bool>>,
-    #[serde(rename = "enable_emoticons", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub enable_emoticons: Option<Option<bool>>,
+    #[serde(rename = "syncing", skip_serializing_if = "Option::is_none")]
+    pub syncing: Option<bool>,
+    #[serde(rename = "enable_emoticons", skip_serializing_if = "Option::is_none")]
+    pub enable_emoticons: Option<bool>,
 }
 
 impl ExternalConnectionIntegrationResponse {
-    pub fn new(r#type: Option<String>, id: String, user: models::UserResponse) -> ExternalConnectionIntegrationResponse {
+    pub fn new(r#type: Option<String>, account: models::AccountResponse, enabled: bool, id: String, user: models::UserResponse) -> ExternalConnectionIntegrationResponse {
         ExternalConnectionIntegrationResponse {
             r#type,
             name: None,
-            account: None,
-            enabled: None,
+            account: Box::new(account),
+            enabled,
             id,
             user: Box::new(user),
             revoked: None,

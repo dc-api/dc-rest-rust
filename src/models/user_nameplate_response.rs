@@ -7,8 +7,8 @@
 //! - **Copyright**: Copyright (c) 2025 Qntx
 //! - **Author**: ΣX <gitctrlx@gmail.com>
 //! - **Version**: 10
-//! - **Modified**: 2025-07-05T02:42:20.508163788Z[Etc/UTC]
-//! - **Generator Version**: 7.14.0
+//! - **Modified**: 2025-11-02T04:40:22.540540420Z[Etc/UTC]
+//! - **Generator Version**: 7.17.0
 //!
 //! <details>
 //! <summary><strong>⚠️ Important Disclaimer & Limitation of Liability</strong></summary>
@@ -48,21 +48,21 @@ use serde::{Deserialize, Serialize};
 pub struct UserNameplateResponse {
     #[serde(rename = "sku_id", skip_serializing_if = "Option::is_none")]
     pub sku_id: Option<String>,
-    #[serde(rename = "asset", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub asset: Option<Option<String>>,
-    #[serde(rename = "label", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub label: Option<Option<String>>,
-    #[serde(rename = "palette", skip_serializing_if = "Option::is_none")]
-    pub palette: Option<String>,
+    #[serde(rename = "asset")]
+    pub asset: String,
+    #[serde(rename = "label")]
+    pub label: String,
+    #[serde(rename = "palette")]
+    pub palette: String,
 }
 
 impl UserNameplateResponse {
-    pub fn new() -> UserNameplateResponse {
+    pub fn new(asset: String, label: String, palette: String) -> UserNameplateResponse {
         UserNameplateResponse {
             sku_id: None,
-            asset: None,
-            label: None,
-            palette: None,
+            asset,
+            label,
+            palette,
         }
     }
 }

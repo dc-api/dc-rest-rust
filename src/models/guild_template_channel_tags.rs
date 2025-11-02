@@ -7,8 +7,8 @@
 //! - **Copyright**: Copyright (c) 2025 Qntx
 //! - **Author**: ΣX <gitctrlx@gmail.com>
 //! - **Version**: 10
-//! - **Modified**: 2025-07-05T02:42:20.508163788Z[Etc/UTC]
-//! - **Generator Version**: 7.14.0
+//! - **Modified**: 2025-11-02T04:40:22.540540420Z[Etc/UTC]
+//! - **Generator Version**: 7.17.0
 //!
 //! <details>
 //! <summary><strong>⚠️ Important Disclaimer & Limitation of Liability</strong></summary>
@@ -46,6 +46,8 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct GuildTemplateChannelTags {
+    #[serde(rename = "id", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub id: Option<Option<i32>>,
     #[serde(rename = "name")]
     pub name: String,
     #[serde(rename = "emoji_id", skip_serializing_if = "Option::is_none")]
@@ -59,6 +61,7 @@ pub struct GuildTemplateChannelTags {
 impl GuildTemplateChannelTags {
     pub fn new(name: String) -> GuildTemplateChannelTags {
         GuildTemplateChannelTags {
+            id: None,
             name,
             emoji_id: None,
             emoji_name: None,
