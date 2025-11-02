@@ -7,8 +7,8 @@
 //! - **Copyright**: Copyright (c) 2025 Qntx
 //! - **Author**: ΣX <gitctrlx@gmail.com>
 //! - **Version**: 10
-//! - **Modified**: 2025-07-05T02:42:20.508163788Z[Etc/UTC]
-//! - **Generator Version**: 7.14.0
+//! - **Modified**: 2025-11-02T04:40:22.540540420Z[Etc/UTC]
+//! - **Generator Version**: 7.17.0
 //!
 //! <details>
 //! <summary><strong>⚠️ Important Disclaimer & Limitation of Liability</strong></summary>
@@ -51,11 +51,11 @@ pub struct ModalInteractionCallbackRequestData {
     #[serde(rename = "title")]
     pub title: String,
     #[serde(rename = "components")]
-    pub components: Vec<models::ActionRowComponentForModalRequest>,
+    pub components: Vec<models::ModalInteractionCallbackRequestDataComponentsInner>,
 }
 
 impl ModalInteractionCallbackRequestData {
-    pub fn new(custom_id: String, title: String, components: Vec<models::ActionRowComponentForModalRequest>) -> ModalInteractionCallbackRequestData {
+    pub fn new(custom_id: String, title: String, components: Vec<models::ModalInteractionCallbackRequestDataComponentsInner>) -> ModalInteractionCallbackRequestData {
         ModalInteractionCallbackRequestData {
             custom_id,
             title,

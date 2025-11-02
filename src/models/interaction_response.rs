@@ -7,8 +7,8 @@
 //! - **Copyright**: Copyright (c) 2025 Qntx
 //! - **Author**: ΣX <gitctrlx@gmail.com>
 //! - **Version**: 10
-//! - **Modified**: 2025-07-05T02:42:20.508163788Z[Etc/UTC]
-//! - **Generator Version**: 7.14.0
+//! - **Modified**: 2025-11-02T04:40:22.540540420Z[Etc/UTC]
+//! - **Generator Version**: 7.17.0
 //!
 //! <details>
 //! <summary><strong>⚠️ Important Disclaimer & Limitation of Liability</strong></summary>
@@ -52,10 +52,10 @@ pub struct InteractionResponse {
     pub r#type: i32,
     #[serde(rename = "response_message_id", skip_serializing_if = "Option::is_none")]
     pub response_message_id: Option<String>,
-    #[serde(rename = "response_message_loading", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub response_message_loading: Option<Option<bool>>,
-    #[serde(rename = "response_message_ephemeral", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub response_message_ephemeral: Option<Option<bool>>,
+    #[serde(rename = "response_message_loading", skip_serializing_if = "Option::is_none")]
+    pub response_message_loading: Option<bool>,
+    #[serde(rename = "response_message_ephemeral", skip_serializing_if = "Option::is_none")]
+    pub response_message_ephemeral: Option<bool>,
     #[serde(rename = "channel_id", skip_serializing_if = "Option::is_none")]
     pub channel_id: Option<String>,
     #[serde(rename = "guild_id", skip_serializing_if = "Option::is_none")]

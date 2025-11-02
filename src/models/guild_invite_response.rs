@@ -7,8 +7,8 @@
 //! - **Copyright**: Copyright (c) 2025 Qntx
 //! - **Author**: ΣX <gitctrlx@gmail.com>
 //! - **Version**: 10
-//! - **Modified**: 2025-07-05T02:42:20.508163788Z[Etc/UTC]
-//! - **Generator Version**: 7.14.0
+//! - **Modified**: 2025-11-02T04:40:22.540540420Z[Etc/UTC]
+//! - **Generator Version**: 7.17.0
 //!
 //! <details>
 //! <summary><strong>⚠️ Important Disclaimer & Limitation of Liability</strong></summary>
@@ -46,54 +46,54 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct GuildInviteResponse {
-    #[serde(rename = "type", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub r#type: Option<Option<i32>>,
+    #[serde(rename = "type", deserialize_with = "Option::deserialize")]
+    pub r#type: Option<i32>,
     #[serde(rename = "code")]
     pub code: String,
-    #[serde(rename = "inviter", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub inviter: Option<Option<Box<models::UserResponse>>>,
-    #[serde(rename = "max_age", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub max_age: Option<Option<i32>>,
-    #[serde(rename = "created_at", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub created_at: Option<Option<String>>,
+    #[serde(rename = "inviter", skip_serializing_if = "Option::is_none")]
+    pub inviter: Option<Box<models::UserResponse>>,
+    #[serde(rename = "max_age", skip_serializing_if = "Option::is_none")]
+    pub max_age: Option<i32>,
+    #[serde(rename = "created_at", skip_serializing_if = "Option::is_none")]
+    pub created_at: Option<String>,
     #[serde(rename = "expires_at", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
     pub expires_at: Option<Option<String>>,
-    #[serde(rename = "is_contact", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub is_contact: Option<Option<bool>>,
-    #[serde(rename = "flags", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub flags: Option<Option<i32>>,
-    #[serde(rename = "guild", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub guild: Option<Option<Box<models::InviteGuildResponse>>>,
-    #[serde(rename = "guild_id", skip_serializing_if = "Option::is_none")]
-    pub guild_id: Option<String>,
-    #[serde(rename = "channel", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub channel: Option<Option<Box<models::InviteChannelResponse>>>,
+    #[serde(rename = "is_contact", skip_serializing_if = "Option::is_none")]
+    pub is_contact: Option<bool>,
+    #[serde(rename = "flags", skip_serializing_if = "Option::is_none")]
+    pub flags: Option<i32>,
+    #[serde(rename = "guild")]
+    pub guild: Box<models::InviteGuildResponse>,
+    #[serde(rename = "guild_id")]
+    pub guild_id: String,
+    #[serde(rename = "channel")]
+    pub channel: Box<models::InviteChannelResponse>,
     #[serde(rename = "target_type", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
     pub target_type: Option<Option<i32>>,
-    #[serde(rename = "target_user", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub target_user: Option<Option<Box<models::UserResponse>>>,
-    #[serde(rename = "target_application", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub target_application: Option<Option<Box<models::InviteApplicationResponse>>>,
-    #[serde(rename = "guild_scheduled_event", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub guild_scheduled_event: Option<Option<Box<models::ScheduledEventResponse>>>,
-    #[serde(rename = "uses", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub uses: Option<Option<i32>>,
-    #[serde(rename = "max_uses", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub max_uses: Option<Option<i32>>,
-    #[serde(rename = "temporary", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub temporary: Option<Option<bool>>,
+    #[serde(rename = "target_user", skip_serializing_if = "Option::is_none")]
+    pub target_user: Option<Box<models::UserResponse>>,
+    #[serde(rename = "target_application", skip_serializing_if = "Option::is_none")]
+    pub target_application: Option<Box<models::InviteApplicationResponse>>,
+    #[serde(rename = "guild_scheduled_event", skip_serializing_if = "Option::is_none")]
+    pub guild_scheduled_event: Option<Box<models::ScheduledEventResponse>>,
+    #[serde(rename = "uses", skip_serializing_if = "Option::is_none")]
+    pub uses: Option<i32>,
+    #[serde(rename = "max_uses", skip_serializing_if = "Option::is_none")]
+    pub max_uses: Option<i32>,
+    #[serde(rename = "temporary", skip_serializing_if = "Option::is_none")]
+    pub temporary: Option<bool>,
     #[serde(rename = "approximate_member_count", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
     pub approximate_member_count: Option<Option<i32>>,
     #[serde(rename = "approximate_presence_count", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
     pub approximate_presence_count: Option<Option<i32>>,
-    #[serde(rename = "is_nickname_changeable", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub is_nickname_changeable: Option<Option<bool>>,
+    #[serde(rename = "is_nickname_changeable", skip_serializing_if = "Option::is_none")]
+    pub is_nickname_changeable: Option<bool>,
 }
 
 impl GuildInviteResponse {
-    pub fn new(code: String) -> GuildInviteResponse {
+    pub fn new(r#type: Option<i32>, code: String, guild: models::InviteGuildResponse, guild_id: String, channel: models::InviteChannelResponse) -> GuildInviteResponse {
         GuildInviteResponse {
-            r#type: None,
+            r#type,
             code,
             inviter: None,
             max_age: None,
@@ -101,9 +101,9 @@ impl GuildInviteResponse {
             expires_at: None,
             is_contact: None,
             flags: None,
-            guild: None,
-            guild_id: None,
-            channel: None,
+            guild: Box::new(guild),
+            guild_id,
+            channel: Box::new(channel),
             target_type: None,
             target_user: None,
             target_application: None,

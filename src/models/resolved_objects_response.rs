@@ -7,8 +7,8 @@
 //! - **Copyright**: Copyright (c) 2025 Qntx
 //! - **Author**: ΣX <gitctrlx@gmail.com>
 //! - **Version**: 10
-//! - **Modified**: 2025-07-05T02:42:20.508163788Z[Etc/UTC]
-//! - **Generator Version**: 7.14.0
+//! - **Modified**: 2025-11-02T04:40:22.540540420Z[Etc/UTC]
+//! - **Generator Version**: 7.17.0
 //!
 //! <details>
 //! <summary><strong>⚠️ Important Disclaimer & Limitation of Liability</strong></summary>
@@ -46,23 +46,23 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct ResolvedObjectsResponse {
-    #[serde(rename = "users")]
-    pub users: std::collections::HashMap<String, models::UserResponse>,
-    #[serde(rename = "members")]
-    pub members: std::collections::HashMap<String, models::GuildMemberResponse>,
-    #[serde(rename = "channels")]
-    pub channels: std::collections::HashMap<String, models::GetChannel200Response>,
-    #[serde(rename = "roles")]
-    pub roles: std::collections::HashMap<String, models::GuildRoleResponse>,
+    #[serde(rename = "users", skip_serializing_if = "Option::is_none")]
+    pub users: Option<std::collections::HashMap<String, models::UserResponse>>,
+    #[serde(rename = "members", skip_serializing_if = "Option::is_none")]
+    pub members: Option<std::collections::HashMap<String, models::BasicGuildMemberResponse>>,
+    #[serde(rename = "channels", skip_serializing_if = "Option::is_none")]
+    pub channels: Option<std::collections::HashMap<String, models::GetChannel200Response>>,
+    #[serde(rename = "roles", skip_serializing_if = "Option::is_none")]
+    pub roles: Option<std::collections::HashMap<String, models::GuildRoleResponse>>,
 }
 
 impl ResolvedObjectsResponse {
-    pub fn new(users: std::collections::HashMap<String, models::UserResponse>, members: std::collections::HashMap<String, models::GuildMemberResponse>, channels: std::collections::HashMap<String, models::GetChannel200Response>, roles: std::collections::HashMap<String, models::GuildRoleResponse>) -> ResolvedObjectsResponse {
+    pub fn new() -> ResolvedObjectsResponse {
         ResolvedObjectsResponse {
-            users,
-            members,
-            channels,
-            roles,
+            users: None,
+            members: None,
+            channels: None,
+            roles: None,
         }
     }
 }

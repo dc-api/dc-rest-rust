@@ -7,8 +7,8 @@
 //! - **Copyright**: Copyright (c) 2025 Qntx
 //! - **Author**: ΣX <gitctrlx@gmail.com>
 //! - **Version**: 10
-//! - **Modified**: 2025-07-05T02:42:20.508163788Z[Etc/UTC]
-//! - **Generator Version**: 7.14.0
+//! - **Modified**: 2025-11-02T04:40:22.540540420Z[Etc/UTC]
+//! - **Generator Version**: 7.17.0
 //!
 //! <details>
 //! <summary><strong>⚠️ Important Disclaimer & Limitation of Liability</strong></summary>
@@ -46,16 +46,16 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct PinnedMessagesResponse {
-    #[serde(rename = "items", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub items: Option<Option<Vec<models::PinnedMessageResponse>>>,
+    #[serde(rename = "items")]
+    pub items: Vec<models::PinnedMessageResponse>,
     #[serde(rename = "has_more")]
     pub has_more: bool,
 }
 
 impl PinnedMessagesResponse {
-    pub fn new(has_more: bool) -> PinnedMessagesResponse {
+    pub fn new(items: Vec<models::PinnedMessageResponse>, has_more: bool) -> PinnedMessagesResponse {
         PinnedMessagesResponse {
-            items: None,
+            items,
             has_more,
         }
     }

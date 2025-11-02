@@ -7,8 +7,8 @@
 //! - **Copyright**: Copyright (c) 2025 Qntx
 //! - **Author**: ΣX <gitctrlx@gmail.com>
 //! - **Version**: 10
-//! - **Modified**: 2025-07-05T02:42:20.508163788Z[Etc/UTC]
-//! - **Generator Version**: 7.14.0
+//! - **Modified**: 2025-11-02T04:40:22.540540420Z[Etc/UTC]
+//! - **Generator Version**: 7.17.0
 //!
 //! <details>
 //! <summary><strong>⚠️ Important Disclaimer & Limitation of Liability</strong></summary>
@@ -56,21 +56,21 @@ pub struct StageInstanceResponse {
     pub privacy_level: i32,
     #[serde(rename = "id")]
     pub id: String,
-    #[serde(rename = "discoverable_disabled", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub discoverable_disabled: Option<Option<bool>>,
+    #[serde(rename = "discoverable_disabled")]
+    pub discoverable_disabled: bool,
     #[serde(rename = "guild_scheduled_event_id", skip_serializing_if = "Option::is_none")]
     pub guild_scheduled_event_id: Option<String>,
 }
 
 impl StageInstanceResponse {
-    pub fn new(guild_id: String, channel_id: String, topic: String, privacy_level: i32, id: String) -> StageInstanceResponse {
+    pub fn new(guild_id: String, channel_id: String, topic: String, privacy_level: i32, id: String, discoverable_disabled: bool) -> StageInstanceResponse {
         StageInstanceResponse {
             guild_id,
             channel_id,
             topic,
             privacy_level,
             id,
-            discoverable_disabled: None,
+            discoverable_disabled,
             guild_scheduled_event_id: None,
         }
     }

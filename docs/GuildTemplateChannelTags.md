@@ -4,6 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**id** | Option<**i32**> |  | [optional]
 **name** | **String** |  | 
 **emoji_id** | Option<**String**> |  | [optional]
 **emoji_name** | Option<**String**> |  | [optional]

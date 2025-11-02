@@ -7,8 +7,8 @@
 //! - **Copyright**: Copyright (c) 2025 Qntx
 //! - **Author**: ΣX <gitctrlx@gmail.com>
 //! - **Version**: 10
-//! - **Modified**: 2025-07-05T02:42:20.508163788Z[Etc/UTC]
-//! - **Generator Version**: 7.14.0
+//! - **Modified**: 2025-11-02T04:40:22.540540420Z[Etc/UTC]
+//! - **Generator Version**: 7.17.0
 //!
 //! <details>
 //! <summary><strong>⚠️ Important Disclaimer & Limitation of Liability</strong></summary>
@@ -50,22 +50,22 @@ pub struct GuildHomeSettingsResponse {
     pub guild_id: String,
     #[serde(rename = "enabled")]
     pub enabled: bool,
-    #[serde(rename = "welcome_message", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub welcome_message: Option<Option<Box<models::WelcomeMessageResponse>>>,
-    #[serde(rename = "new_member_actions", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub new_member_actions: Option<Option<Vec<models::NewMemberActionResponse>>>,
-    #[serde(rename = "resource_channels", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub resource_channels: Option<Option<Vec<models::ResourceChannelResponse>>>,
+    #[serde(rename = "welcome_message", skip_serializing_if = "Option::is_none")]
+    pub welcome_message: Option<Box<models::WelcomeMessageResponse>>,
+    #[serde(rename = "new_member_actions")]
+    pub new_member_actions: Vec<models::NewMemberActionResponse>,
+    #[serde(rename = "resource_channels")]
+    pub resource_channels: Vec<models::ResourceChannelResponse>,
 }
 
 impl GuildHomeSettingsResponse {
-    pub fn new(guild_id: String, enabled: bool) -> GuildHomeSettingsResponse {
+    pub fn new(guild_id: String, enabled: bool, new_member_actions: Vec<models::NewMemberActionResponse>, resource_channels: Vec<models::ResourceChannelResponse>) -> GuildHomeSettingsResponse {
         GuildHomeSettingsResponse {
             guild_id,
             enabled,
             welcome_message: None,
-            new_member_actions: None,
-            resource_channels: None,
+            new_member_actions,
+            resource_channels,
         }
     }
 }
