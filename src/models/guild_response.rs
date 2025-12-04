@@ -7,8 +7,8 @@
 //! - **Copyright**: Copyright (c) 2025 Qntx
 //! - **Author**: ΣX <gitctrlx@gmail.com>
 //! - **Version**: 10
-//! - **Modified**: 2025-07-05T02:42:20.508163788Z[Etc/UTC]
-//! - **Generator Version**: 7.14.0
+//! - **Modified**: 2025-12-04T03:54:08.979511923Z[Etc/UTC]
+//! - **Generator Version**: 7.17.0
 //!
 //! <details>
 //! <summary><strong>⚠️ Important Disclaimer & Limitation of Liability</strong></summary>
@@ -94,12 +94,12 @@ pub struct GuildResponse {
     pub explicit_content_filter: i32,
     #[serde(rename = "max_presences", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
     pub max_presences: Option<Option<i32>>,
-    #[serde(rename = "max_members", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub max_members: Option<Option<i32>>,
-    #[serde(rename = "max_stage_video_channel_users", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub max_stage_video_channel_users: Option<Option<i32>>,
-    #[serde(rename = "max_video_channel_users", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub max_video_channel_users: Option<Option<i32>>,
+    #[serde(rename = "max_members")]
+    pub max_members: i32,
+    #[serde(rename = "max_stage_video_channel_users")]
+    pub max_stage_video_channel_users: i32,
+    #[serde(rename = "max_video_channel_users")]
+    pub max_video_channel_users: i32,
     #[serde(rename = "vanity_url_code", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
     pub vanity_url_code: Option<Option<String>>,
     #[serde(rename = "premium_tier")]
@@ -127,7 +127,7 @@ pub struct GuildResponse {
 }
 
 impl GuildResponse {
-    pub fn new(id: String, name: String, features: Vec<String>, owner_id: String, region: String, afk_timeout: Option<i32>, system_channel_flags: i32, widget_enabled: bool, verification_level: i32, roles: Vec<models::GuildRoleResponse>, default_message_notifications: i32, mfa_level: i32, explicit_content_filter: i32, premium_tier: i32, premium_subscription_count: i32, preferred_locale: String, premium_progress_bar_enabled: bool, nsfw: bool, nsfw_level: Option<i32>, emojis: Vec<models::EmojiResponse>, stickers: Vec<models::GuildStickerResponse>) -> GuildResponse {
+    pub fn new(id: String, name: String, features: Vec<String>, owner_id: String, region: String, afk_timeout: Option<i32>, system_channel_flags: i32, widget_enabled: bool, verification_level: i32, roles: Vec<models::GuildRoleResponse>, default_message_notifications: i32, mfa_level: i32, explicit_content_filter: i32, max_members: i32, max_stage_video_channel_users: i32, max_video_channel_users: i32, premium_tier: i32, premium_subscription_count: i32, preferred_locale: String, premium_progress_bar_enabled: bool, nsfw: bool, nsfw_level: Option<i32>, emojis: Vec<models::EmojiResponse>, stickers: Vec<models::GuildStickerResponse>) -> GuildResponse {
         GuildResponse {
             id,
             name,
@@ -153,9 +153,9 @@ impl GuildResponse {
             mfa_level,
             explicit_content_filter,
             max_presences: None,
-            max_members: None,
-            max_stage_video_channel_users: None,
-            max_video_channel_users: None,
+            max_members,
+            max_stage_video_channel_users,
+            max_video_channel_users,
             vanity_url_code: None,
             premium_tier,
             premium_subscription_count,

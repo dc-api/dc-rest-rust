@@ -7,8 +7,8 @@
 //! - **Copyright**: Copyright (c) 2025 Qntx
 //! - **Author**: ΣX <gitctrlx@gmail.com>
 //! - **Version**: 10
-//! - **Modified**: 2025-07-05T02:42:20.508163788Z[Etc/UTC]
-//! - **Generator Version**: 7.14.0
+//! - **Modified**: 2025-12-04T03:54:08.979511923Z[Etc/UTC]
+//! - **Generator Version**: 7.17.0
 //!
 //! <details>
 //! <summary><strong>⚠️ Important Disclaimer & Limitation of Liability</strong></summary>
@@ -46,8 +46,8 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct MessageReferenceResponse {
-    #[serde(rename = "type", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub r#type: Option<Option<serde_json::Value>>,
+    #[serde(rename = "type", deserialize_with = "Option::deserialize")]
+    pub r#type: Option<serde_json::Value>,
     #[serde(rename = "channel_id")]
     pub channel_id: String,
     #[serde(rename = "message_id", skip_serializing_if = "Option::is_none")]
@@ -57,9 +57,9 @@ pub struct MessageReferenceResponse {
 }
 
 impl MessageReferenceResponse {
-    pub fn new(channel_id: String) -> MessageReferenceResponse {
+    pub fn new(r#type: Option<serde_json::Value>, channel_id: String) -> MessageReferenceResponse {
         MessageReferenceResponse {
-            r#type: None,
+            r#type,
             channel_id,
             message_id: None,
             guild_id: None,

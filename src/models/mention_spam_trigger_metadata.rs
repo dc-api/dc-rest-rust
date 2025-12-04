@@ -7,8 +7,8 @@
 //! - **Copyright**: Copyright (c) 2025 Qntx
 //! - **Author**: ΣX <gitctrlx@gmail.com>
 //! - **Version**: 10
-//! - **Modified**: 2025-07-05T02:42:20.508163788Z[Etc/UTC]
-//! - **Generator Version**: 7.14.0
+//! - **Modified**: 2025-12-04T03:54:08.979511923Z[Etc/UTC]
+//! - **Generator Version**: 7.17.0
 //!
 //! <details>
 //! <summary><strong>⚠️ Important Disclaimer & Limitation of Liability</strong></summary>
@@ -46,16 +46,16 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct MentionSpamTriggerMetadata {
-    #[serde(rename = "mention_total_limit")]
-    pub mention_total_limit: i32,
+    #[serde(rename = "mention_total_limit", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub mention_total_limit: Option<Option<i32>>,
     #[serde(rename = "mention_raid_protection_enabled", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
     pub mention_raid_protection_enabled: Option<Option<bool>>,
 }
 
 impl MentionSpamTriggerMetadata {
-    pub fn new(mention_total_limit: i32) -> MentionSpamTriggerMetadata {
+    pub fn new() -> MentionSpamTriggerMetadata {
         MentionSpamTriggerMetadata {
-            mention_total_limit,
+            mention_total_limit: None,
             mention_raid_protection_enabled: None,
         }
     }

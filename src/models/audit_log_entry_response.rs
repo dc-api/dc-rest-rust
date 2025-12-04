@@ -7,8 +7,8 @@
 //! - **Copyright**: Copyright (c) 2025 Qntx
 //! - **Author**: ΣX <gitctrlx@gmail.com>
 //! - **Version**: 10
-//! - **Modified**: 2025-07-05T02:42:20.508163788Z[Etc/UTC]
-//! - **Generator Version**: 7.14.0
+//! - **Modified**: 2025-12-04T03:54:08.979511923Z[Etc/UTC]
+//! - **Generator Version**: 7.17.0
 //!
 //! <details>
 //! <summary><strong>⚠️ Important Disclaimer & Limitation of Liability</strong></summary>
@@ -54,12 +54,12 @@ pub struct AuditLogEntryResponse {
     pub user_id: Option<String>,
     #[serde(rename = "target_id", skip_serializing_if = "Option::is_none")]
     pub target_id: Option<String>,
-    #[serde(rename = "changes", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub changes: Option<Option<Vec<models::AuditLogObjectChangeResponse>>>,
+    #[serde(rename = "changes", skip_serializing_if = "Option::is_none")]
+    pub changes: Option<Vec<models::AuditLogObjectChangeResponse>>,
     #[serde(rename = "options", skip_serializing_if = "Option::is_none")]
     pub options: Option<std::collections::HashMap<String, String>>,
-    #[serde(rename = "reason", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub reason: Option<Option<String>>,
+    #[serde(rename = "reason", skip_serializing_if = "Option::is_none")]
+    pub reason: Option<String>,
 }
 
 impl AuditLogEntryResponse {

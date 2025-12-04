@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **id** | **String** |  | 
 **username** | **String** |  | 
 **discriminator** | Option<**String**> |  | 
-**avatar** | Option<[**serde_json::Value**](.md)> |  | [optional]
+**avatar** | Option<[**models::Null**](null.md)> |  | [optional]
 **status** | **String** |  | 
 **avatar_url** | **String** |  | 
 **activity** | Option<[**models::WidgetActivity**](WidgetActivity.md)> |  | [optional]

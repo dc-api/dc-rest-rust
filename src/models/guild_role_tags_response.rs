@@ -7,8 +7,8 @@
 //! - **Copyright**: Copyright (c) 2025 Qntx
 //! - **Author**: ΣX <gitctrlx@gmail.com>
 //! - **Version**: 10
-//! - **Modified**: 2025-07-05T02:42:20.508163788Z[Etc/UTC]
-//! - **Generator Version**: 7.14.0
+//! - **Modified**: 2025-12-04T03:54:08.979511923Z[Etc/UTC]
+//! - **Generator Version**: 7.17.0
 //!
 //! <details>
 //! <summary><strong>⚠️ Important Disclaimer & Limitation of Liability</strong></summary>
@@ -46,18 +46,18 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct GuildRoleTagsResponse {
-    #[serde(rename = "premium_subscriber", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub premium_subscriber: Option<Option<serde_json::Value>>,
+    #[serde(rename = "premium_subscriber", skip_serializing_if = "Option::is_none")]
+    pub premium_subscriber: Option<models::Null>,
     #[serde(rename = "bot_id", skip_serializing_if = "Option::is_none")]
     pub bot_id: Option<String>,
     #[serde(rename = "integration_id", skip_serializing_if = "Option::is_none")]
     pub integration_id: Option<String>,
     #[serde(rename = "subscription_listing_id", skip_serializing_if = "Option::is_none")]
     pub subscription_listing_id: Option<String>,
-    #[serde(rename = "available_for_purchase", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub available_for_purchase: Option<Option<serde_json::Value>>,
-    #[serde(rename = "guild_connections", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub guild_connections: Option<Option<serde_json::Value>>,
+    #[serde(rename = "available_for_purchase", skip_serializing_if = "Option::is_none")]
+    pub available_for_purchase: Option<models::Null>,
+    #[serde(rename = "guild_connections", skip_serializing_if = "Option::is_none")]
+    pub guild_connections: Option<models::Null>,
 }
 
 impl GuildRoleTagsResponse {
