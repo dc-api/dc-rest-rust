@@ -7,8 +7,8 @@
 //! - **Copyright**: Copyright (c) 2025 Qntx
 //! - **Author**: ΣX <gitctrlx@gmail.com>
 //! - **Version**: 10
-//! - **Modified**: 2025-07-05T02:42:20.508163788Z[Etc/UTC]
-//! - **Generator Version**: 7.14.0
+//! - **Modified**: 2025-12-04T03:54:08.979511923Z[Etc/UTC]
+//! - **Generator Version**: 7.17.0
 //!
 //! <details>
 //! <summary><strong>⚠️ Important Disclaimer & Limitation of Liability</strong></summary>
@@ -46,22 +46,22 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct MessageEmbedVideoResponse {
-    #[serde(rename = "url", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub url: Option<Option<String>>,
-    #[serde(rename = "proxy_url", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub proxy_url: Option<Option<String>>,
+    #[serde(rename = "url", skip_serializing_if = "Option::is_none")]
+    pub url: Option<String>,
+    #[serde(rename = "proxy_url", skip_serializing_if = "Option::is_none")]
+    pub proxy_url: Option<String>,
     #[serde(rename = "width", skip_serializing_if = "Option::is_none")]
     pub width: Option<i64>,
     #[serde(rename = "height", skip_serializing_if = "Option::is_none")]
     pub height: Option<i64>,
-    #[serde(rename = "content_type", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub content_type: Option<Option<String>>,
-    #[serde(rename = "placeholder", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub placeholder: Option<Option<String>>,
+    #[serde(rename = "content_type", skip_serializing_if = "Option::is_none")]
+    pub content_type: Option<String>,
+    #[serde(rename = "placeholder", skip_serializing_if = "Option::is_none")]
+    pub placeholder: Option<String>,
     #[serde(rename = "placeholder_version", skip_serializing_if = "Option::is_none")]
     pub placeholder_version: Option<i64>,
-    #[serde(rename = "description", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub description: Option<Option<String>>,
+    #[serde(rename = "description", skip_serializing_if = "Option::is_none")]
+    pub description: Option<String>,
     #[serde(rename = "flags", skip_serializing_if = "Option::is_none")]
     pub flags: Option<i64>,
 }

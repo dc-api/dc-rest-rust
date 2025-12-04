@@ -7,8 +7,8 @@
 //! - **Copyright**: Copyright (c) 2025 Qntx
 //! - **Author**: ΣX <gitctrlx@gmail.com>
 //! - **Version**: 10
-//! - **Modified**: 2025-07-05T02:42:20.508163788Z[Etc/UTC]
-//! - **Generator Version**: 7.14.0
+//! - **Modified**: 2025-12-04T03:54:08.979511923Z[Etc/UTC]
+//! - **Generator Version**: 7.17.0
 //!
 //! <details>
 //! <summary><strong>⚠️ Important Disclaimer & Limitation of Liability</strong></summary>
@@ -50,21 +50,21 @@ pub struct GuildSubscriptionIntegrationResponse {
     pub r#type: Option<String>,
     #[serde(rename = "name", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
     pub name: Option<Option<String>>,
-    #[serde(rename = "account", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub account: Option<Option<Box<models::AccountResponse>>>,
-    #[serde(rename = "enabled", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub enabled: Option<Option<bool>>,
+    #[serde(rename = "account")]
+    pub account: Box<models::AccountResponse>,
+    #[serde(rename = "enabled")]
+    pub enabled: bool,
     #[serde(rename = "id")]
     pub id: String,
 }
 
 impl GuildSubscriptionIntegrationResponse {
-    pub fn new(r#type: Option<String>, id: String) -> GuildSubscriptionIntegrationResponse {
+    pub fn new(r#type: Option<String>, account: models::AccountResponse, enabled: bool, id: String) -> GuildSubscriptionIntegrationResponse {
         GuildSubscriptionIntegrationResponse {
             r#type,
             name: None,
-            account: None,
-            enabled: None,
+            account: Box::new(account),
+            enabled,
             id,
         }
     }

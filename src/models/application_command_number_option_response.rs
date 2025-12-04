@@ -7,8 +7,8 @@
 //! - **Copyright**: Copyright (c) 2025 Qntx
 //! - **Author**: ΣX <gitctrlx@gmail.com>
 //! - **Version**: 10
-//! - **Modified**: 2025-07-05T02:42:20.508163788Z[Etc/UTC]
-//! - **Generator Version**: 7.14.0
+//! - **Modified**: 2025-12-04T03:54:08.979511923Z[Etc/UTC]
+//! - **Generator Version**: 7.17.0
 //!
 //! <details>
 //! <summary><strong>⚠️ Important Disclaimer & Limitation of Liability</strong></summary>
@@ -50,26 +50,26 @@ pub struct ApplicationCommandNumberOptionResponse {
     pub r#type: i32,
     #[serde(rename = "name")]
     pub name: String,
-    #[serde(rename = "name_localized", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub name_localized: Option<Option<String>>,
+    #[serde(rename = "name_localized", skip_serializing_if = "Option::is_none")]
+    pub name_localized: Option<String>,
     #[serde(rename = "name_localizations", skip_serializing_if = "Option::is_none")]
     pub name_localizations: Option<std::collections::HashMap<String, String>>,
     #[serde(rename = "description")]
     pub description: String,
-    #[serde(rename = "description_localized", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub description_localized: Option<Option<String>>,
+    #[serde(rename = "description_localized", skip_serializing_if = "Option::is_none")]
+    pub description_localized: Option<String>,
     #[serde(rename = "description_localizations", skip_serializing_if = "Option::is_none")]
     pub description_localizations: Option<std::collections::HashMap<String, String>>,
-    #[serde(rename = "required", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub required: Option<Option<bool>>,
-    #[serde(rename = "autocomplete", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub autocomplete: Option<Option<bool>>,
-    #[serde(rename = "choices", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub choices: Option<Option<Vec<models::ApplicationCommandOptionNumberChoiceResponse>>>,
-    #[serde(rename = "min_value", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub min_value: Option<Option<f64>>,
-    #[serde(rename = "max_value", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub max_value: Option<Option<f64>>,
+    #[serde(rename = "required", skip_serializing_if = "Option::is_none")]
+    pub required: Option<bool>,
+    #[serde(rename = "autocomplete", skip_serializing_if = "Option::is_none")]
+    pub autocomplete: Option<bool>,
+    #[serde(rename = "choices", skip_serializing_if = "Option::is_none")]
+    pub choices: Option<Vec<models::ApplicationCommandOptionNumberChoiceResponse>>,
+    #[serde(rename = "min_value", skip_serializing_if = "Option::is_none")]
+    pub min_value: Option<f64>,
+    #[serde(rename = "max_value", skip_serializing_if = "Option::is_none")]
+    pub max_value: Option<f64>,
 }
 
 impl ApplicationCommandNumberOptionResponse {

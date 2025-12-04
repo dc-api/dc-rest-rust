@@ -7,8 +7,8 @@
 //! - **Copyright**: Copyright (c) 2025 Qntx
 //! - **Author**: ΣX <gitctrlx@gmail.com>
 //! - **Version**: 10
-//! - **Modified**: 2025-07-05T02:42:20.508163788Z[Etc/UTC]
-//! - **Generator Version**: 7.14.0
+//! - **Modified**: 2025-12-04T03:54:08.979511923Z[Etc/UTC]
+//! - **Generator Version**: 7.17.0
 //!
 //! <details>
 //! <summary><strong>⚠️ Important Disclaimer & Limitation of Liability</strong></summary>
@@ -48,15 +48,15 @@ use serde::{Deserialize, Serialize};
 pub struct MentionSpamTriggerMetadataResponse {
     #[serde(rename = "mention_total_limit")]
     pub mention_total_limit: i32,
-    #[serde(rename = "mention_raid_protection_enabled", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub mention_raid_protection_enabled: Option<Option<bool>>,
+    #[serde(rename = "mention_raid_protection_enabled")]
+    pub mention_raid_protection_enabled: bool,
 }
 
 impl MentionSpamTriggerMetadataResponse {
-    pub fn new(mention_total_limit: i32) -> MentionSpamTriggerMetadataResponse {
+    pub fn new(mention_total_limit: i32, mention_raid_protection_enabled: bool) -> MentionSpamTriggerMetadataResponse {
         MentionSpamTriggerMetadataResponse {
             mention_total_limit,
-            mention_raid_protection_enabled: None,
+            mention_raid_protection_enabled,
         }
     }
 }

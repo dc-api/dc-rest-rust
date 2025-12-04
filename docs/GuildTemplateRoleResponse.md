@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **name** | **String** |  | 
 **permissions** | **String** |  | 
 **color** | **i32** |  | 
+**colors** | Option<[**models::GuildTemplateRoleColorsResponse**](GuildTemplateRoleColorsResponse.md)> |  | [optional]
 **hoist** | **bool** |  | 
 **mentionable** | **bool** |  | 
 **icon** | Option<**String**> |  | [optional]

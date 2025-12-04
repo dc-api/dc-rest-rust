@@ -7,8 +7,8 @@
 //! - **Copyright**: Copyright (c) 2025 Qntx
 //! - **Author**: ΣX <gitctrlx@gmail.com>
 //! - **Version**: 10
-//! - **Modified**: 2025-07-05T02:42:20.508163788Z[Etc/UTC]
-//! - **Generator Version**: 7.14.0
+//! - **Modified**: 2025-12-04T03:54:08.979511923Z[Etc/UTC]
+//! - **Generator Version**: 7.17.0
 //!
 //! <details>
 //! <summary><strong>⚠️ Important Disclaimer & Limitation of Liability</strong></summary>
@@ -62,16 +62,16 @@ pub struct PrivateGroupChannelResponse {
     pub name: Option<Option<String>>,
     #[serde(rename = "icon", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
     pub icon: Option<Option<String>>,
-    #[serde(rename = "owner_id", skip_serializing_if = "Option::is_none")]
-    pub owner_id: Option<String>,
-    #[serde(rename = "managed", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub managed: Option<Option<bool>>,
+    #[serde(rename = "owner_id")]
+    pub owner_id: String,
+    #[serde(rename = "managed", skip_serializing_if = "Option::is_none")]
+    pub managed: Option<bool>,
     #[serde(rename = "application_id", skip_serializing_if = "Option::is_none")]
     pub application_id: Option<String>,
 }
 
 impl PrivateGroupChannelResponse {
-    pub fn new(id: String, r#type: i32, flags: i32, recipients: Vec<models::UserResponse>) -> PrivateGroupChannelResponse {
+    pub fn new(id: String, r#type: i32, flags: i32, recipients: Vec<models::UserResponse>, owner_id: String) -> PrivateGroupChannelResponse {
         PrivateGroupChannelResponse {
             id,
             r#type,
@@ -81,7 +81,7 @@ impl PrivateGroupChannelResponse {
             recipients,
             name: None,
             icon: None,
-            owner_id: None,
+            owner_id,
             managed: None,
             application_id: None,
         }

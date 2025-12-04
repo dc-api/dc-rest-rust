@@ -7,8 +7,8 @@
 //! - **Copyright**: Copyright (c) 2025 Qntx
 //! - **Author**: ΣX <gitctrlx@gmail.com>
 //! - **Version**: 10
-//! - **Modified**: 2025-07-05T02:42:20.508163788Z[Etc/UTC]
-//! - **Generator Version**: 7.14.0
+//! - **Modified**: 2025-12-04T03:54:08.979511923Z[Etc/UTC]
+//! - **Generator Version**: 7.17.0
 //!
 //! <details>
 //! <summary><strong>⚠️ Important Disclaimer & Limitation of Liability</strong></summary>
@@ -52,24 +52,24 @@ pub struct WidgetMember {
     pub username: String,
     #[serde(rename = "discriminator", deserialize_with = "Option::deserialize")]
     pub discriminator: Option<String>,
-    #[serde(rename = "avatar", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub avatar: Option<Option<serde_json::Value>>,
+    #[serde(rename = "avatar", skip_serializing_if = "Option::is_none")]
+    pub avatar: Option<models::Null>,
     #[serde(rename = "status")]
     pub status: String,
     #[serde(rename = "avatar_url")]
     pub avatar_url: String,
-    #[serde(rename = "activity", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub activity: Option<Option<Box<models::WidgetActivity>>>,
-    #[serde(rename = "deaf", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub deaf: Option<Option<bool>>,
-    #[serde(rename = "mute", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub mute: Option<Option<bool>>,
-    #[serde(rename = "self_deaf", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub self_deaf: Option<Option<bool>>,
-    #[serde(rename = "self_mute", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub self_mute: Option<Option<bool>>,
-    #[serde(rename = "suppress", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub suppress: Option<Option<bool>>,
+    #[serde(rename = "activity", skip_serializing_if = "Option::is_none")]
+    pub activity: Option<Box<models::WidgetActivity>>,
+    #[serde(rename = "deaf", skip_serializing_if = "Option::is_none")]
+    pub deaf: Option<bool>,
+    #[serde(rename = "mute", skip_serializing_if = "Option::is_none")]
+    pub mute: Option<bool>,
+    #[serde(rename = "self_deaf", skip_serializing_if = "Option::is_none")]
+    pub self_deaf: Option<bool>,
+    #[serde(rename = "self_mute", skip_serializing_if = "Option::is_none")]
+    pub self_mute: Option<bool>,
+    #[serde(rename = "suppress", skip_serializing_if = "Option::is_none")]
+    pub suppress: Option<bool>,
     #[serde(rename = "channel_id", skip_serializing_if = "Option::is_none")]
     pub channel_id: Option<String>,
 }
