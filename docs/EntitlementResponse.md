@@ -16,6 +16,8 @@ Name | Type | Description | Notes
 **fulfilled_at** | Option<**String**> |  | [optional]
 **fulfillment_status** | Option<**i32**> |  | [optional]
 **consumed** | Option<**bool**> |  | [optional]
+**gifter_user_id** | Option<**String**> |  | [optional]
+**parent_id** | Option<**String**> |  | [optional]
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

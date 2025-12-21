@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**r#type** | Option<**i32**> |  | [optional]
+**r#type** | Option<**i32**> |  | 
 **code** | **String** |  | 
 **inviter** | Option<[**models::UserResponse**](UserResponse.md)> |  | [optional]
 **max_age** | Option<**i32**> |  | [optional]

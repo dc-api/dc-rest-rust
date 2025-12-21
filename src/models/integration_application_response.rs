@@ -7,8 +7,8 @@
 //! - **Copyright**: Copyright (c) 2025 Qntx
 //! - **Author**: ΣX <gitctrlx@gmail.com>
 //! - **Version**: 10
-//! - **Modified**: 2025-07-05T02:42:20.508163788Z[Etc/UTC]
-//! - **Generator Version**: 7.14.0
+//! - **Modified**: 2025-12-21T03:28:02.735703102Z[Etc/UTC]
+//! - **Generator Version**: 7.17.0
 //!
 //! <details>
 //! <summary><strong>⚠️ Important Disclaimer & Limitation of Liability</strong></summary>
@@ -56,12 +56,12 @@ pub struct IntegrationApplicationResponse {
     pub description: String,
     #[serde(rename = "type", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
     pub r#type: Option<Option<i32>>,
-    #[serde(rename = "cover_image", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub cover_image: Option<Option<String>>,
+    #[serde(rename = "cover_image", skip_serializing_if = "Option::is_none")]
+    pub cover_image: Option<String>,
     #[serde(rename = "primary_sku_id", skip_serializing_if = "Option::is_none")]
     pub primary_sku_id: Option<String>,
-    #[serde(rename = "bot", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub bot: Option<Option<Box<models::UserResponse>>>,
+    #[serde(rename = "bot", skip_serializing_if = "Option::is_none")]
+    pub bot: Option<Box<models::UserResponse>>,
 }
 
 impl IntegrationApplicationResponse {

@@ -15,7 +15,7 @@ Name | Type | Description | Notes
 **vanity_url_code** | Option<**String**> |  | [optional]
 **nsfw_level** | Option<**i32**> |  | [optional]
 **nsfw** | Option<**bool**> |  | [optional]
-**premium_subscription_count** | Option<**i32**> |  | [optional]
+**premium_subscription_count** | **i32** |  | 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

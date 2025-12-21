@@ -14,9 +14,11 @@ Name | Type | Description | Notes
 **pending** | **bool** |  | 
 **premium_since** | Option<**String**> |  | [optional]
 **roles** | **Vec<String>** |  | 
+**collectibles** | Option<[**models::UserCollectiblesResponse**](UserCollectiblesResponse.md)> |  | [optional]
 **user** | [**models::UserResponse**](UserResponse.md) |  | 
 **mute** | **bool** |  | 
 **deaf** | **bool** |  | 
+**permissions** | Option<**String**> |  | [optional]
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
