@@ -7,8 +7,8 @@
 //! - **Copyright**: Copyright (c) 2025 Qntx
 //! - **Author**: ΣX <gitctrlx@gmail.com>
 //! - **Version**: 10
-//! - **Modified**: 2025-07-05T02:42:20.508163788Z[Etc/UTC]
-//! - **Generator Version**: 7.14.0
+//! - **Modified**: 2025-12-21T03:28:02.735703102Z[Etc/UTC]
+//! - **Generator Version**: 7.17.0
 //!
 //! <details>
 //! <summary><strong>⚠️ Important Disclaimer & Limitation of Liability</strong></summary>
@@ -62,6 +62,8 @@ pub struct BaseCreateMessageCreateRequest {
     pub attachments: Option<Option<Vec<models::MessageAttachmentRequest>>>,
     #[serde(rename = "poll", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
     pub poll: Option<Option<Box<models::PollCreateRequest>>>,
+    #[serde(rename = "shared_client_theme", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub shared_client_theme: Option<Option<Box<models::CustomClientThemeShareRequest>>>,
     #[serde(rename = "confetti_potion", skip_serializing_if = "Option::is_none")]
     pub confetti_potion: Option<serde_json::Value>,
 }
@@ -77,6 +79,7 @@ impl BaseCreateMessageCreateRequest {
             flags: None,
             attachments: None,
             poll: None,
+            shared_client_theme: None,
             confetti_potion: None,
         }
     }

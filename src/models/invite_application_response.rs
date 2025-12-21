@@ -7,8 +7,8 @@
 //! - **Copyright**: Copyright (c) 2025 Qntx
 //! - **Author**: ΣX <gitctrlx@gmail.com>
 //! - **Version**: 10
-//! - **Modified**: 2025-07-05T02:42:20.508163788Z[Etc/UTC]
-//! - **Generator Version**: 7.14.0
+//! - **Modified**: 2025-12-21T03:28:02.735703102Z[Etc/UTC]
+//! - **Generator Version**: 7.17.0
 //!
 //! <details>
 //! <summary><strong>⚠️ Important Disclaimer & Limitation of Liability</strong></summary>
@@ -56,30 +56,30 @@ pub struct InviteApplicationResponse {
     pub description: String,
     #[serde(rename = "type", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
     pub r#type: Option<Option<i32>>,
-    #[serde(rename = "cover_image", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub cover_image: Option<Option<String>>,
+    #[serde(rename = "cover_image", skip_serializing_if = "Option::is_none")]
+    pub cover_image: Option<String>,
     #[serde(rename = "primary_sku_id", skip_serializing_if = "Option::is_none")]
     pub primary_sku_id: Option<String>,
-    #[serde(rename = "bot", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub bot: Option<Option<Box<models::UserResponse>>>,
-    #[serde(rename = "slug", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub slug: Option<Option<String>>,
+    #[serde(rename = "bot", skip_serializing_if = "Option::is_none")]
+    pub bot: Option<Box<models::UserResponse>>,
+    #[serde(rename = "slug", skip_serializing_if = "Option::is_none")]
+    pub slug: Option<String>,
     #[serde(rename = "guild_id", skip_serializing_if = "Option::is_none")]
     pub guild_id: Option<String>,
-    #[serde(rename = "rpc_origins", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub rpc_origins: Option<Option<Vec<String>>>,
-    #[serde(rename = "bot_public", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub bot_public: Option<Option<bool>>,
-    #[serde(rename = "bot_require_code_grant", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub bot_require_code_grant: Option<Option<bool>>,
-    #[serde(rename = "terms_of_service_url", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub terms_of_service_url: Option<Option<String>>,
-    #[serde(rename = "privacy_policy_url", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub privacy_policy_url: Option<Option<String>>,
-    #[serde(rename = "custom_install_url", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub custom_install_url: Option<Option<String>>,
-    #[serde(rename = "install_params", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub install_params: Option<Option<Box<models::ApplicationOAuth2InstallParamsResponse>>>,
+    #[serde(rename = "rpc_origins", skip_serializing_if = "Option::is_none")]
+    pub rpc_origins: Option<Vec<String>>,
+    #[serde(rename = "bot_public", skip_serializing_if = "Option::is_none")]
+    pub bot_public: Option<bool>,
+    #[serde(rename = "bot_require_code_grant", skip_serializing_if = "Option::is_none")]
+    pub bot_require_code_grant: Option<bool>,
+    #[serde(rename = "terms_of_service_url", skip_serializing_if = "Option::is_none")]
+    pub terms_of_service_url: Option<String>,
+    #[serde(rename = "privacy_policy_url", skip_serializing_if = "Option::is_none")]
+    pub privacy_policy_url: Option<String>,
+    #[serde(rename = "custom_install_url", skip_serializing_if = "Option::is_none")]
+    pub custom_install_url: Option<String>,
+    #[serde(rename = "install_params", skip_serializing_if = "Option::is_none")]
+    pub install_params: Option<Box<models::ApplicationOAuth2InstallParamsResponse>>,
     #[serde(rename = "integration_types_config", skip_serializing_if = "Option::is_none")]
     pub integration_types_config: Option<std::collections::HashMap<String, models::ApplicationIntegrationTypeConfigurationResponse>>,
     #[serde(rename = "verify_key")]
@@ -88,8 +88,8 @@ pub struct InviteApplicationResponse {
     pub flags: i32,
     #[serde(rename = "max_participants", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
     pub max_participants: Option<Option<i32>>,
-    #[serde(rename = "tags", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub tags: Option<Option<Vec<String>>>,
+    #[serde(rename = "tags", skip_serializing_if = "Option::is_none")]
+    pub tags: Option<Vec<String>>,
 }
 
 impl InviteApplicationResponse {

@@ -5,6 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **r#type** | **i32** |  | 
+**id** | Option<**i32**> |  | [optional]
 **components** | [**Vec<models::TextDisplayComponentForMessageRequest>**](TextDisplayComponentForMessageRequest.md) |  | 
 **accessory** | [**models::SectionComponentForMessageRequestAccessory**](SectionComponentForMessageRequest_accessory.md) |  | 
 

@@ -7,8 +7,8 @@
 //! - **Copyright**: Copyright (c) 2025 Qntx
 //! - **Author**: ΣX <gitctrlx@gmail.com>
 //! - **Version**: 10
-//! - **Modified**: 2025-07-05T02:42:20.508163788Z[Etc/UTC]
-//! - **Generator Version**: 7.14.0
+//! - **Modified**: 2025-12-21T03:28:02.735703102Z[Etc/UTC]
+//! - **Generator Version**: 7.17.0
 //!
 //! <details>
 //! <summary><strong>⚠️ Important Disclaimer & Limitation of Liability</strong></summary>
@@ -66,12 +66,16 @@ pub struct PrivateGuildMemberResponse {
     pub premium_since: Option<Option<String>>,
     #[serde(rename = "roles")]
     pub roles: Vec<String>,
+    #[serde(rename = "collectibles", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub collectibles: Option<Option<Box<models::UserCollectiblesResponse>>>,
     #[serde(rename = "user")]
     pub user: Box<models::UserResponse>,
     #[serde(rename = "mute")]
     pub mute: bool,
     #[serde(rename = "deaf")]
     pub deaf: bool,
+    #[serde(rename = "permissions", skip_serializing_if = "Option::is_none")]
+    pub permissions: Option<String>,
 }
 
 impl PrivateGuildMemberResponse {
@@ -87,9 +91,11 @@ impl PrivateGuildMemberResponse {
             pending,
             premium_since: None,
             roles,
+            collectibles: None,
             user: Box::new(user),
             mute,
             deaf,
+            permissions: None,
         }
     }
 }

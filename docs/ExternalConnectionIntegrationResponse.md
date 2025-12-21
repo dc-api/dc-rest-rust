@@ -6,8 +6,8 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **r#type** | Option<**String**> |  | 
 **name** | Option<**String**> |  | [optional]
-**account** | Option<[**models::AccountResponse**](AccountResponse.md)> |  | [optional]
-**enabled** | Option<**bool**> |  | [optional]
+**account** | [**models::AccountResponse**](AccountResponse.md) |  | 
+**enabled** | **bool** |  | 
 **id** | **String** |  | 
 **user** | [**models::UserResponse**](UserResponse.md) |  | 
 **revoked** | Option<**bool**> |  | [optional]

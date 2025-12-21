@@ -7,8 +7,8 @@
 //! - **Copyright**: Copyright (c) 2025 Qntx
 //! - **Author**: ΣX <gitctrlx@gmail.com>
 //! - **Version**: 10
-//! - **Modified**: 2025-07-05T02:42:20.508163788Z[Etc/UTC]
-//! - **Generator Version**: 7.14.0
+//! - **Modified**: 2025-12-21T03:28:02.735703102Z[Etc/UTC]
+//! - **Generator Version**: 7.17.0
 //!
 //! <details>
 //! <summary><strong>⚠️ Important Disclaimer & Limitation of Liability</strong></summary>
@@ -60,18 +60,18 @@ pub struct KeywordRuleResponse {
     pub actions: Vec<models::DefaultKeywordRuleResponseActionsInner>,
     #[serde(rename = "trigger_type")]
     pub trigger_type: i32,
-    #[serde(rename = "enabled", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub enabled: Option<Option<bool>>,
-    #[serde(rename = "exempt_roles", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub exempt_roles: Option<Option<Vec<String>>>,
-    #[serde(rename = "exempt_channels", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub exempt_channels: Option<Option<Vec<String>>>,
+    #[serde(rename = "enabled")]
+    pub enabled: bool,
+    #[serde(rename = "exempt_roles")]
+    pub exempt_roles: Vec<String>,
+    #[serde(rename = "exempt_channels")]
+    pub exempt_channels: Vec<String>,
     #[serde(rename = "trigger_metadata")]
     pub trigger_metadata: Box<models::KeywordTriggerMetadataResponse>,
 }
 
 impl KeywordRuleResponse {
-    pub fn new(id: String, guild_id: String, creator_id: String, name: String, event_type: i32, actions: Vec<models::DefaultKeywordRuleResponseActionsInner>, trigger_type: i32, trigger_metadata: models::KeywordTriggerMetadataResponse) -> KeywordRuleResponse {
+    pub fn new(id: String, guild_id: String, creator_id: String, name: String, event_type: i32, actions: Vec<models::DefaultKeywordRuleResponseActionsInner>, trigger_type: i32, enabled: bool, exempt_roles: Vec<String>, exempt_channels: Vec<String>, trigger_metadata: models::KeywordTriggerMetadataResponse) -> KeywordRuleResponse {
         KeywordRuleResponse {
             id,
             guild_id,
@@ -80,9 +80,9 @@ impl KeywordRuleResponse {
             event_type,
             actions,
             trigger_type,
-            enabled: None,
-            exempt_roles: None,
-            exempt_channels: None,
+            enabled,
+            exempt_roles,
+            exempt_channels,
             trigger_metadata: Box::new(trigger_metadata),
         }
     }

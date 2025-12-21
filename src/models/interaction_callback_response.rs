@@ -7,8 +7,8 @@
 //! - **Copyright**: Copyright (c) 2025 Qntx
 //! - **Author**: ΣX <gitctrlx@gmail.com>
 //! - **Version**: 10
-//! - **Modified**: 2025-07-05T02:42:20.508163788Z[Etc/UTC]
-//! - **Generator Version**: 7.14.0
+//! - **Modified**: 2025-12-21T03:28:02.735703102Z[Etc/UTC]
+//! - **Generator Version**: 7.17.0
 //!
 //! <details>
 //! <summary><strong>⚠️ Important Disclaimer & Limitation of Liability</strong></summary>
@@ -48,8 +48,8 @@ use serde::{Deserialize, Serialize};
 pub struct InteractionCallbackResponse {
     #[serde(rename = "interaction")]
     pub interaction: Box<models::InteractionResponse>,
-    #[serde(rename = "resource", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub resource: Option<Option<Box<models::InteractionCallbackResponseResource>>>,
+    #[serde(rename = "resource", skip_serializing_if = "Option::is_none")]
+    pub resource: Option<Box<models::InteractionCallbackResponseResource>>,
 }
 
 impl InteractionCallbackResponse {

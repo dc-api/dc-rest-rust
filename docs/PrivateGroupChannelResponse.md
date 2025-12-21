@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 **recipients** | [**Vec<models::UserResponse>**](UserResponse.md) |  | 
 **name** | Option<**String**> |  | [optional]
 **icon** | Option<**String**> |  | [optional]
-**owner_id** | Option<**String**> |  | [optional]
+**owner_id** | **String** |  | 
 **managed** | Option<**bool**> |  | [optional]
 **application_id** | Option<**String**> |  | [optional]
 

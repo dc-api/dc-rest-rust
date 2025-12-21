@@ -14,7 +14,6 @@ Name | Type | Description | Notes
 **edited_timestamp** | Option<**String**> |  | [optional]
 **flags** | **i32** |  | 
 **components** | [**Vec<models::BasicMessageResponseComponentsInner>**](BasicMessageResponse_components_inner.md) |  | 
-**resolved** | Option<[**models::ResolvedObjectsResponse**](ResolvedObjectsResponse.md)> |  | [optional]
 **stickers** | Option<[**Vec<models::GetSticker200Response>**](get_sticker_200_response.md)> |  | [optional]
 **sticker_items** | Option<[**Vec<models::MessageStickerItemResponse>**](MessageStickerItemResponse.md)> |  | [optional]
 

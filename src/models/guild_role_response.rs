@@ -7,8 +7,8 @@
 //! - **Copyright**: Copyright (c) 2025 Qntx
 //! - **Author**: ΣX <gitctrlx@gmail.com>
 //! - **Version**: 10
-//! - **Modified**: 2025-07-05T02:42:20.508163788Z[Etc/UTC]
-//! - **Generator Version**: 7.14.0
+//! - **Modified**: 2025-12-21T03:28:02.735703102Z[Etc/UTC]
+//! - **Generator Version**: 7.17.0
 //!
 //! <details>
 //! <summary><strong>⚠️ Important Disclaimer & Limitation of Liability</strong></summary>
@@ -58,8 +58,8 @@ pub struct GuildRoleResponse {
     pub position: i32,
     #[serde(rename = "color")]
     pub color: i32,
-    #[serde(rename = "colors", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub colors: Option<Option<Box<models::GuildRoleColorsResponse>>>,
+    #[serde(rename = "colors")]
+    pub colors: Box<models::GuildRoleColorsResponse>,
     #[serde(rename = "hoist")]
     pub hoist: bool,
     #[serde(rename = "managed")]
@@ -70,14 +70,14 @@ pub struct GuildRoleResponse {
     pub icon: Option<Option<String>>,
     #[serde(rename = "unicode_emoji", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
     pub unicode_emoji: Option<Option<String>>,
-    #[serde(rename = "tags", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub tags: Option<Option<Box<models::GuildRoleTagsResponse>>>,
+    #[serde(rename = "tags", skip_serializing_if = "Option::is_none")]
+    pub tags: Option<Box<models::GuildRoleTagsResponse>>,
     #[serde(rename = "flags")]
     pub flags: i32,
 }
 
 impl GuildRoleResponse {
-    pub fn new(id: String, name: String, permissions: String, position: i32, color: i32, hoist: bool, managed: bool, mentionable: bool, flags: i32) -> GuildRoleResponse {
+    pub fn new(id: String, name: String, permissions: String, position: i32, color: i32, colors: models::GuildRoleColorsResponse, hoist: bool, managed: bool, mentionable: bool, flags: i32) -> GuildRoleResponse {
         GuildRoleResponse {
             id,
             name,
@@ -85,7 +85,7 @@ impl GuildRoleResponse {
             permissions,
             position,
             color,
-            colors: None,
+            colors: Box::new(colors),
             hoist,
             managed,
             mentionable,
